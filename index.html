@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#F5F3FE" />
+  <title>PawConnect — The social network for pet owners in Singapore</title>
+  <meta name="description"
+    content="PawConnect is the social network built for pet owners in Singapore. Share moments, find vets, discover pet services, and connect with your pet community." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="PawConnect — Social network for pet owners" />
+  <meta property="og:description"
+    content="Share pet moments, find vets, discover grooming, boarding, parks and more — all in one app built for Singapore pet owners." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://pawconnect.fingrow.app" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <!-- NAV -->
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a class="brand" href="#">
+        <div class="brand-mark">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="16" fill="url(#pawgrad)"/>
+            <text x="16" y="21" text-anchor="middle" font-size="16" font-family="Inter,sans-serif" font-weight="900" fill="white">🐾</text>
+            <defs>
+              <linearGradient id="pawgrad" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#9B8FF6"/>
+                <stop offset="1" stop-color="#C6C0F8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-name">PawConnect</span>
+      </a>
+
+      <nav class="nav" aria-label="Primary">
+        <a href="#features">Features</a>
+        <a href="#services">Services</a>
+        <a href="#community">Community</a>
+        <a href="#about">About</a>
+      </nav>
+
+      <div class="topbar-cta">
+        <button class="btn btn-primary" data-open-waitlist>Join waitlist</button>
+      </div>
+
+      <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Mobile nav -->
+    <div class="mobile-nav" id="mobile-nav" aria-hidden="true">
+      <a href="#features" class="mobile-nav-link">Features</a>
+      <a href="#services" class="mobile-nav-link">Services</a>
+      <a href="#community" class="mobile-nav-link">Community</a>
+      <a href="#about" class="mobile-nav-link">About</a>
+      <button class="btn btn-primary mobile-nav-cta" data-open-waitlist>Join waitlist</button>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-left">
+          <div class="pill animate-in stagger-1">
+            <span class="dot"></span>
+            Built for Singapore pet owners
+          </div>
+
+          <h1 class="animate-in stagger-2">
+            Your pet's world,<br>
+            <span class="gradient-text">connected</span>.
+          </h1>
+
+          <p class="subhead animate-in stagger-3">
+            Share moments, find vets, book groomers, discover dog parks and more —
+            all in one app made for Singapore's pet community.
+          </p>
+
+          <div class="hero-actions animate-in stagger-4">
+            <button class="btn btn-primary btn-pulse" data-open-waitlist>
+              <span class="btn-icon-svg">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M22 2L11 13" />
+                  <path d="M22 2l-7 20-4-9-9-4 20-7z" />
+                </svg>
+              </span>
+              Join waitlist
+            </button>
+            <a class="btn btn-ghost" href="#features">See features</a>
+          </div>
+
+          <div class="quick-actions animate-in stagger-4">
+            <div class="quick-action" data-tooltip="Share pet moments">
+              <div class="quick-icon feed">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="3" y="3" width="18" height="18" rx="4"/>
+                  <circle cx="8.5" cy="8.5" r="1.5"/>
+                  <polyline points="21 15 16 10 5 21"/>
+                </svg>
+              </div>
+              <div class="quick-label">Feed</div>
+            </div>
+            <div class="quick-action" data-tooltip="Find vets nearby">
+              <div class="quick-icon vets">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                </svg>
+              </div>
+              <div class="quick-label">Vets</div>
+            </div>
+            <div class="quick-action" data-tooltip="Discover dog parks">
+              <div class="quick-icon parks">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                  <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+              </div>
+              <div class="quick-label">Parks</div>
+            </div>
+            <div class="quick-action" data-tooltip="Connect with pet owners">
+              <div class="quick-icon community">
+                <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                  <circle cx="9" cy="7" r="4"/>
+                  <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                  <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                </svg>
+              </div>
+              <div class="quick-label">Community</div>
+            </div>
+          </div>
+
+          <div class="store-row">
+            <div class="store-badge disabled" role="img" aria-label="Coming soon on the App Store">
+              <div class="store-top">
+                <svg class="store-icon apple" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                </svg>
+                App Store
+              </div>
+              <div class="store-sub">Coming soon</div>
+            </div>
+          </div>
+
+          <div class="trust-row">
+            <div class="trust-pill">
+              <svg class="trust-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Free to use
+            </div>
+            <div class="trust-pill">
+              <svg class="trust-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              Singapore-focused
+            </div>
+            <div class="trust-pill">
+              <svg class="trust-icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+              No ads
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="visual-wrap">
+            <div class="hero-visual glass">
+              <div class="visual-head">
+                <div class="chip">Live preview</div>
+                <div class="status"><span class="pulse"></span> Singapore</div>
+              </div>
+
+              <!-- Mock feed post card -->
+              <div class="mock-post">
+                <div class="mock-post-header">
+                  <div class="mock-avatar">🐶</div>
+                  <div class="mock-user-info">
+                    <div class="mock-username">Mochi's Dad</div>
+                    <div class="mock-time">2 minutes ago</div>
+                  </div>
+                </div>
+                <div class="mock-post-image">
+                  <div class="mock-image-placeholder">📸</div>
+                </div>
+                <div class="mock-post-actions">
+                  <div class="mock-action paw">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10 10-4.5 10-10S17.5 2 12 2z"/>
+                    </svg>
+                    <span>142 paws</span>
+                  </div>
+                  <div class="mock-action comment">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span>18 comments</span>
+                  </div>
+                </div>
+                <div class="mock-caption">Mochi's first visit to Bishan Dog Run! 🐾 She made 5 new friends today.</div>
+              </div>
+
+              <div class="mini-stats">
+                <div class="mini-stat">
+                  <div class="mini-stat-val"><span class="count" data-target="2847">0</span></div>
+                  <div class="mini-stat-label">Pet owners</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="mini-stat-val"><span class="count" data-target="12400">0</span></div>
+                  <div class="mini-stat-label">Posts shared</div>
+                </div>
+                <div class="mini-stat">
+                  <div class="mini-stat-val">25</div>
+                  <div class="mini-stat-label">Dog parks</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section class="features-section" id="features">
+      <div class="container">
+        <div class="section-header animate-in">
+          <div class="pill">Everything in one place</div>
+          <h2>Made for every kind of pet owner</h2>
+          <p class="section-subhead">From sharing daily moments to finding emergency vets at midnight — PawConnect has you covered.</p>
+        </div>
+
+        <div class="features-grid">
+          <div class="feature-card animate-in stagger-1">
+            <div class="feature-icon feed-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="3" width="18" height="18" rx="4"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+            <h3>Social Feed</h3>
+            <p>Share photos and videos of your pets. Give "paws" to posts you love. Build your pet's following in the community.</p>
+          </div>
+
+          <div class="feature-card animate-in stagger-2">
+            <div class="feature-icon vet-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+              </svg>
+            </div>
+            <h3>Find a Vet</h3>
+            <p>Locate nearby veterinary clinics on a live map. See distance, address, and phone — all powered by Apple Maps.</p>
+          </div>
+
+          <div class="feature-card animate-in stagger-3">
+            <div class="feature-icon service-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="M21 21l-4.35-4.35"/>
+              </svg>
+            </div>
+            <h3>Pet Services</h3>
+            <p>Groomers, pet hotels, dog parks, shelters, and pet stores — all discoverable from one services panel.</p>
+          </div>
+
+          <div class="feature-card animate-in stagger-1">
+            <div class="feature-icon story-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="12" r="10"/>
+                <circle cx="12" cy="12" r="4"/>
+              </svg>
+            </div>
+            <h3>Pet Stories</h3>
+            <p>24-hour stories just for your pets. Share daily moments that disappear — keeping your feed fresh and fun.</p>
+          </div>
+
+          <div class="feature-card animate-in stagger-2">
+            <div class="feature-icon walk-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+              </svg>
+            </div>
+            <h3>Walk Tracker</h3>
+            <p>Track your dog's walks with GPS. See distance, duration, and route history — keep your pup healthy and active.</p>
+          </div>
+
+          <div class="feature-card animate-in stagger-3">
+            <div class="feature-icon insurance-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+              </svg>
+            </div>
+            <h3>Pet Insurance</h3>
+            <p>Compare all 6 Singapore pet insurers side by side. Real data, honest coverage details, direct quote links.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section class="services-section" id="services">
+      <div class="container">
+        <div class="section-header animate-in">
+          <div class="pill">Singapore-specific</div>
+          <h2>Every pet service,<br><span class="gradient-text">right here</span></h2>
+          <p class="section-subhead">We mapped out every pet service in Singapore so you don't have to Google it.</p>
+        </div>
+
+        <div class="services-grid">
+          <div class="service-item animate-in stagger-1">
+            <div class="service-dot" style="background: #FF8888;"></div>
+            <div>
+              <div class="service-name">Veterinarians</div>
+              <div class="service-sub">Find nearby vets via Apple Maps</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-1">
+            <div class="service-dot" style="background: #FFB3D9;"></div>
+            <div>
+              <div class="service-name">Pet Insurance</div>
+              <div class="service-sub">6 SG insurers compared</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-2">
+            <div class="service-dot" style="background: #FF9F7F;"></div>
+            <div>
+              <div class="service-name">Groomers</div>
+              <div class="service-sub">Pet grooming & salons</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-2">
+            <div class="service-dot" style="background: #A8E6CF;"></div>
+            <div>
+              <div class="service-name">Dog Parks</div>
+              <div class="service-sub">25 NParks dog runs</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-3">
+            <div class="service-dot" style="background: #9B8FF6;"></div>
+            <div>
+              <div class="service-name">Pet Hotels</div>
+              <div class="service-sub">Boarding & daycare</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-3">
+            <div class="service-dot" style="background: #FFE599;"></div>
+            <div>
+              <div class="service-name">Pet Stores</div>
+              <div class="service-sub">Supplies & accessories</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-1">
+            <div class="service-dot" style="background: #C6C0F8;"></div>
+            <div>
+              <div class="service-name">Shelters & Rescue</div>
+              <div class="service-sub">10 SG welfare organisations</div>
+            </div>
+          </div>
+          <div class="service-item animate-in stagger-2">
+            <div class="service-dot" style="background: #9B8FF6;"></div>
+            <div>
+              <div class="service-name">PawShop</div>
+              <div class="service-sub">Toys, food, treats & more</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COMMUNITY -->
+    <section class="community-section" id="community">
+      <div class="container">
+        <div class="community-inner animate-in">
+          <div class="community-text">
+            <div class="pill">Growing community</div>
+            <h2>Singapore's pet owners,<br>together.</h2>
+            <p>PawConnect is being built by pet owners, for pet owners. Join the waitlist and be among the first to connect with Singapore's pet community.</p>
+            <button class="btn btn-primary" data-open-waitlist>Get early access</button>
+          </div>
+          <div class="community-stats">
+            <div class="stat-card">
+              <div class="stat-number gradient-text"><span class="count" data-target="2847">0</span>+</div>
+              <div class="stat-label">Waitlist members</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number gradient-text">8</div>
+              <div class="stat-label">Pet services integrated</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number gradient-text">25</div>
+              <div class="stat-label">Dog parks mapped</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-number gradient-text">6</div>
+              <div class="stat-label">Insurance providers</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="about-section" id="about">
+      <div class="container">
+        <div class="about-inner animate-in">
+          <div class="about-badge">
+            <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 8v4l3 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <h2>About PawConnect</h2>
+          <p>PawConnect is an iOS app built by a pet owner in Singapore, frustrated by the lack of a good local pet community platform. We believe every pet deserves to be celebrated — and every owner deserves a community that understands them.</p>
+          <p>The app is currently in development. Join the waitlist to get notified when we launch.</p>
+          <div class="about-links">
+            <a href="privacy.html">Privacy Policy</a>
+            <a href="terms.html">Terms of Service</a>
+            <a href="mailto:support@pawconnect.fingrow.app">Contact Us</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="container">
+        <div class="cta-inner animate-in">
+          <div class="cta-paw">🐾</div>
+          <h2>Be first to join the pack.</h2>
+          <p>PawConnect is coming to the App Store. Join the waitlist and get early access.</p>
+          <button class="btn btn-primary btn-lg btn-pulse" data-open-waitlist>Join the waitlist</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <div class="brand-mark small">
+          <svg viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="16" fill="url(#pawgrad2)"/>
+            <text x="16" y="21" text-anchor="middle" font-size="14" font-family="Inter,sans-serif" font-weight="900" fill="white">🐾</text>
+            <defs>
+              <linearGradient id="pawgrad2" x1="0" y1="0" x2="32" y2="32" gradientUnits="userSpaceOnUse">
+                <stop stop-color="#9B8FF6"/>
+                <stop offset="1" stop-color="#C6C0F8"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <span class="brand-name">PawConnect</span>
+      </div>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:support@pawconnect.fingrow.app">Support</a>
+      </div>
+      <div class="footer-copy">© 2026 PawConnect. All rights reserved. · Singapore 🇸🇬</div>
+    </div>
+  </footer>
+
+  <!-- WAITLIST MODAL -->
+  <div class="modal-overlay" id="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <button class="modal-close" id="modal-close" aria-label="Close">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+      <div class="modal-paw">🐾</div>
+      <h2 class="modal-title" id="modal-title">Join the waitlist</h2>
+      <p class="modal-sub">Be first to know when PawConnect launches on the App Store.</p>
+      <form class="modal-form" id="waitlist-form" novalidate>
+        <div class="form-field">
+          <input type="email" id="waitlist-email" placeholder="your@email.com" autocomplete="email" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full">
+          <span class="btn-text">Notify me</span>
+          <span class="btn-loading" hidden>Joining…</span>
+        </button>
+        <p class="form-note">No spam. Just a launch notification. Unsubscribe any time.</p>
+      </form>
+      <div class="modal-success" id="modal-success" hidden>
+        <div class="success-icon">✅</div>
+        <h3>You're on the list!</h3>
+        <p>We'll email you when PawConnect launches. Thanks for the support 🐾</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+
+</html>
