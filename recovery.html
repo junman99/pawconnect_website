@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var token = params.get("t") || params.get("token") || "";
+      var argument = token ? "pawconnect://recovery?t=" + encodeURIComponent(token) : "pawconnect://recovery";
+      var meta = document.createElement("meta");
+      meta.name = "apple-itunes-app";
+      meta.content = "app-id=6760605721, app-argument=" + argument;
+      document.head.appendChild(meta);
+    })();
+  </script>
+  <title>PawConnect Pet Recovery</title>
+  <style>
+    :root {
+      --bg: #f7f3ea;
+      --card: #fffaf0;
+      --ink: #251b14;
+      --muted: #75685d;
+      --brand: #cf6f38;
+      --brand-dark: #7c3f24;
+      --line: rgba(37, 27, 20, 0.12);
+      --danger: #b52f2f;
+      --success: #347850;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: ui-rounded, "Avenir Next", "Nunito", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 20% 0%, rgba(207, 111, 56, 0.2), transparent 32rem),
+        radial-gradient(circle at 92% 12%, rgba(124, 63, 36, 0.16), transparent 28rem),
+        var(--bg);
+    }
+
+    .shell {
+      width: min(680px, 100%);
+      margin: 0 auto;
+      padding: 28px 18px 48px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+      color: var(--brand-dark);
+      font-weight: 800;
+      letter-spacing: 0.02em;
+    }
+
+    .mark {
+      display: grid;
+      width: 36px;
+      height: 36px;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+      font-size: 18px;
+    }
+
+    .card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: rgba(255, 250, 240, 0.92);
+      box-shadow: 0 28px 72px rgba(75, 43, 25, 0.14);
+    }
+
+    .hero {
+      padding: 26px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+    }
+
+    .lost {
+      display: none;
+      width: fit-content;
+      margin-bottom: 14px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.18);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .pet {
+      display: flex;
+      gap: 18px;
+      align-items: center;
+    }
+
+    .photo {
+      width: 96px;
+      height: 96px;
+      flex: 0 0 auto;
+      overflow: hidden;
+      border: 4px solid rgba(255, 255, 255, 0.34);
+      border-radius: 30px;
+      background: rgba(255, 255, 255, 0.18);
+    }
+
+    .photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .fallback-photo {
+      display: grid;
+      width: 100%;
+      height: 100%;
+      place-items: center;
+      font-size: 42px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 0 0 6px;
+      font-size: clamp(30px, 8vw, 48px);
+      line-height: 0.98;
+    }
+
+    .subtitle {
+      margin: 0;
+      color: rgba(255, 255, 255, 0.84);
+      font-weight: 700;
+    }
+
+    .content {
+      padding: 24px;
+    }
+
+    .message {
+      display: none;
+      margin: 0 0 18px;
+      padding: 15px 16px;
+      border-left: 5px solid var(--brand);
+      border-radius: 16px;
+      background: #fff4df;
+      font-weight: 700;
+    }
+
+    .grid {
+      display: grid;
+      gap: 12px;
+      margin: 18px 0;
+    }
+
+    .row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    .value {
+      max-width: 62%;
+      text-align: right;
+      font-weight: 800;
+      word-break: break-word;
+    }
+
+    .actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    a.button, button {
+      display: flex;
+      width: 100%;
+      min-height: 52px;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      border-radius: 18px;
+      color: #fff;
+      background: var(--brand-dark);
+      font: inherit;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    button.secondary {
+      color: var(--brand-dark);
+      background: #f1dfca;
+    }
+
+    a.button.secondary {
+      color: var(--brand-dark);
+      background: #f1dfca;
+    }
+
+    .notice {
+      margin-top: 16px;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .state {
+      padding: 34px 24px;
+      text-align: center;
+    }
+
+    .state h1 {
+      color: var(--brand-dark);
+      font-size: 30px;
+      line-height: 1.05;
+    }
+
+    .hidden { display: none !important; }
+
+    @media (max-width: 520px) {
+      .shell { padding-top: 16px; }
+      .pet { align-items: flex-start; }
+      .photo {
+        width: 78px;
+        height: 78px;
+        border-radius: 24px;
+      }
+      .hero, .content { padding: 20px; }
+      .row { display: block; }
+      .value {
+        max-width: none;
+        margin-top: 4px;
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <div class="brand"><span class="mark">P</span><span>PawConnect Recovery</span></div>
+
+    <section id="loading" class="card state">
+      <h1>Loading recovery details</h1>
+      <p class="notice">Checking this pet's secure recovery page.</p>
+    </section>
+
+    <section id="error" class="card state hidden">
+      <h1>Recovery link unavailable</h1>
+      <p class="notice">This QR may have been disabled by the owner or the link is no longer valid.</p>
+    </section>
+
+    <section id="card" class="card hidden">
+      <div class="hero">
+        <div id="lost" class="lost">Lost Mode Active</div>
+        <div class="pet">
+          <div class="photo" id="photoWrap">
+            <div class="fallback-photo" id="fallbackPhoto">P</div>
+            <img id="photo" class="hidden" alt="">
+          </div>
+          <div>
+            <h1 id="petName">Pet</h1>
+            <p id="subtitle" class="subtitle">PawConnect recovery profile</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="content">
+        <p id="message" class="message"></p>
+
+        <div class="grid" id="details"></div>
+
+        <div class="actions">
+          <a id="openApp" class="button secondary hidden" href="#">Open in PawConnect</a>
+          <a id="primaryCall" class="button hidden" href="#">Call Owner</a>
+          <a id="backupCall" class="button hidden" href="#">Call Backup Contact</a>
+          <button id="locationButton" class="secondary hidden" type="button">Share My Location Text</button>
+          <a class="button secondary" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721">Get PawConnect on the App Store</a>
+        </div>
+
+        <p class="notice">
+          This page only shows details the pet owner chose to reveal. It is blocked from search indexing and should be used only to help reunite this pet with their owner.
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    const endpoint = "https://asia-southeast1-pawconnect-72d74.cloudfunctions.net/getPetRecoveryPublic";
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("t") || params.get("token") || "";
+
+    const loading = document.getElementById("loading");
+    const error = document.getElementById("error");
+    const card = document.getElementById("card");
+    const details = document.getElementById("details");
+
+    function show(el) { el.classList.remove("hidden"); }
+    function hide(el) { el.classList.add("hidden"); }
+    function clean(value) { return typeof value === "string" ? value.trim() : ""; }
+
+    function addDetail(label, value) {
+      const cleaned = clean(value);
+      if (!cleaned) return;
+      const row = document.createElement("div");
+      row.className = "row";
+      row.innerHTML = `<div class="label"></div><div class="value"></div>`;
+      row.children[0].textContent = label;
+      row.children[1].textContent = cleaned;
+      details.appendChild(row);
+    }
+
+    function configureCallLink(id, label, phone) {
+      const link = document.getElementById(id);
+      const cleaned = clean(phone);
+      if (!cleaned) return;
+      link.href = `tel:${cleaned.replace(/[^\d+]/g, "")}`;
+      link.textContent = label;
+      show(link);
+    }
+
+    function configureLocation(payload) {
+      if (!payload.allowFinderLocation) return;
+      const button = document.getElementById("locationButton");
+      show(button);
+      button.addEventListener("click", () => {
+        if (!navigator.geolocation) {
+          window.alert("Location sharing is not available in this browser.");
+          return;
+        }
+
+        button.disabled = true;
+        button.textContent = "Getting Location...";
+        navigator.geolocation.getCurrentPosition(async position => {
+          const maps = `https://maps.google.com/?q=${position.coords.latitude},${position.coords.longitude}`;
+          const text = `I found ${clean(payload.petName) || "your pet"}. My location: ${maps}`;
+          button.disabled = false;
+          button.textContent = "Share My Location Text";
+
+          if (navigator.share) {
+            await navigator.share({ text }).catch(() => {});
+          } else if (navigator.clipboard) {
+            await navigator.clipboard.writeText(text);
+            window.alert("Location text copied. Please send it to the owner.");
+          } else {
+            window.prompt("Copy this location text and send it to the owner:", text);
+          }
+        }, () => {
+          button.disabled = false;
+          button.textContent = "Share My Location Text";
+          window.alert("Could not access your location.");
+        }, { enableHighAccuracy: true, timeout: 12000 });
+      });
+    }
+
+    async function load() {
+      if (!token) throw new Error("Missing token");
+      const response = await fetch(`${endpoint}?token=${encodeURIComponent(token)}`, {
+        cache: "no-store"
+      });
+      if (!response.ok) throw new Error("Unavailable");
+      return response.json();
+    }
+
+    load()
+      .then(payload => {
+        document.getElementById("petName").textContent = clean(payload.petName) || "Pet";
+        document.getElementById("subtitle").textContent = [payload.species, payload.breed].map(clean).filter(Boolean).join(" / ") || "PawConnect recovery profile";
+
+        if (payload.lostModeEnabled) {
+          show(document.getElementById("lost"));
+        }
+
+        const message = clean(payload.recoveryMessage);
+        if (message) {
+          const el = document.getElementById("message");
+          el.textContent = message;
+          show(el);
+        }
+
+        const photoURL = clean(payload.photoURL);
+        if (photoURL) {
+          const photo = document.getElementById("photo");
+          photo.src = photoURL;
+          photo.alt = `${clean(payload.petName) || "Pet"} photo`;
+          photo.onload = () => {
+            hide(document.getElementById("fallbackPhoto"));
+            show(photo);
+          };
+        }
+
+        addDetail("Owner", payload.ownerName);
+        addDetail("Species", payload.species);
+        addDetail("Breed", payload.breed);
+        addDetail("Microchip", payload.microchipId);
+        addDetail("Backup Contact", [payload.backupContactName, payload.backupContactType].map(clean).filter(Boolean).join(" / "));
+
+        configureCallLink("primaryCall", "Call Owner", payload.primaryPhone);
+        configureCallLink("backupCall", "Call Backup Contact", payload.backupPhone);
+        configureLocation(payload);
+        if (token) {
+          const openApp = document.getElementById("openApp");
+          openApp.href = `pawconnect://recovery?t=${encodeURIComponent(token)}`;
+          show(openApp);
+        }
+
+        hide(loading);
+        show(card);
+      })
+      .catch(() => {
+        hide(loading);
+        show(error);
+      });
+  </script>
+</body>
+</html>
