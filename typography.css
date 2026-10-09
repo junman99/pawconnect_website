@@ -1,0 +1,12 @@
+/* Nunito by Vernon Adams, Jacques Le Bailly, and contributors. SIL Open Font License. */
+@font-face {
+  font-family: 'Nunito';
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url('assets/fonts/nunito-latin-variable.woff2') format('woff2');
+}
+:root {
+  --native-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --rounded-sans: 'Nunito', ui-rounded, 'Arial Rounded MT Bold', var(--native-sans);
+}

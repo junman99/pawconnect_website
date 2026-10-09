@@ -14,9 +14,11 @@ Open http://127.0.0.1:8765. No build step or package installation is needed. All
 
 ## Design
 
-Cream `#FFF8F4`, peach `#FFF0EB`, coral `#D95A48`, charcoal `#29262D`, and PawAI lavender `#806FE8` follow the current native Theme.swift. Clean system typography, large product views and continuous chapters replace the previous serif/sticker direction. Native scroll drives the desktop care product sequence; mobile exposes direct feature controls. No scroll interception. Reduced motion disables transitions and mascot motion; a pause control is also provided. The cat’s animation stops outside the viewport and in hidden tabs.
+Cream `#FFF8F4`, peach `#FFF0EB`, coral `#D95A48`, charcoal `#29262D`, and PawAI lavender `#806FE8` follow the current native Theme.swift. Locally hosted Nunito typography with rounded terminals, large product views and continuous chapters replace the previous serif/sticker direction. Native scroll drives the desktop care product sequence; mobile exposes direct feature controls. No scroll interception. Reduced motion disables transitions and mascot motion; a pause control is also provided. The cat’s animation stops outside the viewport and in hidden tabs.
 
 ## Assets and screenshots
+
+- `assets/fonts/nunito-latin-variable.woff2`: Nunito variable font, served locally with its SIL Open Font License. Marketing and supporting pages use Nunito; app design previews retain native system typography. Source: https://fonts.google.com/specimen/Nunito.
 
 - `coco.jpg`, `mochi.jpg`, `buddy.jpg`: resized copies of native Welcome* photography, with the same pet identities. Original native assets untouched. Existing app assets are reused; their upstream photo licenses were not documented in the checkout and should be confirmed before publication.
 - `logo-primary.svg` and `logo-white.svg`: exact current SVG exports from the native `output/brand/PawConnect-Brand-Assets/SVG` folder. The coral P mark, pet silhouette and heart preserve the original geometry and color. `app-logo.png` and `app-icon.png` are the matching new native brand exports. Used throughout navigation, footer, download, support/legal/recovery pages and browser icons.

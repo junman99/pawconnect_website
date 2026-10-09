@@ -4,3 +4,7 @@ body.recovery-page{--bg:#fff8f4;--card:#fffdfc;--ink:#29262d;--muted:#6d6267;--b
 @media(max-width:600px){body.document-page{padding:24px 22px 50px;font-size:14px}.document-page h1{font-size:40px;letter-spacing:-1.3px}.document-page h2{font-size:26px}.document-page .card{padding:20px}}
 
 .document-brand{display:flex;align-items:center;gap:4px;width:fit-content;font-weight:650;font-size:20px;letter-spacing:-.6px;color:#29262d!important;margin-bottom:18px}.document-brand img{object-fit:contain}.document-page h1{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:600;font-size:clamp(36px,6vw,56px);letter-spacing:-2px}.document-page h2{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:24px;font-weight:600;letter-spacing:-.7px}.recovery-page .mark{background:transparent;width:44px;height:44px}.recovery-page .mark img{width:44px;height:44px;object-fit:contain}.recovery-page h1{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-weight:600}
+
+body.document-page,body.recovery-page {font-family:var(--rounded-sans)}
+.document-page h1,.document-page h2,.recovery-page h1 {font-family:var(--rounded-sans);font-weight:750;letter-spacing:-.035em}
+.document-brand {font-weight:800}
