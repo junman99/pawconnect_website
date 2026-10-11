@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF8F4">
+  <meta name="robots" content="noindex,follow">
+  <title>Join me on PawConnect</title>
+  <meta name="description" content="A moment from PawConnect, the app for pets and the people who love them. Get it on the App Store.">
+  <meta property="og:site_name" content="PawConnect">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Join me on PawConnect">
+  <meta property="og:description" content="Pet profiles, everyday care and a community that gets it.">
+  <meta property="og:image" content="https://pawconnect.fingrow.app/assets/app-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="assets/logo-primary.svg">
+  <link rel="apple-touch-icon" href="assets/app-icon.png">
+  <link rel="preload" href="assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="typography.css?v=rounded-1">
+  <script>
+    // Safari's Smart App Banner. Tapping OPEN hands `app-argument` to the app, which opens the post or the invite.
+    // Everything here comes from the link, so it is validated before use.
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var kind = p.get("k") || "";
+      var id = p.get("id") || "";
+      var code = p.get("code") || "";
+      var argument = window.location.href;
+      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        argument = "pawconnect://post?id=" + encodeURIComponent(id);
+      } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
+        argument = "pawconnect://join?code=" + encodeURIComponent(code);
+      }
+      var meta = document.createElement("meta");
+      meta.name = "apple-itunes-app";
+      meta.content = "app-id=6760605721, app-argument=" + argument;
+      document.head.appendChild(meta);
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #fff8f4;
+      --peach: #fff0eb;
+      --card: #ffffff;
+      --ink: #29262d;
+      --muted: #6d6267;
+      --coral: #d95a48;
+      --coral-dark: #be493a;
+      --line: #eadcd5;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--rounded-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -8%, rgba(255, 127, 110, 0.28), transparent 26rem),
+        radial-gradient(circle at 100% 8%, rgba(255, 209, 102, 0.22), transparent 22rem),
+        var(--bg);
+    }
+    .shell { width: min(560px, 100%); margin: 0 auto; padding: 22px 20px 40px; }
+    .brand { display: flex; align-items: center; gap: 10px; font-weight: 800; font-size: 20px; letter-spacing: -0.02em; color: var(--ink); text-decoration: none; }
+    .brand img { width: 40px; height: 40px; }
+    .card {
+      margin-top: 26px;
+      padding: 30px 24px 26px;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(98, 66, 43, 0.10);
+    }
+    .faces { display: flex; justify-content: center; margin-bottom: 22px; }
+    .faces img {
+      width: 84px; height: 84px; object-fit: cover; border-radius: 50%;
+      border: 4px solid var(--card); box-shadow: 0 8px 22px rgba(98, 66, 43, 0.18);
+    }
+    .faces img + img { margin-left: -20px; }
+    .faces img:nth-child(2) { width: 100px; height: 100px; margin-top: -8px; position: relative; z-index: 1; }
+    .chip {
+      display: inline-block; margin-bottom: 14px; padding: 6px 14px; border-radius: 999px;
+      background: var(--peach); color: var(--coral-dark); font-weight: 800; font-size: 13px; letter-spacing: 0.04em;
+    }
+    h1 { margin: 0 0 10px; font-size: clamp(27px, 7vw, 34px); line-height: 1.12; letter-spacing: -0.035em; font-weight: 800; }
+    .lead { margin: 0 auto 24px; max-width: 30em; font-size: 17px; line-height: 1.5; color: var(--muted); }
+    .button {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 54px; padding: 0 22px; border-radius: 999px;
+      font: inherit; font-weight: 800; font-size: 17px; text-decoration: none; cursor: pointer;
+    }
+    .button.primary { background: var(--coral); color: #fff; box-shadow: 0 12px 26px rgba(217, 90, 72, 0.32); }
+    .button.primary:active { background: var(--coral-dark); }
+    .button.secondary { margin-top: 12px; background: var(--peach); color: var(--coral-dark); }
+    .steps { margin: 26px 0 0; padding: 0; list-style: none; text-align: left; counter-reset: step; }
+    .steps li {
+      position: relative; margin-top: 10px; padding: 14px 16px 14px 56px; border-radius: 18px;
+      background: var(--bg); border: 1px solid var(--line); font-size: 16px; line-height: 1.4; counter-increment: step;
+    }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; border-radius: 50%; background: var(--coral); color: #fff;
+      display: grid; place-items: center; font-weight: 800; font-size: 15px;
+    }
+    .code {
+      display: inline-block; margin: 2px 0 0; padding: 2px 10px; border-radius: 10px;
+      background: var(--peach); color: var(--coral-dark); font-weight: 800; letter-spacing: 0.08em;
+    }
+    .hint { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
+    .desktop { display: none; }
+    @media (hover: hover) and (pointer: fine) { .desktop { display: block; } }
+    .features { display: grid; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; text-align: left; }
+    .features li { padding: 12px 16px; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); font-size: 15px; line-height: 1.4; }
+    .features b { color: var(--ink); }
+    footer { margin-top: 26px; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { color: var(--muted); margin: 0 8px; }
+    .hidden { display: none !important; }
+    @media (prefers-color-scheme: dark) {
+      :root { --bg: #1f1b1a; --peach: #3a2825; --card: #292422; --ink: #f6eeea; --muted: #bdb4ae; --line: #3d3532; --coral-dark: #ff907f; }
+      .faces img { border-color: var(--card); }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <a class="brand" href="index.html"><img src="assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
+
+    <section class="card">
+      <div class="faces" aria-hidden="true">
+        <img src="assets/coco.jpg" alt="" width="84" height="84">
+        <img src="assets/mochi.jpg" alt="" width="100" height="100">
+        <img src="assets/buddy.jpg" alt="" width="84" height="84">
+      </div>
+      <span class="chip" id="chip">PAWCONNECT</span>
+      <h1 id="headline">Their world. In your hands.</h1>
+      <p class="lead" id="lead">Pet profiles, everyday care and a community that gets it.</p>
+
+      <a class="button primary" id="get" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721">Download on the App Store</a>
+      <a class="button secondary" id="open" href="pawconnect://">I have the app: open it</a>
+
+      <ol class="steps hidden" id="steps">
+        <li>Get PawConnect from the App Store.</li>
+        <li>Come back to this message and tap <b>Open it</b>.</li>
+        <li id="codeStep" class="hidden">If it doesn't fill in by itself, go to Profile › Join with a code and enter <span class="code" id="codeText"></span></li>
+      </ol>
+
+      <ul class="features" id="features">
+        <li><b>Pet profiles and a digital ID</b> for everyone you love.</li>
+        <li><b>Health, reminders and walks</b> in one calm place.</li>
+        <li><b>Zoomies and moments</b> from pets and people nearby.</li>
+      </ul>
+      <p class="hint desktop">PawConnect is an iPhone app. Open this page on your iPhone to install it.</p>
+    </section>
+
+    <footer>
+      <a href="privacy.html">Privacy</a><a href="terms.html">Terms</a><a href="support.html">Support</a>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var kind = p.get("k") || "";
+      var id = p.get("id") || "";
+      var code = p.get("code") || "";
+      var sharer = p.get("u") || "";
+      if (!/^[A-Za-z0-9._]{1,30}$/.test(sharer)) sharer = "";
+
+      function $(name) { return document.getElementById(name); }
+      var by = sharer ? "@" + sharer : "A friend";
+
+      // Copy per kind. Only textContent is ever set from link values, never HTML.
+      var copy = {
+        post:      { chip: "SHARED WITH YOU", head: by + " shared a moment", lead: "See it, say hi, and meet the pets and people on PawConnect." },
+        zoomie:    { chip: "⚡ ZOOMIE", head: by + " shared a Zoomie", lead: "Watch it in PawConnect, the home of pet videos and everyday moments." },
+        pet:       { chip: "MEET A NEW FRIEND", head: "Meet a pet on PawConnect", lead: by + " thinks you'll love this one. See their profile in the app." },
+        profile:   { chip: "ON PAWCONNECT", head: (sharer ? "@" + sharer : "Your friend") + " is on PawConnect", lead: "Follow along with their pets and everyday moments." },
+        milestone: { chip: "A BIG DAY 🎉", head: "A milestone worth celebrating", lead: "Tracked on PawConnect. Keep every special day in one place." },
+        walk:      { chip: "TRACKED WALK", head: "Out for a walk 🐾", lead: "Tracked with PawConnect. Walks, health and care for the whole pack." },
+        badge:     { chip: "NEW BADGE 🏅", head: "A badge earned on PawConnect", lead: "Earn badges for caring, sharing and showing up for your pets." },
+        join:      { chip: "YOU'RE INVITED", head: "Care for a pet together", lead: by + " invited you to share a pet on PawConnect." }
+      };
+      var c = copy[kind];
+      if (c) {
+        $("chip").textContent = c.chip;
+        $("headline").textContent = c.head;
+        $("lead").textContent = c.lead;
+        document.title = c.head + " · PawConnect";
+      }
+
+      // Where "I have the app" goes.
+      var deep = "pawconnect://";
+      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        deep = "pawconnect://post?id=" + encodeURIComponent(id);
+      } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
+        deep = "pawconnect://join?code=" + encodeURIComponent(code);
+        $("steps").classList.remove("hidden");
+        $("features").classList.add("hidden");
+        $("codeStep").classList.remove("hidden");
+        $("codeText").textContent = code;
+        $("open").textContent = "Open it";
+      }
+      $("open").setAttribute("href", deep);
+    })();
+  </script>
+</body>
+</html>
