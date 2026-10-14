@@ -37,7 +37,8 @@
     <li><strong>Account Information:</strong> Email address, username, and a password, or your Apple or Google sign-in identifier, when you create an account</li>
     <li><strong>Profile Information:</strong> Display name, profile photo, and pet profiles you create</li>
     <li><strong>Content:</strong> Photos, videos, captions, stories, and comments you post</li>
-    <li><strong>Pet Data:</strong> Pet name, species, breed, age, weight, and the health records, medical documents, reminders, activity logs, and notes you enter</li>
+    <li><strong>Pet Data:</strong> Pet name, species, breed, age, weight, the microchip number you enter, and the health records, medical documents, reminders, activity logs (including walks, see Section 2.2), and notes you enter. The microchip number is shown in the app only to you and the people you give access to that pet, and on the public recovery page only if you choose to show it. It is currently stored with the pet's profile record; we are moving it to a private area that only you and the pet's co-owners can read, and older versions of the app still keep a copy in the profile record while they are in use</li>
+    <li><strong>Emergency Contacts:</strong> The names, phone numbers, and types of the vets, sitters, and family members you save for a pet. Please only enter details of people who are happy for you to do so</li>
     <li><strong>Messages:</strong> Direct and group messages you send, including photos, voice notes, and shared posts (see Section 6)</li>
     <li><strong>Support Conversations:</strong> Messages and photos you send to PawConnect Support (see Section 6)</li>
     <li><strong>Reports and Blocks:</strong> Reports you file about content or people, and the people you block (see Section 7)</li>
@@ -45,10 +46,10 @@
 
   <h3>2.2 Information Collected Automatically</h3>
   <ul>
-    <li><strong>Location Data:</strong> Approximate or precise location when you use map-based features (such as Find a Vet) or track a walk, only when you grant permission</li>
-    <li><strong>Device and Notification Information:</strong> Device type, iOS version, app version, and the push notification token for your device</li>
-    <li><strong>Usage and Diagnostics:</strong> We use Firebase Analytics and Firebase Crashlytics to understand which features are used and to find and fix crashes. These collect app events, device details, and an app-instance identifier. They are on by default</li>
-    <li><strong>Walk Tracking:</strong> GPS route data during walks is stored on your device and only uploaded if you choose to share it</li>
+    <li><strong>Location Data:</strong> Approximate or precise location when you use map-based features (such as Find a Vet) or track a walk, only when you grant permission. If you allow location access, we also use your approximate location to work out which country you are in (on your device). We store the country, not the location, to show the right PawShop region and to see where people want PawShop to open</li>
+    <li><strong>Device and Notification Information:</strong> Device type, iOS version, app version, the push notification token for your device, and a device attestation token (from Apple App Attest and Firebase App Check) that shows requests come from the genuine app</li>
+    <li><strong>Usage and Diagnostics:</strong> We use Firebase Analytics and Firebase Crashlytics to understand which features are used and to find and fix crashes. These collect app events (for example sign-ups, adding a pet, creating a post, using reminders, viewing profiles, sharing, and viewing or tapping items in PawShop, including the words you type into the PawShop search box), crash reports, device details, an app-instance identifier, and three settings about you: the number of pets you have, your main pet species, and your region. They are on by default</li>
+    <li><strong>Walk Tracking:</strong> When you track a walk, PawConnect uses your precise location while the walk is running (and in the background if you allowed "Always"). When you finish the walk, its route, distance, duration, and the estimated calories burned are saved to your pet's activity log on our servers. Everyone who has access to that pet (the owner, co-owners, caregivers, and viewers you invite) can see the walk and its route. You can delete a walk from the activity log at any time. Photos you add to a walk are stored like your other photos</li>
   </ul>
 
   <h3>2.3 Information NOT Collected</h3>
@@ -67,6 +68,7 @@
     <li>Answer your questions to PawConnect Support and send you service announcements</li>
     <li>Keep the community safe: review reports, apply our Terms, and prevent abuse (see Section 7)</li>
     <li>Provide the PawAI assistant (see Section 5)</li>
+    <li>Provide pet recovery tags and lost-pet alerts (see Section 6A)</li>
     <li>Improve the app, measure performance, and fix problems</li>
   </ul>
 
@@ -76,11 +78,12 @@
     <li><strong>Photos and Videos:</strong> Stored on Cloudflare R2 and served only to people who are allowed to see them</li>
     <li><strong>Authentication:</strong> Passwords are never stored in plain text; Firebase Authentication handles sign-in</li>
     <li><strong>Messages:</strong> Messages are stored on our servers so they can be delivered and kept in your chat history. They are not end-to-end encrypted</li>
-    <li><strong>Walk Data:</strong> GPS routes are stored locally on your device by default</li>
+    <li><strong>Walk Data:</strong> A draft of a walk is kept on your device until it is saved. A finished walk, including its route, is stored on our servers with your pet's activity log (see Section 2.2)</li>
   </ul>
 
   <h2>5. PawAI Assistant</h2>
-  <p>When you ask PawAI a question, we send your message, together with the details of the pets you choose and the care records relevant to the question (for example weight, health records, activity, and reminders), plus short notes PawAI has remembered about you, to our AI provider, <strong>OpenAI</strong>, to generate the answer. We ask OpenAI not to store the request, and we identify you to OpenAI only with an anonymous identifier, never your name or email. Your PawAI conversation history and memories are stored in your account and are deleted when you delete your account or clear them.</p>
+  <p>PawAI is powered by <strong>OpenAI</strong>, a third-party AI service. When you ask PawAI a question, we send OpenAI your question and earlier messages in the chat, the details of the pets you pick (such as name, species, breed, age, and weight), the care records PawAI needs to answer (such as health records, activity, and reminders), photos or vet documents you ask about, and the notes PawAI has saved for you if "Remember useful details" is on. If PawAI searches the web to answer, the search words are sent too. We do not send your name, email address, phone number, location, or microchip number. We ask OpenAI not to store the request, and we identify you to OpenAI only with an anonymous identifier. OpenAI processes this information to produce the answer; see OpenAI's privacy policy (Section 13).</p>
+  <p>For new accounts, "Remember useful details" is off until you turn it on. Your PawAI conversation history and saved notes are stored in your account and are deleted when you delete your account or clear them.</p>
   <p>PawAI is not a veterinarian. Its answers are general information and not a substitute for professional veterinary advice.</p>
 
   <h2>6. Messages, Support, and Announcements</h2>
@@ -90,6 +93,9 @@
     <li><strong>Announcements:</strong> We may send service announcements and updates to the read-only PawConnect Updates chat in the app, with a push notification if you have message notifications turned on</li>
     <li><strong>Push Notifications:</strong> Delivered through Apple Push Notification service and Firebase Cloud Messaging. Your device token is removed when you sign out or delete your account. You can turn notifications off in iOS Settings or in the app</li>
   </ul>
+
+  <h2>6A. Pet Recovery Page (QR Tag) and Lost Mode</h2>
+  <p>If you create a recovery tag for a pet, anyone who scans the QR code or opens its link can see a public page, without signing in. You choose what it shows: the pet's name and species and, if you turn them on, its breed, photo, and microchip number; your name and phone number; an optional second contact; a message to the finder; a medical alert; and, if you turn on Lost Mode, where the pet was last seen. We record that the tag was scanned (the time only) and notify you and the pet's co-owners. A finder can send you a message, and may choose to include their phone number and location; this is stored with the pet and visible to you and the pet's co-owners. You can change what is shown, switch the page off, or issue a new QR code at any time (the old link then stops working). Deleting the pet or your account deletes the tag and the reports sent to it.</p>
 
   <h2>7. Safety: Reports, Blocking, and Moderation</h2>
   <ul>
@@ -103,8 +109,9 @@
   <h2>8. Data Sharing</h2>
   <ul>
     <li><strong>Public Posts:</strong> Content you post publicly is visible to all PawConnect users</li>
-    <li><strong>Service Providers:</strong> We use Google (Firebase, Google Sign-In, Google Maps and Places), Apple (Sign-In, Push Notifications, Maps), Cloudflare (media storage and delivery), and OpenAI (the PawAI assistant) to run the service. They process data only to provide those services to us</li>
-    <li><strong>Affiliate Links:</strong> When you tap "Buy Now" in PawShop, we record the click (product name, timestamp) to track affiliate commissions. No personal data is shared with the retailer beyond the standard referral link</li>
+    <li><strong>Recovery Page:</strong> If you create a pet recovery tag, the information you choose to show is visible to anyone who opens the page (see Section 6A)</li>
+    <li><strong>Service Providers:</strong> We use Google (Firebase, Google Sign-In, Google Maps and Places), Apple (Sign-In, Push Notifications, Maps, App Attest), Cloudflare (media storage and delivery), and OpenAI (the PawAI assistant) to run the service. They process data only to provide those services to us. We also use Klipy (GIF search in chats: the search words you type are sent to Klipy) and Open Pet Food Facts (the barcode you scan is sent to this public database to look up a pet-food product)</li>
+    <li><strong>PawShop and Affiliate Links:</strong> When you tap "Buy Now", we record the click against your account and open the retailer with a random click id (it does not contain your name or account id). The retailer tells us, through its affiliate programme, when an order was placed with that id, so we can match it to your click and earn a commission; we do not see what else you bought. In the app we may ask whether you got the product and store your answer and an optional rating, and we store the products you save so we can tell you about price drops. We do not share your name, email, or account id with the retailer. PawShop is a shop window only: you cannot buy inside PawConnect. "Buy Now" opens the retailer's own website, where you place and pay for the order; that website has its own privacy policy, which applies there, and we receive no payment details, delivery address, or price from it</li>
     <li><strong>Legal and Safety:</strong> If required by law, or to protect the safety of people, animals, or the service</li>
   </ul>
   <p>We do NOT sell your personal information to third parties.</p>
@@ -138,7 +145,7 @@
   <ul>
     <li><strong>The other people's side of conversations.</strong> Your messages in chats with other people stay in their chat history only as "This message was deleted", under the name "Deleted User", and your photo is removed. Messages other people sent you stay with them, because they are their own messages. A chat is removed entirely once no one in it still has an account</li>
     <li><strong>Our replies in support conversations.</strong> Your own messages are removed; our replies remain on a closed conversation marked as a deleted account</li>
-    <li><strong>Reports you filed about other people.</strong> They stay so we can act on them, without your identity</li>
+    <li><strong>Reports you filed about other people.</strong> They stay so we can act on them, without your name</li>
     <li><strong>A limited safety record.</strong> If at the time you delete your account you were banned, had been blocked by other people, or had reports filed against you, we keep a small record to stop banned people and abusers from simply creating a new account. It holds only whether you were banned, the IDs of the people who had blocked you, and the number and types of reports, stored under a one-way hash of your sign-in identity (email, Apple, or Google). It contains no name or email address and is used for nothing else. If you sign up again with the same identity while it exists, a ban, blocks, and a review flag can be applied to the new account. We keep it for 12 months, or 24 months if you were banned, and then delete it automatically. Our legitimate interest is keeping the community safe</li>
     <li><strong>Moderation log entries,</strong> as described in Section 7, for 12 months (the excerpt of removed content is deleted straight away)</li>
     <li><strong>Backups and logs.</strong> Residual copies in encrypted backups and system logs are overwritten or expire after a limited period and are not used for any other purpose</li>
@@ -165,6 +172,8 @@
     <li><strong>Apple Sign-In, Push Notifications, and Maps:</strong> Authentication, notifications, and location services &mdash; <a href="https://www.apple.com/legal/privacy/">Privacy Policy</a></li>
     <li><strong>Cloudflare R2:</strong> Media storage and delivery &mdash; <a href="https://www.cloudflare.com/privacypolicy/">Privacy Policy</a></li>
     <li><strong>OpenAI:</strong> Generating PawAI answers &mdash; <a href="https://openai.com/policies/privacy-policy">Privacy Policy</a></li>
+    <li><strong>Klipy:</strong> GIF search in chats</li>
+    <li><strong>Open Pet Food Facts:</strong> Looking up a pet-food product from a barcode you scan</li>
   </ul>
 
   <h2>14. Changes and Contact</h2>
