@@ -17,6 +17,10 @@
   <link rel="apple-touch-icon" href="assets/app-icon.png">
   <link rel="preload" href="assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="typography.css?v=rounded-1">
+  <script>
+    // A share card is never meant to sit inside another page (GitHub Pages cannot send a frame-ancestors header): if it is framed, hide it.
+    if (window.top !== window.self) { document.documentElement.style.display = "none"; }
+  </script>
   <!-- Safari's Smart App Banner. The tag is in the served HTML (Safari reads it before scripts run); the script below only adds the
        argument that tells the app what to open, and only from values it has validated. -->
   <meta name="apple-itunes-app" content="app-id=6760605721">
