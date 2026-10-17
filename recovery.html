@@ -132,9 +132,10 @@
       <p class="notice">Checking this pet's recovery page.</p>
     </section>
 
-    <section id="error" class="card state hidden">
-      <h1>This page isn't available</h1>
-      <p class="notice">The owner may have turned this tag off or replaced it. If you found a pet, please take it to a nearby vet or shelter and ask them to scan its microchip.</p>
+    <section id="error" class="card state hidden" role="alert">
+      <h1 id="errorTitle">This page isn't available</h1>
+      <p class="notice" id="errorText">The owner may have turned this tag off or replaced it. If you found a pet, please take it to a nearby vet or shelter and ask them to scan its microchip.</p>
+      <div class="actions"><button id="retryButton" class="button secondary hidden" type="button">Try again</button></div>
     </section>
 
     <section id="card" class="card hidden">
@@ -282,14 +283,62 @@
       });
     }
 
+    // Why a tag could not be shown (audit S11-004). A tag that is off or unknown answers 404 and is final: no retry can help. A busy
+    // network (429), a failed connection, a slow answer or a server error is temporary: say so and offer to try again.
+    class LoadProblem extends Error {
+      constructor(kind) { super(kind); this.kind = kind; }
+    }
+    const FINDER_ADVICE = " If you found a pet, please take it to a nearby vet or shelter and ask them to scan its microchip.";
+    const problemCopy = {
+      missing:   { title: "This link is incomplete", text: "The address is missing part of the tag's code. Try scanning the QR code again." + FINDER_ADVICE, retry: false },
+      off:       { title: "This page isn't available", text: "The owner may have turned this tag off or replaced it." + FINDER_ADVICE, retry: false },
+      busy:      { title: "Too many tries", text: "Too many people are opening tags from this network right now. Wait a minute, then try again.", retry: true },
+      offline:   { title: "We couldn't load this page", text: "Your connection may have dropped, or our service is slow. This does not mean the tag was turned off. Check your connection and try again." + FINDER_ADVICE, retry: true },
+      server:    { title: "We couldn't load this page", text: "Something went wrong on our side. This does not mean the tag was turned off. Please try again in a moment." + FINDER_ADVICE, retry: true }
+    };
+
     async function load() {
-      if (!token) throw new Error("Missing token");
-      const response = await fetch(base + "/getPetRecoveryPublic?token=" + encodeURIComponent(token), { cache: "no-store" });
-      if (!response.ok) throw new Error("Unavailable");
-      return response.json();
+      if (!token) throw new LoadProblem("missing");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+      let response;
+      try {
+        response = await fetch(base + "/getPetRecoveryPublic?token=" + encodeURIComponent(token), { cache: "no-store", signal: controller.signal });
+      } catch (error) {
+        throw new LoadProblem("offline");
+      } finally {
+        clearTimeout(timer);
+      }
+      if (response.status === 404) throw new LoadProblem("off");
+      if (response.status === 429) throw new LoadProblem("busy");
+      if (!response.ok) throw new LoadProblem("server");
+      try {
+        return await response.json();
+      } catch (error) {
+        throw new LoadProblem("server");
+      }
     }
 
-    load().then(payload => {
+    function showProblem(error) {
+      const kind = error instanceof LoadProblem ? error.kind : "server";
+      const copy = problemCopy[kind];
+      $("errorTitle").textContent = copy.title;
+      $("errorText").textContent = copy.text;
+      const retry = $("retryButton");
+      copy.retry ? show(retry) : hide(retry);
+      hide($("loading"));
+      show($("error"));
+    }
+
+    function start() {
+      hide($("error"));
+      $("details").textContent = "";
+      show($("loading"));
+      load().then(render).catch(showProblem);
+    }
+    $("retryButton").addEventListener("click", start);
+
+    function render(payload) {
       const name = clean(payload.petName) || "Pet";
       document.title = name + " · PawConnect Recovery";
       $("petName").textContent = name;
@@ -353,10 +402,9 @@
       }
       hide($("loading"));
       show($("card"));
-    }).catch(() => {
-      hide($("loading"));
-      show($("error"));
-    });
+    }
+
+    start();
   </script>
 </body>
 </html>
