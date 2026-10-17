@@ -17,24 +17,21 @@
   <link rel="apple-touch-icon" href="assets/app-icon.png">
   <link rel="preload" href="assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="typography.css?v=rounded-1">
+  <!-- Safari's Smart App Banner. The tag is in the served HTML (Safari reads it before scripts run); the script below only adds the
+       argument that tells the app what to open, and only from values it has validated. -->
+  <meta name="apple-itunes-app" content="app-id=6760605721">
   <script>
-    // Safari's Smart App Banner. Tapping OPEN hands `app-argument` to the app, which opens the post or the invite.
-    // Everything here comes from the link, so it is validated before use.
     (function () {
       var p = new URLSearchParams(window.location.search);
       var kind = p.get("k") || "";
       var id = p.get("id") || "";
       var code = p.get("code") || "";
-      var argument = window.location.href;
-      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
-        argument = "pawconnect://post?id=" + encodeURIComponent(id);
-      } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
-        argument = "pawconnect://join?code=" + encodeURIComponent(code);
-      }
-      var meta = document.createElement("meta");
-      meta.name = "apple-itunes-app";
-      meta.content = "app-id=6760605721, app-argument=" + argument;
-      document.head.appendChild(meta);
+      var scheme = null;
+      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) scheme = "pawconnect://post?id=" + encodeURIComponent(id);
+      else if ((kind === "pet" || kind === "milestone") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) scheme = "pawconnect://" + kind + "?id=" + encodeURIComponent(id);
+      else if (kind === "profile" && /^[A-Za-z0-9._]{1,30}$/.test(id)) scheme = "pawconnect://profile?id=" + encodeURIComponent(id);
+      else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) scheme = "pawconnect://join?code=" + encodeURIComponent(code);
+      if (scheme) document.querySelector('meta[name="apple-itunes-app"]').setAttribute("content", "app-id=6760605721, app-argument=" + scheme);
     })();
   </script>
   <style>
@@ -137,11 +134,11 @@
       <p class="lead" id="lead">Pet profiles, everyday care and a community that gets it.</p>
 
       <a class="button primary" id="get" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721">Download on the App Store</a>
-      <a class="button secondary" id="open" href="pawconnect://">I have the app: open it</a>
+      <a class="button secondary" id="open" href="pawconnect://">Open PawConnect</a>
 
       <ol class="steps hidden" id="steps">
         <li>Get PawConnect from the App Store.</li>
-        <li>Come back to this message and tap <b>Open it</b>.</li>
+        <li>Come back to this message and tap <b>Open in PawConnect</b>.</li>
         <li id="codeStep" class="hidden">If it doesn't fill in by itself, go to Profile › Join with a code and enter <span class="code" id="codeText"></span></li>
       </ol>
 
@@ -159,29 +156,28 @@
   </main>
 
   <script>
+    // Everything on this page that comes from the address is checked against a strict pattern before it is used. The only text taken from
+    // the address and shown is a join code that passed its pattern. No name or sentence from the address is ever displayed: otherwise anyone
+    // could put words on an official-looking page (audit S17-009). The sharer's name is therefore not shown.
     (function () {
       var p = new URLSearchParams(window.location.search);
       var kind = p.get("k") || "";
       var id = p.get("id") || "";
       var code = p.get("code") || "";
-      var sharer = p.get("u") || "";
-      if (!/^[A-Za-z0-9._]{1,30}$/.test(sharer)) sharer = "";
-
       function $(name) { return document.getElementById(name); }
-      var by = sharer ? "@" + sharer : "A friend";
 
-      // Copy per kind. Only textContent is ever set from link values, never HTML.
+      // Fixed copy per kind. "opens" kinds have a place in the app; walks and badges do not, so the page does not promise to open them.
       var copy = {
-        post:      { chip: "SHARED WITH YOU", head: by + " shared a moment", lead: "See it, say hi, and meet the pets and people on PawConnect." },
-        zoomie:    { chip: "⚡ ZOOMIE", head: by + " shared a Zoomie", lead: "Watch it in PawConnect, the home of pet videos and everyday moments." },
-        pet:       { chip: "MEET A NEW FRIEND", head: "Meet a pet on PawConnect", lead: by + " thinks you'll love this one. See their profile in the app." },
-        profile:   { chip: "ON PAWCONNECT", head: (sharer ? "@" + sharer : "Your friend") + " is on PawConnect", lead: "Follow along with their pets and everyday moments." },
-        milestone: { chip: "A BIG DAY 🎉", head: "A milestone worth celebrating", lead: "Tracked on PawConnect. Keep every special day in one place." },
-        walk:      { chip: "TRACKED WALK", head: "Out for a walk 🐾", lead: "Tracked with PawConnect. Walks, health and care for the whole pack." },
-        badge:     { chip: "NEW BADGE 🏅", head: "A badge earned on PawConnect", lead: "Earn badges for caring, sharing and showing up for your pets." },
-        join:      { chip: "YOU'RE INVITED", head: "Care for a pet together", lead: by + " invited you to share a pet on PawConnect." }
+        post:      { opens: true,  chip: "SHARED WITH YOU", head: "A friend shared a moment", lead: "Open it in PawConnect to see it, say hi, and meet the pets and people there." },
+        zoomie:    { opens: true,  chip: "ZOOMIE", head: "A friend shared a Zoomie", lead: "Open it in PawConnect, the home of pet videos and everyday moments." },
+        pet:       { opens: true,  chip: "MEET A NEW FRIEND", head: "A friend shared a pet with you", lead: "Open PawConnect to see their profile. If it is no longer shared, the app will say so." },
+        profile:   { opens: true,  chip: "ON PAWCONNECT", head: "A friend shared a profile with you", lead: "Open PawConnect to follow along. If the profile is no longer available, the app will say so." },
+        milestone: { opens: true,  chip: "A BIG DAY", head: "A friend shared a milestone", lead: "Open PawConnect to meet the pet behind it. Keep every special day in one place." },
+        walk:      { opens: false, chip: "TRACKED WALK", head: "A friend shared a walk", lead: "Walks stay inside PawConnect, so there is nothing to open here. Get the app to track your own walks, health and care." },
+        badge:     { opens: false, chip: "NEW BADGE", head: "A friend earned a badge", lead: "Earn badges for caring, sharing and showing up for your pets. Get PawConnect to start collecting." },
+        join:      { opens: true,  chip: "YOU'RE INVITED", head: "Care for a pet together", lead: "A friend invited you to share a pet on PawConnect." }
       };
-      var c = copy[kind];
+      var c = Object.prototype.hasOwnProperty.call(copy, kind) ? copy[kind] : null;
       if (c) {
         $("chip").textContent = c.chip;
         $("headline").textContent = c.head;
@@ -189,18 +185,25 @@
         document.title = c.head + " · PawConnect";
       }
 
-      // Where "I have the app" goes.
+      // Where the Open button goes: the item itself when the link carries a valid id or code, otherwise just the app.
       var deep = "pawconnect://";
+      var valid = false;
       if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
-        deep = "pawconnect://post?id=" + encodeURIComponent(id);
+        deep = "pawconnect://post?id=" + encodeURIComponent(id); valid = true;
+      } else if ((kind === "pet" || kind === "milestone") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        deep = "pawconnect://" + kind + "?id=" + encodeURIComponent(id); valid = true;
+      } else if (kind === "profile" && /^[A-Za-z0-9._]{1,30}$/.test(id)) {
+        deep = "pawconnect://profile?id=" + encodeURIComponent(id); valid = true;
       } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
-        deep = "pawconnect://join?code=" + encodeURIComponent(code);
+        deep = "pawconnect://join?code=" + encodeURIComponent(code); valid = true;
         $("steps").classList.remove("hidden");
         $("features").classList.add("hidden");
         $("codeStep").classList.remove("hidden");
         $("codeText").textContent = code;
-        $("open").textContent = "Open it";
       }
+      // A known kind with a broken id is a plain card: install, or open the app as it is. An unknown kind keeps the generic card.
+      if (c && c.opens && !valid) $("lead").textContent = "This link looks incomplete, so it cannot open a specific item. You can still get PawConnect or open the app.";
+      $("open").textContent = (c && c.opens && valid) ? "Open in PawConnect" : "Open PawConnect";
       $("open").setAttribute("href", deep);
     })();
   </script>
