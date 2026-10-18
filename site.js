@@ -68,7 +68,7 @@
   var clips = Array.prototype.slice.call(document.querySelectorAll("video[data-src]"));
   clips.forEach(function (v) { v.addEventListener("playing", function () { v.classList.add("playing"); }); });
   if ("IntersectionObserver" in window) {
-    var near = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && pageLoaded && !e.target.closest(".hero")) loadVideo(e.target); }); }, { rootMargin: "100% 0px" });
+    var near = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && pageLoaded && !e.target.closest(".hero") && !e.target.closest(".appx")) loadVideo(e.target); }); }, { rootMargin: "100% 0px" });
     clips.forEach(function (v) { near.observe(v); });
   }
 
@@ -81,49 +81,46 @@
     new IntersectionObserver(function (entries) { entries.forEach(function (e) { heroVisible = e.isIntersecting; if (e.isIntersecting) { if (pageLoaded) playVideo(heroClip); } else stopVideo(heroClip); }); }, { threshold: 0.25 }).observe(heroClip);
   }
 
-  // ---- the story stage: one phone, the screen follows the text ----
-  var stage = document.querySelector(".stage");
-  var steps = Array.prototype.slice.call(document.querySelectorAll(".step"));
-  var layers = stage ? Array.prototype.slice.call(stage.querySelectorAll(".layer")) : [];
-  var dots = stage ? Array.prototype.slice.call(stage.querySelectorAll(".stage__dots li")) : [];
+  // ---- the app page: a tab picks the feature; the phone's screen and the words change together (no long scroll) ----
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('.tabs [role="tab"]'));
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panels [role="tabpanel"]'));
+  var layers = Array.prototype.slice.call(document.querySelectorAll(".appx .layer"));
   var current = "";
-  function setActive(name) {
-    if (!stage || name === current) return;
+  function select(name, moveFocus, remember) {
+    var tab = tabs.filter(function (t) { return t.getAttribute("data-screen") === name; })[0];
+    if (!tab || name === current) { if (tab && moveFocus) tab.focus(); return; }
     current = name;
+    tabs.forEach(function (t) { var on = t === tab; t.setAttribute("aria-selected", on ? "true" : "false"); t.tabIndex = on ? 0 : -1; });
+    panels.forEach(function (p) { if (p.getAttribute("data-screen") === name) p.removeAttribute("hidden"); else p.setAttribute("hidden", ""); });
     layers.forEach(function (l) {
       var on = l.getAttribute("data-screen") === name;
       l.classList.toggle("on", on);
       var v = l.querySelector("video");
       if (v) { if (on) { try { v.currentTime = 0; } catch (e) {} playVideo(v); } else stopVideo(v); }
     });
-    steps.forEach(function (s, i) { if (dots[i]) dots[i].classList.toggle("on", s.getAttribute("data-screen") === name); });
+    if (moveFocus) tab.focus();
+    if (remember && history.replaceState) { try { history.replaceState(null, "", "#" + name); } catch (e) {} }
+    if (tab.scrollIntoView && tab.parentNode && tab.parentNode.scrollWidth > tab.parentNode.clientWidth) { try { tab.scrollIntoView({ block: "nearest", inline: "center" }); } catch (e) {} }
   }
-  var stepObserver;
-  function watchSteps() {
-    if (!("IntersectionObserver" in window) || !steps.length) return;
-    if (stepObserver) stepObserver.disconnect();
-    var wide = window.matchMedia("(min-width: 900px)").matches;
-    stepObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) { if (e.isIntersecting) setActive(e.target.getAttribute("data-screen")); });
-    }, { rootMargin: wide ? "-46% 0px -46% 0px" : "-56% 0px -26% 0px", threshold: 0 });
-    steps.forEach(function (s) { stepObserver.observe(s); });
-  }
-  if (stage) {
-    // first screen before anything has scrolled
-    setActive(steps.length ? steps[0].getAttribute("data-screen") : "");
-    watchSteps();
-    if (window.matchMedia) window.matchMedia("(min-width: 900px)").addEventListener("change", watchSteps);
-    // the stage only plays while the story is on screen
-    var story = document.getElementById("story");
-    if (story && "IntersectionObserver" in window) {
-      new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          var v = stage.querySelector(".layer.on video");
-          if (!v) return;
-          if (e.isIntersecting) playVideo(v); else stopVideo(v);
-        });
-      }, { threshold: 0 }).observe(story);
-    }
+  if (tabs.length) {
+    tabs.forEach(function (t, i) {
+      t.addEventListener("click", function () { select(t.getAttribute("data-screen"), false, true); });
+      t.addEventListener("keydown", function (e) {
+        var j = -1;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") j = (i + 1) % tabs.length;
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") j = (i - 1 + tabs.length) % tabs.length;
+        else if (e.key === "Home") j = 0; else if (e.key === "End") j = tabs.length - 1;
+        if (j >= 0) { e.preventDefault(); select(tabs[j].getAttribute("data-screen"), true, true); }
+      });
+    });
+    var fromHash = function () { var h = (location.hash || "").replace("#", ""); if (h) select(h, false, false); };
+    current = tabs[0].getAttribute("data-screen");
+    fromHash();
+    window.addEventListener("hashchange", fromHash);
+    // the recording in the phone plays while the page is visible
+    var phoneVideo = function () { return document.querySelector(".appx .layer.on video"); };
+    var firstVideo = phoneVideo();
+    window.addEventListener("load", function () { setTimeout(function () { pageLoaded = true; var v = phoneVideo(); if (v) playVideo(v); }, 800); });
   }
 
   // ---- pause (WCAG 2.2.2): the recordings in the phones play by themselves, so each phone carries a small pause/play button; one switch stops everything that moves ----
@@ -137,7 +134,7 @@
       motionOff = !motionOff;
       paintToggle();
       clips.forEach(function (v) { if (motionOff) v.pause(); });
-      if (!motionOff) { var v = stage && stage.querySelector(".layer.on video"); if (v) playVideo(v); if (heroClip) playVideo(heroClip); }
+      if (!motionOff) { var v = document.querySelector(".appx .layer.on video"); if (v) playVideo(v); if (heroClip) playVideo(heroClip); }
     });
   });
   paintToggle();

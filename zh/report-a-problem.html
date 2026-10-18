@@ -1,61 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hans" data-alt="/report-a-problem.html">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>PawConnect 报告问题</title>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px 20px 72px; line-height: 1.7; color: #1A1A1A; background: #FAFAFA; }
-    h1, h2, h3 { color: #1A1A1A; }
-    h1 { border-bottom: 2px solid #9B8FF6; padding-bottom: 12px; font-size: 30px; margin-bottom: 8px; }
-    h2 { font-size: 20px; margin-top: 32px; }
-    h3 { font-size: 16px; margin-top: 24px; }
-    p, li { color: #374151; }
-    a { color: #9B8FF6; text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .meta { color: #6B7280; font-size: 13px; font-style: italic; margin-bottom: 24px; }
-    .back { display: inline-flex; align-items: center; gap: 6px; margin-bottom: 24px; font-size: 14px; font-weight: 600; color: #9B8FF6; }
-    .card { background: #FFFFFF; border: 1px solid #E5E7EB; border-radius: 16px; padding: 18px 18px; margin-top: 16px; box-shadow: 0 4px 14px rgba(155, 143, 246, 0.06); }
-    .cta { display: inline-block; margin-top: 8px; padding: 11px 16px; background: #9B8FF6; color: white; border-radius: 999px; font-weight: 700; }
-    code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; background: #F5F3FE; border-radius: 8px; }
-    pre { padding: 14px 16px; overflow-x: auto; white-space: pre-wrap; }
-    ul { padding-left: 20px; }
-    hr { border: 0; border-top: 1px solid #E5E7EB; margin: 36px 0 20px; }
-  </style>
-  <link rel="stylesheet" href="/documents.css?v=rounded-1">
-  <meta name="theme-color" content="#FFF8F4">
-  <link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
-<link rel="preload" href="/assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/typography.css?v=rounded-1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<script>(function(){try{if(localStorage.getItem("pc-lang"))return;var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";var want=/^zh/i.test(l)?"zh":"en";var here=document.documentElement.lang.indexOf("zh")===0?"zh":"en";if(want==="zh"&&here==="en")location.replace(document.documentElement.getAttribute("data-alt")+location.search+location.hash)}catch(e){}})()</script>
+<title>PawConnect 报告问题</title>
+<meta name="description" content="如何报告 PawConnect 中的错误、失效链接、审核问题或有害内容，以及需要附上哪些信息。">
+<link rel="canonical" href="https://pawconnectsocial.com/zh/report-a-problem.html">
 <link rel="alternate" hreflang="en" href="https://pawconnectsocial.com/report-a-problem.html">
 <link rel="alternate" hreflang="zh-Hans" href="https://pawconnectsocial.com/zh/report-a-problem.html">
 <link rel="alternate" hreflang="x-default" href="https://pawconnectsocial.com/report-a-problem.html">
-<link rel="canonical" href="https://pawconnectsocial.com/zh/report-a-problem.html">
-<script>(function(){try{if(localStorage.getItem("pc-lang"))return;var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";var want=/^zh/i.test(l)?"zh":"en";var here=document.documentElement.lang.indexOf("zh")===0?"zh":"en";if(want==="zh"&&here==="en")location.replace(document.documentElement.getAttribute("data-alt")+location.search+location.hash)}catch(e){}})()</script>
-<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(a){try{localStorage.setItem("pc-lang",a.getAttribute("data-lang"))}catch(x){}}})</script>
-<meta name="description" content="如何报告 PawConnect 中的错误、失效链接、审核问题或有害内容，以及需要附上哪些信息。">
+<meta name="theme-color" content="#FFF8F4" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#171211" media="(prefers-color-scheme: dark)">
+<meta name="apple-itunes-app" content="app-id=6760605721">
+<meta property="og:site_name" content="PawConnect">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:url" content="https://pawconnectsocial.com/zh/report-a-problem.html">
+<meta property="og:title" content="PawConnect 报告问题">
+<meta property="og:description" content="如何报告 PawConnect 中的错误、失效链接、审核问题或有害内容，以及需要附上哪些信息。">
+<meta property="og:image" content="https://pawconnectsocial.com/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="PawConnect。和宠物的生活，都在这里。PawConnect 的创作者，与应用名称在一起。">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+<link rel="apple-touch-icon" href="/assets/app-icon.png">
+<link rel="preload" href="/assets/fonts/bricolage-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/noto-sans-sc-display.woff2" as="font" type="font/woff2" crossorigin>
+<script>(function(){try{var t=localStorage.getItem("pc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+<link rel="stylesheet" href="/site.css?v=4">
+<style>@font-face{font-family:"Noto Sans SC PC";font-style:normal;font-weight:800;font-display:swap;src:url("/assets/fonts/noto-sans-sc-display.woff2") format("woff2")}</style>
+<script src="/site.js?v=4" defer></script>
 </head>
-<body class="document-page">
-  <div class="doc-top"><a class="document-brand" href="/zh/"><img src="/assets/logo-primary.svg" alt="" width="48" height="48"><span>PawConnect</span></a><nav class="doc-lang" aria-label="语言"><a href="/report-a-problem.html" hreflang="en" lang="en" data-lang="en">EN</a><span aria-current="true">中文</span></nav></div>
-  <a class="back" href="/zh/">← 返回 PawConnect</a>
-  <h1>报告问题</h1>
-  <p class="meta">最后更新：2026 年 10 月 17 日</p>
-
-  <p>如果你在 PawConnect 中发现了错误、失效的链接、加载问题、审核问题或可疑行为，请按下面的方式联系我们，方便我们认真排查。</p>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="site-header"><div class="wrap">
+<a class="brand" href="/zh/" aria-label="PawConnect，回到顶部"><img src="/assets/logo-primary.svg" alt="" width="34" height="34"><span>PawConnect</span></a>
+<nav class="nav" aria-label="Main"><a href="/zh/app.html">应用一览</a><a href="/zh/app.html#pawai">PawAI</a><a href="/zh/about.html">关于</a><a href="/zh/questions.html">常见问题</a><a href="/zh/support.html">支持</a></nav>
+<nav class="lang" aria-label="语言"><a href="/report-a-problem.html" hreflang="en" lang="en" data-lang="en">EN</a><span aria-current="true">中文</span></nav>
+<button type="button" class="theme-toggle" aria-label="切换主题"><svg class="ico-moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="ico-sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg></button>
+<a class="btn header-cta" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721">获取应用</a>
+<details class="menu"><summary aria-label="打开菜单"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M4 7h16M4 12h16M4 17h16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"/></svg></summary>
+<nav class="menu__panel" aria-label="菜单"><a href="/zh/app.html">应用一览</a><a href="/zh/app.html#pawai">PawAI</a><a href="/zh/about.html">关于</a><a href="/zh/questions.html">常见问题</a><a href="/zh/support.html">支持</a></nav></details>
+</div></header>
+<main id="main" class="doc">
+<div class="wrap doc__grid"><div class="doc__side"><p class="eyebrow">帮助中心</p><h1>报告问题</h1><p class="meta">最后更新：2026 年 10 月 17 日</p><nav class="toc" aria-label="本页内容"><p>本页内容</p><ol><li><a href="#s1">产品问题请联系</a></li><li><a href="#s2">隐私或安全问题请联系</a></li><li><a href="#s3">请附上这些信息</a></li><li><a href="#s4">邮件模板</a></li><li><a href="#s5">报告之前，请先试试这些</a></li><li><a href="#s6">滥用、冒充或有害内容</a></li><li><a href="#s7">相关页面</a></li></ol></nav></div><div class="doc__body"><p>如果你在 PawConnect 中发现了错误、失效的链接、加载问题、审核问题或可疑行为，请按下面的方式联系我们，方便我们认真排查。</p>
 
   <div class="card">
-    <h2>产品问题请联系</h2>
+    <h2 id="s1">产品问题请联系</h2>
     <p><strong>邮箱：</strong> <a href="mailto:support@pawconnectsocial.com">support@pawconnectsocial.com</a></p>
     <p><a class="cta" href="mailto:support@pawconnectsocial.com?subject=PawConnect%20Bug%20Report">发送问题报告</a></p>
   </div>
 
   <div class="card">
-    <h2>隐私或安全问题请联系</h2>
+    <h2 id="s2">隐私或安全问题请联系</h2>
     <p><strong>隐私：</strong> <a href="mailto:privacy@pawconnectsocial.com">privacy@pawconnectsocial.com</a></p>
     <p><strong>法律 / 条款：</strong> <a href="mailto:legal@pawconnectsocial.com">legal@pawconnectsocial.com</a></p>
   </div>
 
-  <h2>请附上这些信息</h2>
+  <h2 id="s3">请附上这些信息</h2>
   <ul>
     <li>你当时想做什么</li>
     <li>你期望发生什么</li>
@@ -66,7 +71,7 @@
     <li>任何有助于说明问题的截图或录屏</li>
   </ul>
 
-  <h2>邮件模板</h2>
+  <h2 id="s4">邮件模板</h2>
   <pre>主题：PawConnect 问题报告
 
 账号邮箱：
@@ -88,7 +93,7 @@ iOS 版本：
 附件：
 - 截图 / 录屏 / 无</pre>
 
-  <h2>报告之前，请先试试这些</h2>
+  <h2 id="s5">报告之前，请先试试这些</h2>
   <ul>
     <li>强制关闭 PawConnect，再重新打开</li>
     <li>确认你使用的是最新版本的应用</li>
@@ -96,17 +101,20 @@ iOS 版本：
     <li>如果问题看起来只和你的账号有关，请退出后重新登录</li>
   </ul>
 
-  <h2>滥用、冒充或有害内容</h2>
+  <h2 id="s6">滥用、冒充或有害内容</h2>
   <p>如果问题涉及用户安全，请附上相关的用户名、宠物档案、帖子或消息，方便我们更快处理。</p>
 
-  <h2>相关页面</h2>
+  <h2 id="s7">相关页面</h2>
   <ul>
     <li><a href="/zh/support.html">帮助中心</a></li>
     <li><a href="/zh/privacy.html">隐私政策（英文为准，附中文摘要）</a></li>
     <li><a href="/zh/terms.html">服务条款（英文为准，附中文摘要）</a></li>
-  </ul>
-
-  <hr>
-  <p><em>© 2026 PawConnect。保留所有权利。</em></p>
+  </ul></div></div>
+</main>
+<footer class="site-footer"><div class="wrap">
+<a class="brand" href="/zh/" aria-label="PawConnect，回到顶部"><img src="/assets/logo-primary.svg" alt="" width="34" height="34"><span>PawConnect</span></a>
+<nav aria-label="Footer"><a href="/zh/support.html">支持</a><a href="/zh/report-a-problem.html">报告问题</a><a href="/zh/privacy.html">隐私政策</a><a href="/zh/terms.html">服务条款</a><a href="mailto:support@pawconnectsocial.com">support@pawconnectsocial.com</a></nav>
+<p>© 2026 PawConnect。新加坡出品。</p>
+</div></footer>
 </body>
 </html>
