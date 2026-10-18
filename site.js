@@ -173,6 +173,8 @@
       intro.addEventListener("webkitbeginfullscreen", function () { fullscreen = true; settle(); });
       intro.addEventListener("webkitendfullscreen", function () { fullscreen = false; settle(); showCue(); });
     }
+    // the cue is also looked up as the time moves, so a cue that became active while the track was still loading is never missed
+    intro.addEventListener("timeupdate", showCue);
     intro.addEventListener("ended", function () { if (capBox) capBox.classList.remove("on"); });
   }
 })();
