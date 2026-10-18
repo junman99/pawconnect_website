@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-alt="/zh/share.html">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -117,21 +117,29 @@
     footer { margin-top: 26px; text-align: center; font-size: 13px; color: var(--muted); }
     footer a { color: var(--muted); margin: 0 8px; }
     .hidden { display: none !important; }
+    .langlink { position: absolute; top: 20px; right: 20px; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--peach); color: var(--coral-dark); font-weight: 800; font-size: 14px; text-decoration: none; }
+    body { position: relative; }
     @media (prefers-color-scheme: dark) {
       :root { --bg: #1f1b1a; --peach: #3a2825; --card: #292422; --ink: #f6eeea; --muted: #bdb4ae; --line: #3d3532; --coral-dark: #ff907f; }
       .faces img { border-color: var(--card); }
     }
   </style>
+<link rel="alternate" hreflang="en" href="https://pawconnectsocial.com/share.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://pawconnectsocial.com/zh/share.html">
+<link rel="alternate" hreflang="x-default" href="https://pawconnectsocial.com/share.html">
+<script>(function(){try{if(localStorage.getItem("pc-lang"))return;var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";var want=/^zh/i.test(l)?"zh":"en";var here=document.documentElement.lang.indexOf("zh")===0?"zh":"en";if(want==="zh"&&here==="en")location.replace(document.documentElement.getAttribute("data-alt")+location.search+location.hash)}catch(e){}})()</script>
+<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(a){try{localStorage.setItem("pc-lang",a.getAttribute("data-lang"))}catch(x){}}})</script>
 </head>
 <body>
   <main class="shell">
-    <a class="brand" href="index.html"><img src="assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
+    <a class="langlink" href="/zh/share.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" id="langlink">中文</a>
+            <a class="brand" href="index.html"><img src="assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
 
     <section class="card">
       <div class="faces" aria-hidden="true">
-        <img src="assets/coco.jpg" alt="" width="84" height="84">
-        <img src="assets/mochi.jpg" alt="" width="100" height="100">
-        <img src="assets/buddy.jpg" alt="" width="84" height="84">
+        <img src="assets/brand/avatar-cat_peach.webp" alt="" width="84" height="84">
+        <img src="assets/brand/avatar-dog_blue.webp" alt="" width="100" height="100">
+        <img src="assets/brand/avatar-rabbit_lilac.webp" alt="" width="84" height="84">
       </div>
       <span class="chip" id="chip">PAWCONNECT</span>
       <h1 id="headline">Their world. In your hands.</h1>
@@ -181,7 +189,22 @@
         badge:     { opens: false, chip: "NEW BADGE", head: "A friend earned a badge", lead: "Earn badges for caring, sharing and showing up for your pets. Get PawConnect to start collecting." },
         join:      { opens: true,  chip: "YOU'RE INVITED", head: "Care for a pet together", lead: "A friend invited you to share a pet on PawConnect." }
       };
-      var c = Object.prototype.hasOwnProperty.call(copy, kind) ? copy[kind] : null;
+      var copyZh = {
+        post:      { opens: true,  chip: "朋友的分享", head: "朋友分享了一个瞬间", lead: "在 PawConnect 中打开来查看、打个招呼，认识那里的宠物和朋友。" },
+        zoomie:    { opens: true,  chip: "ZOOMIE", head: "朋友分享了一个 Zoomie", lead: "在 PawConnect 中打开，这里是宠物视频和日常瞬间的家。" },
+        pet:       { opens: true,  chip: "认识新朋友", head: "朋友向你分享了一只宠物", lead: "打开 PawConnect 查看它的档案。如果已不再共享，应用会告诉你。" },
+        profile:   { opens: true,  chip: "在 PAWCONNECT", head: "朋友向你分享了一个主页", lead: "打开 PawConnect 来关注。如果该主页已不可用，应用会告诉你。" },
+        milestone: { opens: true,  chip: "重要的一天", head: "朋友分享了一个里程碑", lead: "打开 PawConnect，认识它背后的宠物。把每个特别的日子都留在一处。" },
+        walk:      { opens: false, chip: "散步记录", head: "朋友分享了一次散步", lead: "散步记录只保存在 PawConnect 里，所以这里没有可打开的内容。获取应用，记录你自己的散步、健康与护理。" },
+        badge:     { opens: false, chip: "新徽章", head: "朋友获得了一枚徽章", lead: "为照顾、分享和陪伴宠物而获得徽章。获取 PawConnect，开始收集。" },
+        join:      { opens: true,  chip: "你受到邀请", head: "一起照顾一只宠物", lead: "朋友邀请你在 PawConnect 上共同照顾一只宠物。" }
+      };
+      var UI = {
+        en: { incomplete: "This link looks incomplete, so it cannot open a specific item. You can still get PawConnect or open the app.", openIn: "Open in PawConnect", open: "Open PawConnect" },
+        zh: { incomplete: "此链接似乎不完整，无法打开具体内容。你仍可以获取 PawConnect 或直接打开应用。", openIn: "在 PawConnect 中打开", open: "打开 PawConnect" }
+      };
+      var L = document.documentElement.lang.indexOf("zh") === 0 ? "zh" : "en";
+      var c = Object.prototype.hasOwnProperty.call(L === "zh" ? copyZh : copy, kind) ? (L === "zh" ? copyZh : copy)[kind] : null;
       if (c) {
         $("chip").textContent = c.chip;
         $("headline").textContent = c.head;
@@ -206,8 +229,8 @@
         $("codeText").textContent = code;
       }
       // A known kind with a broken id is a plain card: install, or open the app as it is. An unknown kind keeps the generic card.
-      if (c && c.opens && !valid) $("lead").textContent = "This link looks incomplete, so it cannot open a specific item. You can still get PawConnect or open the app.";
-      $("open").textContent = (c && c.opens && valid) ? "Open in PawConnect" : "Open PawConnect";
+      if (c && c.opens && !valid) $("lead").textContent = UI[L].incomplete;
+      $("open").textContent = (c && c.opens && valid) ? UI[L].openIn : UI[L].open;
       $("open").setAttribute("href", deep);
     })();
   </script>

@@ -1,0 +1,461 @@
+<!doctype html>
+<html lang="zh-Hans" data-alt="/recovery.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="color-scheme" content="light dark">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data:; font-src 'self'; connect-src https://asia-southeast1-pawconnect-72d74.cloudfunctions.net; form-action 'none'; base-uri 'none'; object-src 'none'">
+  <script>
+    // A tag page is never meant to sit inside another page (GitHub Pages cannot send a frame-ancestors header): if it is framed, hide it.
+    if (window.top !== window.self) { document.documentElement.style.display = "none"; }
+  </script>
+  <script>
+    (function() {
+      var params = new URLSearchParams(window.location.search);
+      var token = params.get("t") || params.get("token") || "";
+      var argument = token ? "pawconnect://recovery?t=" + encodeURIComponent(token) : "pawconnect://recovery";
+      var meta = document.createElement("meta");
+      meta.name = "apple-itunes-app";
+      meta.content = "app-id=6760605721, app-argument=" + argument;
+      document.head.appendChild(meta);
+    })();
+  </script>
+  <meta name="theme-color" content="#fff8f4">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+  <link rel="preload" href="/assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/typography.css?v=rounded-1">
+  <title>PawConnect 宠物找回</title>
+  <style>
+    :root {
+      --bg: #fff8f4;
+      --card: #fffdfc;
+      --ink: #29262d;
+      --muted: #6d6267;
+      --brand: #d95a48;
+      --brand-dark: #be493a;
+      --btn: #be493a;
+      --line: #e6d8d1;
+      --soft: #f6ece6;
+      --danger-bg: #ffe9e6;
+      --danger: #b3261e;
+      --warn-bg: #fff3d6;
+      --warn: #8a5a00;
+      --ok-bg: #e3f5ea;
+      --ok: #1f6b3d;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #161210;
+        --card: #211b18;
+        --ink: #f6eee9;
+        --muted: #b9aba2;
+        --btn: #d95a48;
+        --line: rgba(255, 255, 255, 0.14);
+        --soft: #2b2320;
+        --danger-bg: #43211f;
+        --danger: #ff9b92;
+        --warn-bg: #3d3014;
+        --warn: #ffd37a;
+        --ok-bg: #1d3626;
+        --ok: #8ee0a9;
+      }
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--rounded-sans, "Nunito", ui-rounded, system-ui, sans-serif);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-text-size-adjust: 100%;
+    }
+    .shell { width: min(560px, 100%); margin: 0 auto; padding: 18px 16px calc(40px + env(safe-area-inset-bottom)); }
+    .brand { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; color: var(--muted); font-size: 13px; font-weight: 700; }
+    .mark { display: grid; width: 26px; height: 26px; place-items: center; }
+    .mark img { width: 26px; height: 26px; object-fit: contain; }
+    .card { overflow: hidden; border: 1px solid var(--line); border-radius: 24px; background: var(--card); }
+    .langlink { position: absolute; top: 18px; right: 18px; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--soft, #fff0eb); color: var(--brand-dark, #be493a); font-weight: 800; font-size: 14px; text-decoration: none; }
+    .shell { position: relative; }
+    .hidden { display: none !important; }
+
+    .banner { display: none; padding: 14px 20px; background: var(--danger-bg); color: var(--danger); font-weight: 800; }
+    .banner small { display: block; margin-top: 3px; font-weight: 600; opacity: 0.9; }
+
+    .hero { display: flex; gap: 16px; align-items: center; padding: 22px 20px 8px; }
+    .photo { width: 92px; height: 92px; flex: 0 0 auto; overflow: hidden; border-radius: 28px; background: var(--soft); }
+    .photo img { width: 100%; height: 100%; object-fit: cover; }
+    .fallback-photo { display: grid; width: 100%; height: 100%; place-items: center; font-size: 40px; font-weight: 900; color: var(--brand); }
+    h1 { margin: 0 0 4px; font-size: clamp(28px, 8vw, 40px); line-height: 1; }
+    .subtitle { margin: 0; color: var(--muted); font-weight: 700; }
+
+    .content { padding: 12px 20px 22px; }
+    .alert { display: none; margin: 12px 0 0; padding: 13px 14px; border-radius: 14px; font-weight: 700; line-height: 1.35; }
+    .alert.medical { background: var(--warn-bg); color: var(--warn); }
+    .alert.note { background: var(--soft); }
+    .alert strong { display: block; font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 3px; }
+
+    .actions { display: grid; gap: 10px; margin-top: 18px; }
+    a.button, button.button {
+      display: flex; width: 100%; min-height: 54px; align-items: center; justify-content: center; gap: 8px;
+      border: 0; border-radius: 16px; color: #fff; background: var(--btn); font: inherit; font-weight: 800; font-size: 17px;
+      text-decoration: none; cursor: pointer;
+    }
+    .button.secondary { color: var(--ink); background: var(--soft); }
+    .button:disabled { opacity: 0.6; cursor: default; }
+    .button small { font-weight: 600; opacity: 0.85; }
+
+    .rows { margin-top: 18px; }
+    .row { display: flex; justify-content: space-between; gap: 16px; padding: 12px 0; border-top: 1px solid var(--line); }
+    .label { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; }
+    .value { max-width: 62%; text-align: right; font-weight: 700; word-break: break-word; }
+
+    .panel { margin-top: 14px; padding: 16px; border-radius: 18px; background: var(--soft); }
+    .panel h2 { margin: 0 0 4px; font-size: 18px; }
+    .panel p { margin: 0 0 12px; color: var(--muted); font-size: 14px; line-height: 1.4; }
+    label { display: block; margin: 10px 0 5px; font-size: 13px; font-weight: 800; }
+    input[type=text], input[type=tel], textarea {
+      width: 100%; padding: 12px; border: 1px solid var(--line); border-radius: 12px; color: var(--ink); background: var(--card); font: inherit;
+    }
+    textarea { min-height: 84px; resize: vertical; }
+    .check { display: flex; gap: 10px; align-items: flex-start; margin-top: 12px; font-weight: 600; font-size: 14px; line-height: 1.35; }
+    .check input { width: 20px; height: 20px; margin-top: 1px; flex: 0 0 auto; }
+    .status { margin-top: 12px; padding: 12px 14px; border-radius: 12px; font-weight: 700; display: none; }
+    .status.ok { background: var(--ok-bg); color: var(--ok); }
+    .status.err { background: var(--danger-bg); color: var(--danger); }
+
+    .notice { margin: 18px 0 0; color: var(--muted); font-size: 12.5px; line-height: 1.45; }
+    .state { padding: 36px 22px; text-align: center; }
+    .state h1 { font-size: 26px; }
+  </style>
+<link rel="alternate" hreflang="en" href="https://pawconnectsocial.com/recovery.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://pawconnectsocial.com/zh/recovery.html">
+<link rel="alternate" hreflang="x-default" href="https://pawconnectsocial.com/recovery.html">
+<script>(function(){try{if(localStorage.getItem("pc-lang"))return;var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";var want=/^zh/i.test(l)?"zh":"en";var here=document.documentElement.lang.indexOf("zh")===0?"zh":"en";if(want==="zh"&&here==="en")location.replace(document.documentElement.getAttribute("data-alt")+location.search+location.hash)}catch(e){}})()</script>
+<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(a){try{localStorage.setItem("pc-lang",a.getAttribute("data-lang"))}catch(x){}}})</script>
+</head>
+<body>
+  <main class="shell">
+    <a class="langlink" href="/recovery.html" hreflang="en" lang="en" data-lang="en" id="langlink">EN</a>
+            <div class="brand"><span class="mark"><img src="/assets/logo-primary.svg" alt="" width="26" height="26"></span><span>PawConnect 找回</span></div>
+
+    <section id="loading" class="card state">
+      <h1>加载中</h1>
+      <p class="notice">正在检查这只宠物的找回页面。</p>
+    </section>
+
+    <section id="error" class="card state hidden" role="alert">
+      <h1 id="errorTitle">此页面不可用</h1>
+      <p class="notice" id="errorText">主人可能已关闭或更换了这个标签。如果你捡到了宠物，请把它带到附近的兽医诊所或收容所，请他们扫描它的微芯片。</p>
+      <div class="actions"><button id="retryButton" class="button secondary hidden" type="button">重试</button></div>
+    </section>
+
+    <section id="card" class="card hidden">
+      <div id="lost" class="banner"></div>
+
+      <div class="hero">
+        <div class="photo"><div class="fallback-photo" id="fallbackPhoto">P</div><img id="photo" class="hidden" alt=""></div>
+        <div>
+          <h1 id="petName">宠物</h1>
+          <p id="subtitle" class="subtitle"></p>
+        </div>
+      </div>
+
+      <div class="content">
+        <div id="medical" class="alert medical"><strong>健康提醒</strong><span id="medicalText"></span></div>
+        <div id="message" class="alert note"><strong>主人的留言</strong><span id="messageText"></span></div>
+
+        <div class="actions">
+          <a id="primaryCall" class="button hidden" href="#"></a>
+          <a id="primaryText" class="button secondary hidden" href="#">发短信</a>
+          <a id="backupCall" class="button secondary hidden" href="#"></a>
+          <button id="foundButton" class="button secondary" type="button">我找到了这只宠物</button>
+        </div>
+
+        <form id="foundPanel" class="panel hidden" novalidate>
+          <h2>告诉主人</h2>
+          <p>他们的手机会立刻收到提醒。你不需要透露自己的号码。</p>
+          <label for="foundMessage">留言</label>
+          <textarea id="foundMessage" maxlength="400" placeholder="宠物现在在哪里？它安全吗？"></textarea>
+          <label for="foundName">你的名字 <span style="font-weight:600;color:var(--muted)">（可选）</span></label>
+          <input id="foundName" type="text" maxlength="60" autocomplete="name">
+          <label for="foundPhone">你的电话 <span style="font-weight:600;color:var(--muted)">（可选）</span></label>
+          <input id="foundPhone" type="tel" maxlength="24" autocomplete="tel" inputmode="tel">
+          <label id="locationRow" class="check hidden"><input id="shareLocation" type="checkbox"><span>分享我现在的位置，方便主人来接宠物</span></label>
+          <button id="sendFound" class="button" type="submit" style="margin-top:14px">发送给主人</button>
+          <div id="foundStatus" class="status"></div>
+        </form>
+
+        <div class="rows" id="details"></div>
+
+        <a id="openApp" class="button secondary hidden" style="margin-top:16px" href="#">在 PawConnect 中打开</a>
+        <p class="notice">
+          此页面只显示主人选择公开的信息，并已禁止搜索引擎收录。请仅用于帮助这只宠物回家。
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    // Every sentence on this page, in both languages. The page picks one from <html lang>. Dynamic sentences are small functions so word order can differ.
+    const STR = {
+      en: {
+        defaultPet: "Pet", thisPet: "this pet", theOwner: "the owner", backupContact: "backup contact", aContact: "a contact",
+        titleSuffix: " · PawConnect Recovery",
+        missingFor: (n, unit) => "Missing for " + n + (unit === "min" ? " min" : unit === "hour" ? (n === 1 ? " hour" : " hours") : " days"),
+        lost: name => name + " is lost. Please help get them home.",
+        lastSeen: "Last seen: ", photoAlt: name => name + " photo", call: who => "Call " + who, callContact: (who, type) => "Call " + who + (type ? " (" + type + ")" : ""),
+        smsBody: name => "Hi, I found " + name + ".", foundButton: name => "I found " + name,
+        owner: "Owner", microchip: "Microchip",
+        needSomething: "Add a message, your phone number, or share your location.", gettingLocation: "Getting your location…", sending: "Sending…", sent: "Sent", sendToOwner: "Send to owner",
+        sendFailed: "Couldn't send. Please call the owner instead.",
+        alerted: name => "The owner has been alerted. Please keep " + name + " safe and wait for their call.",
+        alertedNoLocation: "The owner has been alerted, but we couldn't get your location. Please tell them where you are.",
+        finderAdvice: " If you found a pet, please take it to a nearby vet or shelter and ask them to scan its microchip.",
+        problems: {
+          missing: ["This link is incomplete", "The address is missing part of the tag's code. Try scanning the QR code again.", false, true],
+          off: ["This page isn't available", "The owner may have turned this tag off or replaced it.", false, true],
+          busy: ["Too many tries", "Too many people are opening tags from this network right now. Wait a minute, then try again.", true, false],
+          offline: ["We couldn't load this page", "Your connection may have dropped, or our service is slow. This does not mean the tag was turned off. Check your connection and try again.", true, true],
+          server: ["We couldn't load this page", "Something went wrong on our side. This does not mean the tag was turned off. Please try again in a moment.", true, true]
+        }
+      },
+      zh: {
+        defaultPet: "宠物", thisPet: "这只宠物", theOwner: "主人", backupContact: "备用联系人", aContact: "联系人",
+        titleSuffix: " · PawConnect 找回",
+        missingFor: (n, unit) => "已走失 " + n + (unit === "min" ? " 分钟" : unit === "hour" ? " 小时" : " 天"),
+        lost: name => name + " 走失了。请帮忙送它回家。",
+        lastSeen: "最后出现：", photoAlt: name => name + " 的照片", call: who => "致电" + who, callContact: (who, type) => "致电" + who + (type ? "（" + type + "）" : ""),
+        smsBody: name => "你好，我找到了" + name + "。", foundButton: name => "我找到了" + name,
+        owner: "主人", microchip: "微芯片",
+        needSomething: "请填写留言、你的电话号码，或分享你的位置。", gettingLocation: "正在获取你的位置…", sending: "发送中…", sent: "已发送", sendToOwner: "发送给主人",
+        sendFailed: "发送失败。请直接联系主人。",
+        alerted: name => "已通知主人。请照看好" + name + "，等待主人来电。",
+        alertedNoLocation: "已通知主人，但我们无法获取你的位置。请告诉主人你在哪里。",
+        finderAdvice: "如果你捡到了宠物，请把它带到附近的兽医诊所或收容所，请他们扫描它的微芯片。",
+        problems: {
+          missing: ["链接不完整", "地址缺少标签代码的一部分。请再扫描一次二维码。", false, true],
+          off: ["此页面不可用", "主人可能已关闭或更换了这个标签。", false, true],
+          busy: ["尝试次数过多", "目前有太多人在用这个网络打开标签。请等一分钟再试。", true, false],
+          offline: ["无法加载此页面", "你的网络可能断了，或我们的服务较慢。这并不代表标签已被关闭。请检查网络后重试。", true, true],
+          server: ["无法加载此页面", "我们这边出了点问题。这并不代表标签已被关闭。请稍后再试。", true, true]
+        }
+      }
+    };
+    const S = STR[document.documentElement.lang.indexOf("zh") === 0 ? "zh" : "en"];
+    const base = "https://asia-southeast1-pawconnect-72d74.cloudfunctions.net";
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("t") || params.get("token") || "";
+    const $ = id => document.getElementById(id);
+
+    function show(el) { el.classList.remove("hidden"); }
+    function hide(el) { el.classList.add("hidden"); }
+    function clean(value) { return typeof value === "string" ? value.trim() : ""; }
+    function telHref(phone) { return "tel:" + phone.replace(/[^\d+]/g, ""); }
+
+    function addDetail(label, value) {
+      const cleaned = clean(value);
+      if (!cleaned) return;
+      const row = document.createElement("div");
+      row.className = "row";
+      const l = document.createElement("div"); l.className = "label"; l.textContent = label;
+      const v = document.createElement("div"); v.className = "value"; v.textContent = cleaned;
+      row.append(l, v);
+      $("details").appendChild(row);
+    }
+
+    function sinceText(ms) {
+      if (!ms) return "";
+      const minutes = Math.max(1, Math.round((Date.now() - ms) / 60000));
+      if (minutes < 60) return S.missingFor(minutes, "min");
+      const hours = Math.round(minutes / 60);
+      if (hours < 48) return S.missingFor(hours, "hour");
+      return S.missingFor(Math.round(hours / 24), "day");
+    }
+
+    function setStatus(kind, text) {
+      const el = $("foundStatus");
+      el.className = "status " + kind;
+      el.textContent = text;
+      el.style.display = "block";
+    }
+
+    function getPosition() {
+      return new Promise(resolve => {
+        if (!navigator.geolocation) return resolve(null);
+        navigator.geolocation.getCurrentPosition(
+          p => resolve({ latitude: p.coords.latitude, longitude: p.coords.longitude }),
+          () => resolve(null),
+          { enableHighAccuracy: true, timeout: 12000 }
+        );
+      });
+    }
+
+    function wireFoundForm(payload) {
+      const name = clean(payload.petName) || S.thisPet;
+      $("foundButton").textContent = S.foundButton(name);
+      $("foundButton").addEventListener("click", () => {
+        const panel = $("foundPanel");
+        panel.classList.contains("hidden") ? show(panel) : hide(panel);
+        if (!panel.classList.contains("hidden")) $("foundMessage").focus();
+      });
+      if (payload.allowFinderLocation) show($("locationRow"));
+
+      $("foundPanel").addEventListener("submit", async event => {
+        event.preventDefault();
+        const send = $("sendFound");
+        const message = clean($("foundMessage").value);
+        const finderPhone = clean($("foundPhone").value);
+        const wantsLocation = payload.allowFinderLocation && $("shareLocation").checked;
+        if (!message && !finderPhone && !wantsLocation) {
+          setStatus("err", S.needSomething);
+          return;
+        }
+        send.disabled = true;
+        send.textContent = wantsLocation ? S.gettingLocation : S.sending;
+        const position = wantsLocation ? await getPosition() : null;
+        send.textContent = S.sending;
+        try {
+          const response = await fetch(base + "/reportPetFound", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              token, message, finderPhone,
+              finderName: clean($("foundName").value),
+              latitude: position ? position.latitude : null,
+              longitude: position ? position.longitude : null
+            })
+          });
+          const result = await response.json().catch(() => ({}));
+          if (!response.ok) throw new Error(result.error || S.sendFailed);
+          setStatus("ok", S.alerted(name));
+          send.textContent = S.sent;
+          if (wantsLocation && !position) {
+            setStatus("ok", S.alertedNoLocation);
+          }
+        } catch (error) {
+          send.disabled = false;
+          send.textContent = S.sendToOwner;
+          setStatus("err", error.message || S.sendFailed);
+        }
+      });
+    }
+
+    // Why a tag could not be shown (audit S11-004). A tag that is off or unknown answers 404 and is final: no retry can help. A busy
+    // network (429), a failed connection, a slow answer or a server error is temporary: say so and offer to try again.
+    class LoadProblem extends Error {
+      constructor(kind) { super(kind); this.kind = kind; }
+    }
+
+    async function load() {
+      if (!token) throw new LoadProblem("missing");
+      const controller = new AbortController();
+      const timer = setTimeout(() => controller.abort(), 15000);
+      let response;
+      try {
+        response = await fetch(base + "/getPetRecoveryPublic?token=" + encodeURIComponent(token), { cache: "no-store", signal: controller.signal });
+      } catch (error) {
+        throw new LoadProblem("offline");
+      } finally {
+        clearTimeout(timer);
+      }
+      if (response.status === 404) throw new LoadProblem("off");
+      if (response.status === 429) throw new LoadProblem("busy");
+      if (!response.ok) throw new LoadProblem("server");
+      try {
+        return await response.json();
+      } catch (error) {
+        throw new LoadProblem("server");
+      }
+    }
+
+    function showProblem(error) {
+      const kind = error instanceof LoadProblem ? error.kind : "server";
+      const p = S.problems[kind];
+      $("errorTitle").textContent = p[0];
+      $("errorText").textContent = p[1] + (p[3] ? (document.documentElement.lang.indexOf("zh") === 0 ? "" : " ") + S.finderAdvice : "");
+      const retry = $("retryButton");
+      p[2] ? show(retry) : hide(retry);
+      hide($("loading"));
+      show($("error"));
+    }
+
+    function start() {
+      hide($("error"));
+      $("details").textContent = "";
+      show($("loading"));
+      load().then(render).catch(showProblem);
+    }
+    $("retryButton").addEventListener("click", start);
+
+    function render(payload) {
+      const name = clean(payload.petName) || S.defaultPet;
+      document.title = name + S.titleSuffix;
+      $("petName").textContent = name;
+      $("subtitle").textContent = [payload.species, payload.breed].map(clean).filter(Boolean).join(" · ");
+
+      if (payload.lostModeEnabled) {
+        const banner = $("lost");
+        banner.textContent = S.lost(name);
+        const small = document.createElement("small");
+        small.textContent = [sinceText(payload.lostSince), clean(payload.lastSeen) ? S.lastSeen + clean(payload.lastSeen) : ""].filter(Boolean).join(" · ");
+        if (small.textContent) banner.appendChild(small);
+        banner.style.display = "block";
+      }
+
+      if (clean(payload.medicalAlert)) {
+        $("medicalText").textContent = clean(payload.medicalAlert);
+        $("medical").style.display = "block";
+      }
+      if (clean(payload.recoveryMessage)) {
+        $("messageText").textContent = clean(payload.recoveryMessage);
+        $("message").style.display = "block";
+      }
+
+      const photoURL = clean(payload.photoURL);
+      if (photoURL) {
+        const photo = $("photo");
+        photo.alt = S.photoAlt(name);
+        photo.onload = () => { hide($("fallbackPhoto")); show(photo); };
+        photo.src = photoURL;
+      } else {
+        $("fallbackPhoto").textContent = name.charAt(0).toUpperCase();
+      }
+
+      const phone = clean(payload.primaryPhone);
+      if (phone) {
+        const call = $("primaryCall");
+        call.href = telHref(phone);
+        call.textContent = S.call(clean(payload.ownerName) || S.theOwner);
+        show(call);
+        const text = $("primaryText");
+        text.href = "sms:" + phone.replace(/[^\d+]/g, "") + "?&body=" + encodeURIComponent(S.smsBody(name));
+        show(text);
+      }
+      const backup = clean(payload.backupPhone);
+      if (backup) {
+        const call = $("backupCall");
+        call.href = telHref(backup);
+        const who = clean(payload.backupContactName);
+        call.textContent = phone ? S.call(who || S.backupContact) : S.callContact(who || S.aContact, clean(payload.backupContactType));
+        show(call);
+      }
+
+      addDetail(S.owner, payload.ownerName);
+      addDetail(S.microchip, payload.microchipId);
+
+      wireFoundForm(payload);
+      if (token) {
+        const openApp = $("openApp");
+        openApp.href = "pawconnect://recovery?t=" + encodeURIComponent(token);
+        show(openApp);
+      }
+      hide($("loading"));
+      show($("card"));
+    }
+
+    start();
+  </script>
+</body>
+</html>
