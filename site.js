@@ -139,12 +139,20 @@
       capBox.classList.add("on");
     }
     if (track) {
-      Array.prototype.forEach.call(intro.textTracks, function (t) { t.mode = "disabled"; });
-      track.mode = "hidden";                       // hidden: the cues load and fire, the browser draws nothing; the overlay draws them
+      // hidden: the cues load and fire, the browser draws nothing; the overlay draws them. The native track carries the "default" flag, which can
+      // switch it to "showing" after this script ran, so the setting is applied again when the video loads and plays.
+      var fullscreen = false;
+      var settle = function () {
+        Array.prototype.forEach.call(intro.textTracks, function (t) { t.mode = t === track ? (fullscreen && capOn ? "showing" : "hidden") : "disabled"; });
+      };
+      settle();
+      intro.addEventListener("loadedmetadata", settle);
+      intro.addEventListener("play", settle);
+      Array.prototype.forEach.call(intro.querySelectorAll("track"), function (el) { el.addEventListener("load", settle); });
       track.addEventListener("cuechange", showCue);
       // iPhone full screen shows only the browser's own captions: give it the real track while full screen is open
-      intro.addEventListener("webkitbeginfullscreen", function () { if (capOn) track.mode = "showing"; });
-      intro.addEventListener("webkitendfullscreen", function () { track.mode = "hidden"; showCue(); });
+      intro.addEventListener("webkitbeginfullscreen", function () { fullscreen = true; settle(); });
+      intro.addEventListener("webkitendfullscreen", function () { fullscreen = false; settle(); showCue(); });
     }
     if (capButton) { capButton.addEventListener("click", function () { capOn = !capOn; paintCap(); showCue(); }); paintCap(); }
     intro.addEventListener("pause", function () { if (capBox && intro.currentTime >= END) capBox.classList.remove("on"); });
