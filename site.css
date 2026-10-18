@@ -144,7 +144,7 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 /* ---- the founder: coral is a field here, with dark text on it ---- */
 .field { background: var(--coral); color: var(--field-ink); padding: clamp(64px, 10vw, 140px) 0; position: relative; }
 .field .eyebrow, .field .fine, .field a { color: var(--field-ink); }
-.field .eyebrow { opacity: .8; }
+.field .eyebrow { opacity: 1; }
 .creator { display: grid; gap: 44px; align-items: center; }
 .creator blockquote { margin: 0; }
 .creator blockquote p:not(.byline) { font: 800 clamp(30px, 5.6vw, 64px)/1.04 var(--display); letter-spacing: -.03em; margin: 0; text-wrap: balance; }
