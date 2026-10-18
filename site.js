@@ -3,9 +3,39 @@
   "use strict";
   var doc = document.documentElement;
   var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  var motionOff = reduce;           // the visitor's device asks for less motion, or they pressed "Pause motion"
+  var motionOff = reduce;           // the visitor's device asks for less motion, or they pressed the pause button on a phone
   var lang = (doc.lang || "en").toLowerCase().indexOf("zh") === 0 ? "zh" : "en";
-  var say = { pause: { en: "Pause motion", zh: "暂停动画" }, play: { en: "Play motion", zh: "恢复动画" }, on: { en: "Captions on", zh: "字幕：开" }, off: { en: "Captions off", zh: "字幕：关" } };
+  var say = {
+    toDark: { en: "Switch to the dark theme", zh: "切换到深色主题" }, toLight: { en: "Switch to the light theme", zh: "切换到浅色主题" }
+  };
+
+  // ---- theme: follows the system until the visitor presses the sun/moon button; the choice is kept in this browser only (localStorage) ----
+  var themeButton = document.querySelector(".theme-toggle");
+  var darkQuery = window.matchMedia ? window.matchMedia("(prefers-color-scheme: dark)") : null;
+  function effectiveTheme() { var t = doc.getAttribute("data-theme"); return t === "light" || t === "dark" ? t : (darkQuery && darkQuery.matches ? "dark" : "light"); }
+  function paintTheme() {
+    var dark = effectiveTheme() === "dark";
+    if (themeButton) { themeButton.setAttribute("aria-label", dark ? say.toLight[lang] : say.toDark[lang]); themeButton.setAttribute("aria-pressed", dark ? "true" : "false"); }
+    Array.prototype.forEach.call(document.querySelectorAll('meta[name="theme-color"]'), function (m) { m.setAttribute("content", dark ? "#171211" : "#FFF8F4"); m.removeAttribute("media"); });
+  }
+  if (themeButton) {
+    themeButton.addEventListener("click", function () {
+      var next = effectiveTheme() === "dark" ? "light" : "dark";
+      doc.setAttribute("data-theme", next);
+      try { localStorage.setItem("pc-theme", next); } catch (e) {}
+      paintTheme();
+    });
+    if (darkQuery && darkQuery.addEventListener) darkQuery.addEventListener("change", paintTheme);
+    paintTheme();
+  }
+
+  // ---- the small menu on phones: closes on a choice, on Escape and when the page is tapped elsewhere ----
+  var menu = document.querySelector(".menu");
+  if (menu) {
+    menu.addEventListener("click", function (e) { if (e.target.closest && e.target.closest(".menu__panel a")) menu.removeAttribute("open"); });
+    document.addEventListener("keydown", function (e) { if (e.key === "Escape" && menu.hasAttribute("open")) { menu.removeAttribute("open"); var sum = menu.querySelector("summary"); if (sum) sum.focus(); } });
+    document.addEventListener("click", function (e) { if (menu.hasAttribute("open") && !menu.contains(e.target)) menu.removeAttribute("open"); });
+  }
 
   // ---- language: remember an explicit choice (the first-visit choice is made by a tiny script in the head) ----
   Array.prototype.forEach.call(document.querySelectorAll("a[data-lang]"), function (a) {
@@ -96,10 +126,10 @@
     }
   }
 
-  // ---- pause motion (everything that moves by itself can be stopped) ----
-  var toggles = Array.prototype.slice.call(document.querySelectorAll(".motion-toggle"));
+  // ---- pause (WCAG 2.2.2): the recordings in the phones play by themselves, so each phone carries a small pause/play button; one switch stops everything that moves ----
+  var toggles = Array.prototype.slice.call(document.querySelectorAll(".pause-btn"));
   function paintToggle() {
-    toggles.forEach(function (b) { b.textContent = motionOff ? say.play[lang] : say.pause[lang]; b.setAttribute("aria-pressed", motionOff ? "true" : "false"); });
+    toggles.forEach(function (b) { b.setAttribute("aria-label", b.getAttribute(motionOff ? "data-play" : "data-pause")); b.setAttribute("aria-pressed", motionOff ? "true" : "false"); });
     if (motionOff) doc.setAttribute("data-paused", ""); else doc.removeAttribute("data-paused");
   }
   toggles.forEach(function (b) {
@@ -113,27 +143,16 @@
   paintToggle();
   document.addEventListener("visibilitychange", function () { if (document.hidden) clips.forEach(function (v) { v.pause(); }); });
 
-  // ---- the creator's video: the file keeps its leading silence, so the player starts just before the first word and stops after the last ----
+  // ---- the creator's video: it never plays by itself; captions are always drawn (an overlay without a box), from the same cues as the native caption track ----
   var intro = document.getElementById("intro");
   var capBox = document.getElementById("cap");
   if (intro) {
-    var START = 1.5, END = 48.3;
-    intro.addEventListener("play", function () { if (intro.currentTime < START) intro.currentTime = START; });
-    intro.addEventListener("timeupdate", function () { if (intro.currentTime >= END && !intro.paused) intro.pause(); });
-    // captions: an overlay drawn by the page (no box behind the words) that follows the same cues as the native caption track
     var track = null;
     Array.prototype.forEach.call(intro.textTracks, function (t) { if ((t.language || "").toLowerCase().indexOf(lang) === 0) track = t; });
-    var capButton = document.getElementById("capToggle");
-    var capOn = true;
-    function paintCap() {
-      if (!capButton) return;
-      capButton.textContent = capOn ? say.on[lang] : say.off[lang];
-      capButton.setAttribute("aria-pressed", capOn ? "true" : "false");
-    }
     function showCue() {
       if (!capBox) return;
       var cue = track && track.activeCues && track.activeCues[0];
-      if (!capOn || !cue) { capBox.classList.remove("on"); return; }
+      if (!cue) { capBox.classList.remove("on"); return; }
       capBox.textContent = "";
       cue.text.split("\n").forEach(function (line, i) { if (i) capBox.appendChild(document.createElement("br")); capBox.appendChild(document.createTextNode(line)); });
       capBox.classList.add("on");
@@ -143,7 +162,7 @@
       // switch it to "showing" after this script ran, so the setting is applied again when the video loads and plays.
       var fullscreen = false;
       var settle = function () {
-        Array.prototype.forEach.call(intro.textTracks, function (t) { t.mode = t === track ? (fullscreen && capOn ? "showing" : "hidden") : "disabled"; });
+        Array.prototype.forEach.call(intro.textTracks, function (t) { t.mode = t === track ? (fullscreen ? "showing" : "hidden") : "disabled"; });
       };
       settle();
       intro.addEventListener("loadedmetadata", settle);
@@ -154,7 +173,6 @@
       intro.addEventListener("webkitbeginfullscreen", function () { fullscreen = true; settle(); });
       intro.addEventListener("webkitendfullscreen", function () { fullscreen = false; settle(); showCue(); });
     }
-    if (capButton) { capButton.addEventListener("click", function () { capOn = !capOn; paintCap(); showCue(); }); paintCap(); }
-    intro.addEventListener("pause", function () { if (capBox && intro.currentTime >= END) capBox.classList.remove("on"); });
+    intro.addEventListener("ended", function () { if (capBox) capBox.classList.remove("on"); });
   }
 })();
