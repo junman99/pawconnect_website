@@ -38,14 +38,17 @@
   var clips = Array.prototype.slice.call(document.querySelectorAll("video[data-src]"));
   clips.forEach(function (v) { v.addEventListener("playing", function () { v.classList.add("playing"); }); });
   if ("IntersectionObserver" in window) {
-    var near = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) loadVideo(e.target); }); }, { rootMargin: "100% 0px" });
+    var near = new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting && pageLoaded && !e.target.closest(".hero")) loadVideo(e.target); }); }, { rootMargin: "100% 0px" });
     clips.forEach(function (v) { near.observe(v); });
   }
 
   // hero clip plays while the hero is on screen
   var heroClip = document.querySelector(".hero video[data-src]");
+  var pageLoaded = document.readyState === "complete";
+  window.addEventListener("load", function () { setTimeout(function () { pageLoaded = true; if (heroClip && heroVisible) playVideo(heroClip); }, 1200); });
+  var heroVisible = false;
   if (heroClip && "IntersectionObserver" in window) {
-    new IntersectionObserver(function (entries) { entries.forEach(function (e) { if (e.isIntersecting) playVideo(heroClip); else stopVideo(heroClip); }); }, { threshold: 0.25 }).observe(heroClip);
+    new IntersectionObserver(function (entries) { entries.forEach(function (e) { heroVisible = e.isIntersecting; if (e.isIntersecting) { if (pageLoaded) playVideo(heroClip); } else stopVideo(heroClip); }); }, { threshold: 0.25 }).observe(heroClip);
   }
 
   // ---- the story stage: one phone, the screen follows the text ----
