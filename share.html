@@ -55,7 +55,7 @@
       --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
       color-scheme: light dark;
     }
-    @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("assets/fonts/bricolage-latin-variable.woff2") format("woff2"); }
+    @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("/assets/fonts/bricolage-latin-variable.woff2") format("woff2"); }
     :root[data-theme="light"] { color-scheme: light; }
     * { box-sizing: border-box; }
     html { -webkit-text-size-adjust: 100%; }
@@ -158,8 +158,7 @@
 </head>
 <body>
   <main class="shell">
-    <a class="langlink" href="/zh/share.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" id="langlink">中文</a>
-    <div class="toolbar"><button type="button" class="theme" id="themebtn" aria-label="Switch theme"><svg class="moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg></button></div>
+    <div class="toolbar"><a class="langlink" href="/zh/share.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" id="langlink">中文</a><button type="button" class="theme" id="themebtn" aria-label="Switch theme"><svg class="moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg></button></div>
             <a class="brand" href="index.html"><img src="assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
 
     <section class="card">
