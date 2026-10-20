@@ -57,6 +57,9 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .lead { margin: 22px 0 0; max-width: 31em; font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); text-wrap: pretty; }
 .fine { margin: 18px 0 0; font-size: 14px; line-height: 1.55; color: var(--muted); max-width: 40em; }
 .fine a, .step a, .faq a { color: var(--coral-text); text-underline-offset: 3px; }
+.step a.btn { color: var(--on-button); }
+.fn { color: var(--coral-text); text-decoration: none; margin-left: .08em; font-weight: 800; }
+.fn:hover { text-decoration: underline; }
 .closing a:not(.badge) { text-underline-offset: 3px; }
 
 /* ---- buttons and links ---- */
@@ -124,6 +127,19 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .pause-btn .ico-play, .pause-btn[aria-pressed="true"] .ico-pause { display: none; }
 .pause-btn[aria-pressed="true"] .ico-play { display: block; }
 @media (prefers-reduced-motion: reduce) { .pause-btn { display: none; } }
+
+/* ---- the Today carousel (batch WEB2): real pictures instead of a recording; dots under the hero phone ---- */
+.carousel { position: absolute; inset: 0; touch-action: pan-y; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.carousel .slide { position: absolute; inset: 0; opacity: 0; transition: opacity .7s ease; }
+.carousel .slide.is-on { opacity: 1; }
+.carousel .slide img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.phonebox:has(.carousel__dots) { grid-template-rows: auto auto; }
+.carousel__dots { display: flex; justify-content: center; margin-top: 6px; }
+.carousel__dots button { display: grid; place-items: center; width: 30px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.carousel__dots button::before { content: ""; width: 8px; height: 8px; border-radius: 99px; background: var(--line); transition: width .35s var(--ease), background .35s; }
+.carousel__dots button[aria-current="true"]::before { width: 24px; background: var(--coral-text); }
+.carousel__dots button:hover::before { background: var(--muted); }
+.carousel__dots button[aria-current="true"]:hover::before { background: var(--coral-text); }
 
 /* ---- hero ---- */
 .hero { position: relative; padding: clamp(28px, 6vw, 72px) 0 clamp(56px, 8vw, 110px); overflow: clip; }
@@ -240,6 +256,18 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
   .toc a:hover { color: var(--ink); }
 }
 
+/* ---- the Back pill of the secondary pages (batch WEB2): small, sticky under the header, 44 px tall ---- */
+.backbar { position: sticky; top: 66px; z-index: 20; height: 0; }
+.backbar .wrap { padding-top: 10px; }
+.back-pill { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 18px 0 12px; border-radius: 999px; background: var(--ink); color: var(--bg); font: 800 15px/1 var(--display); text-decoration: none; box-shadow: 0 6px 18px -8px rgba(41, 20, 12, .5); transition: transform .25s var(--ease), box-shadow .25s var(--ease); }
+.back-pill:hover { transform: translateX(-2px); }
+.back-pill:focus-visible { outline: 3px solid var(--lav); outline-offset: 3px; }
+:root[data-theme="dark"] .back-pill { background: var(--button); color: var(--on-button); }
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) .back-pill { background: var(--button); color: var(--on-button); } }
+.backbar + * { margin-top: 0; }
+main > .backbar ~ .pawai-hero { padding-top: clamp(76px, 9vw, 96px); }
+main > .backbar ~ .doc__grid { padding-top: 58px; }
+
 /* ---- closing, questions, footer ---- */
 .closing { position: relative; overflow: clip; padding: clamp(80px, 12vw, 170px) 0; background: var(--deep); color: var(--on-deep); }
 .closing::after { content: ""; position: absolute; right: -8%; bottom: -26%; width: min(70vw, 640px); aspect-ratio: 1; background: var(--coral); opacity: .2; -webkit-mask: url("/assets/logo-primary.svg") center / contain no-repeat; mask: url("/assets/logo-primary.svg") center / contain no-repeat; transform: rotate(-12deg); pointer-events: none; }
@@ -251,19 +279,28 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .closing :focus-visible { outline-color: #ffd0c6; }
 .faq { padding: clamp(56px, 8vw, 110px) 0; }
 .faq h2 { font-size: clamp(34px, 5.6vw, 64px); margin-bottom: 30px; }
-.faq details { border-top: 1px solid var(--line); }
-.faq details:last-of-type { border-bottom: 1px solid var(--line); }
-.faq summary { display: flex; justify-content: space-between; gap: 18px; align-items: center; min-height: 64px; padding: 14px 0; cursor: pointer; list-style: none; font: 800 clamp(18px, 2.6vw, 22px)/1.25 var(--display); letter-spacing: -.015em; }
-.faq summary::-webkit-details-marker { display: none; }
-.faq summary::after { content: ""; flex: none; width: 14px; height: 14px; background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat; transition: transform .3s var(--ease); color: var(--coral-text); }
-.faq details[open] summary::after { transform: rotate(135deg); }
-.faq details p { margin: 0 0 18px; max-width: 42em; color: var(--muted); }
+/* the one question list of the whole site (batch WEB2): home questions, the PawAI lists, Support questions; lines between the items, a plus that becomes a minus */
+.acc details { border-top: 1px solid var(--line); }
+.acc details:last-child { border-bottom: 1px solid var(--line); }
+.acc summary { display: flex; justify-content: space-between; gap: 18px; align-items: center; min-height: 64px; padding: 14px 0; cursor: pointer; list-style: none; font: 800 clamp(18px, 2.6vw, 22px)/1.25 var(--display); letter-spacing: -.015em; color: var(--ink); }
+.acc summary::-webkit-details-marker { display: none; }
+.acc summary:hover { color: var(--coral-text); }
+.acc summary::after { content: ""; flex: none; width: 16px; height: 16px; color: var(--coral-text); background: linear-gradient(currentColor, currentColor) center / 100% 2px no-repeat, linear-gradient(currentColor, currentColor) center / 2px 100% no-repeat; transition: background-size .3s var(--ease), transform .35s var(--ease); }
+.acc details[open]:not(.is-closing) summary::after { background-size: 100% 2px, 2px 0; transform: rotate(180deg); }
+.acc__body { overflow: hidden; }
+.acc .acc__body p { margin: 0 0 12px; max-width: 42em; color: var(--muted); font: 400 18px/1.6 var(--text); text-wrap: pretty; }
+:lang(zh-Hans) .acc .acc__body p { line-height: 1.75; }
+.acc .acc__body > :last-child { margin-bottom: 20px; }
+.acc .acc__body a { color: var(--coral-text); text-underline-offset: 3px; }
+.faq { padding: clamp(56px, 8vw, 110px) 0; }
+.faq h2 { font-size: clamp(34px, 5.6vw, 64px); margin-bottom: 30px; }
 .site-footer { padding: 40px 0 56px; border-top: 1px solid var(--line); font-size: 15px; color: var(--muted); }
 .site-footer .wrap { display: grid; gap: 18px; }
 .site-footer nav { display: flex; flex-wrap: wrap; gap: 4px 22px; }
 .site-footer nav a { display: inline-flex; align-items: center; min-height: 44px; font: 700 15px/1 var(--display); text-decoration: none; color: var(--ink); }
 .site-footer nav a:hover { text-decoration: underline; }
 .site-footer p { margin: 0; }
+.site-footer .footnote { max-width: 62em; font-size: 14px; line-height: 1.55; scroll-margin-top: 96px; }
 .site-footer .credit { max-width: 62em; font-size: 13px; line-height: 1.55; }
 .site-footer .credit a { color: inherit; text-underline-offset: 3px; }
 /* ---- motion (all of it optional) ---- */
@@ -295,7 +332,6 @@ html[data-paused] *, html[data-paused] *::before, html[data-paused] *::after { a
 /* ---- the PawAI page (batch AI6): real recorded answers, each next to the phone that shows it ---- */
 .pawai-hero { padding: 40px 0 8px; }
 .pawai-hero .lead { max-width: 34em; }
-.notvet { margin: 22px 0 0; padding: 14px 18px; border-radius: 14px; background: var(--bg-2); border: 1px solid var(--line); font-weight: 700; max-width: 40em; }
 .exlist { display: grid; gap: clamp(56px, 9vw, 110px); padding: 56px 0 24px; }
 .ex { display: grid; gap: 28px; align-items: center; }
 @media (min-width: 900px) { .ex { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; } .ex:nth-child(even) .ex__phone { order: 2; } }
@@ -312,8 +348,6 @@ html[data-paused] *, html[data-paused] *::before, html[data-paused] *::after { a
 .qa .block ol { margin: 6px 0 0; padding-left: 20px; }
 .qa .src { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
 .qa .rec { margin: 14px 0 0; font-size: 13px; color: var(--muted); }
-.notlist { padding: 8px 0 0; display: grid; gap: 10px; max-width: 44em; list-style: none; margin: 0; }
-.notlist li { padding: 12px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
 .band { padding: 56px 0 16px; }
 .band h2 { font-size: clamp(30px, 5vw, 56px); margin-bottom: 18px; }
 .band p, .band li { max-width: 44em; color: var(--muted); }
