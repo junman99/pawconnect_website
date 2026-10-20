@@ -126,6 +126,20 @@
     }
   }
 
+  // ---- the PawAI page (batch AI6): each example's recording plays only while it is on screen, and can be paused with the button on its phone ----
+  var exVisible = [];
+  var exClips = Array.prototype.slice.call(document.querySelectorAll(".ex video[data-src]"));
+  if (exClips.length && "IntersectionObserver" in window) {
+    var exWatch = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        var i = exVisible.indexOf(e.target);
+        if (e.isIntersecting) { if (i < 0) exVisible.push(e.target); try { e.target.currentTime = 0; } catch (x) {} playVideo(e.target); }
+        else { if (i >= 0) exVisible.splice(i, 1); stopVideo(e.target); }
+      });
+    }, { threshold: 0.45 });
+    exClips.forEach(function (v) { exWatch.observe(v); });
+  }
+
   // ---- pause (WCAG 2.2.2): the recordings in the phones play by themselves, so each phone carries a small pause/play button; one switch stops everything that moves ----
   var toggles = Array.prototype.slice.call(document.querySelectorAll(".pause-btn"));
   function paintToggle() {
@@ -137,7 +151,7 @@
       motionOff = !motionOff;
       paintToggle();
       clips.forEach(function (v) { if (motionOff) v.pause(); });
-      if (!motionOff) { var v = (stage && stage.querySelector(".layer.on video")); if (v) playVideo(v); if (heroClip) playVideo(heroClip); }
+      if (!motionOff) { var v = (stage && stage.querySelector(".layer.on video")); if (v) playVideo(v); if (heroClip) playVideo(heroClip); exVisible.forEach(function (c) { playVideo(c); }); }
     });
   });
   paintToggle();

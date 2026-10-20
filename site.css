@@ -291,3 +291,32 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 html[data-paused] *, html[data-paused] *::before, html[data-paused] *::after { animation-play-state: paused !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1 !important; transform: none !important; } }
 @media print { .site-header, .appx__phone, .pause-btn { display: none; } }
+
+/* ---- the PawAI page (batch AI6): real recorded answers, each next to the phone that shows it ---- */
+.pawai-hero { padding: 40px 0 8px; }
+.pawai-hero .lead { max-width: 34em; }
+.notvet { margin: 22px 0 0; padding: 14px 18px; border-radius: 14px; background: var(--bg-2); border: 1px solid var(--line); font-weight: 700; max-width: 40em; }
+.exlist { display: grid; gap: clamp(56px, 9vw, 110px); padding: 56px 0 24px; }
+.ex { display: grid; gap: 28px; align-items: center; }
+@media (min-width: 900px) { .ex { grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 64px; } .ex:nth-child(even) .ex__phone { order: 2; } }
+.ex__phone .phone { --w: 280px; margin: 0 auto; }
+.ex h2 { font-size: clamp(30px, 4.6vw, 48px); margin: 0 0 12px; line-height: 1.04; }
+.ex .claim { margin: 0 0 18px; color: var(--muted); }
+.qa { margin: 18px 0 0; padding: 18px 20px; border-radius: 18px; background: var(--card); border: 1px solid var(--line); }
+.qa .q { margin: 0 0 12px; padding: 8px 14px; width: fit-content; max-width: 100%; border-radius: 16px; background: var(--coral); color: var(--field-ink); font-weight: 700; }
+.qa .a-head { margin: 0 0 8px; font: 800 20px/1.25 var(--display); letter-spacing: -.01em; }
+.qa .a-head.urgent { color: var(--coral-text); }
+.qa p { margin: 0 0 10px; color: var(--ink); }
+.qa .block { margin: 12px 0 0; padding: 12px 14px; border-radius: 12px; background: var(--bg-2); font-size: 16px; }
+.qa .block b { display: block; margin-bottom: 4px; font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--coral-text); }
+.qa .block ol { margin: 6px 0 0; padding-left: 20px; }
+.qa .src { margin: 10px 0 0; font-size: 14px; color: var(--muted); }
+.qa .rec { margin: 14px 0 0; font-size: 13px; color: var(--muted); }
+.notlist { padding: 8px 0 0; display: grid; gap: 10px; max-width: 44em; list-style: none; margin: 0; }
+.notlist li { padding: 12px 16px; border-radius: 12px; background: var(--card); border: 1px solid var(--line); }
+.band { padding: 56px 0 16px; }
+.band h2 { font-size: clamp(30px, 5vw, 56px); margin-bottom: 18px; }
+.band p, .band li { max-width: 44em; color: var(--muted); }
+.countries { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 14px 0 0; padding: 0; }
+.countries li { padding: 6px 14px; border-radius: 99px; background: var(--card); border: 1px solid var(--line); color: var(--ink); font-weight: 700; }
+.ex .pause-btn { right: max(0px, calc(50% - var(--w, 280px) / 2 - 10px)); }
