@@ -83,7 +83,7 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .nav { display: none; gap: 2px; }
 .nav a, .menu__panel a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 12px; font: 700 15px/1 var(--display); text-decoration: none; color: var(--muted); border-radius: 999px; transition: color .2s, background .2s; }
 .nav a:hover, .menu__panel a:hover { color: var(--ink); background: var(--bg-2); }
-.nav a[aria-current="page"], .menu__panel a[aria-current="page"] { color: var(--ink); background: var(--bg-2); }
+.nav a[aria-current], .menu__panel a[aria-current] { color: var(--ink); background: var(--bg-2); }
 .lang { display: inline-flex; padding: 3px; border-radius: 999px; background: var(--bg-2); font: 800 13px/1 var(--display); }
 .lang a, .lang span { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 10px; border-radius: 999px; text-decoration: none; }
 .lang span { background: var(--ink); color: var(--bg); }
@@ -188,7 +188,8 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 
 /* ---- the story: one phone stays, the screen changes ---- */
 .story { padding: clamp(64px, 9vw, 130px) 0 clamp(20px, 4vw, 60px); position: relative; }
-.story__head { max-width: 900px; }
+.story__head { max-width: 900px; min-height: 84svh; display: flex; flex-direction: column; justify-content: center; }   /* batch WEB3: the start of the app story is a screen of its own, so "The app" and "PawAI" land a full screen apart */
+.story__intro { margin: 22px 0 0; max-width: 28em; font-size: clamp(18px, 2.4vw, 22px); color: var(--muted); text-wrap: pretty; }
 .story__grid { position: relative; display: block; margin-top: clamp(36px, 6vw, 72px); }
 .stage { position: sticky; top: 66px; z-index: 5; display: grid; place-items: center; height: min(46svh, 420px); padding: 6px 0 14px; background: linear-gradient(var(--bg) 82%, transparent); pointer-events: none; }
 .stage .phone { --w: min(210px, calc(40svh * .56)); pointer-events: auto; }
@@ -198,6 +199,7 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .steps { list-style: none; margin: 0; padding: 0; position: relative; z-index: 1; }
 .step { min-height: 64svh; display: flex; flex-direction: column; justify-content: center; padding: 28px 0 34px; max-width: 34em; }
 .step h3 { margin-bottom: 18px; }
+.steps .step:first-child { padding-top: calc(min(46svh, 420px) + 20px); }   /* on a phone the pinned phone covers the top of the screen: the first step starts below it, so "PawAI" lands on readable text */
 .step p { margin: 0 0 14px; color: var(--muted); text-wrap: pretty; }
 .facts { margin: 6px 0 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: 4px 0; font: 700 14px/1.5 var(--display); letter-spacing: .01em; color: var(--ink); }
 .facts li + li::before { content: "·"; margin: 0 .6em; color: var(--coral-text); }
@@ -213,6 +215,7 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
   .stage__dots li.on { height: 28px; background: var(--coral-text); }
   .steps { order: 1; }
   .step { min-height: 92svh; padding: 0; }
+  .steps .step:first-child { padding-top: 0; }
 }
 
 /* ---- document pages (support, report a problem, privacy, terms): the same shell and type as the home page ---- */

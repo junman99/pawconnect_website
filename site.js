@@ -42,6 +42,35 @@
     a.addEventListener("click", function () { try { localStorage.setItem("pc-lang", a.getAttribute("data-lang")); } catch (e) {} });
   });
 
+  // ---- the header follows the scroll on the home page (batch WEB3): the item of the part in view is marked (aria-current="location"); the app story marks "The app", and its first step, PawAI, marks "PawAI" ----
+  (function () {
+    if (!document.getElementById("app") || !document.getElementById("pawai")) return;
+    var links = Array.prototype.slice.call(document.querySelectorAll('.nav a[href^="#"], .menu__panel a[href^="#"]'));
+    if (!links.length) return;
+    var targets = { app: document.getElementById("app"), pawai: document.getElementById("pawai"), about: document.getElementById("about"), questions: document.getElementById("questions") };
+    var pending = false, now = null;
+    function top(el) { return el.getBoundingClientRect().top; }
+    function measure() {
+      pending = false;
+      var line = Math.max(120, window.innerHeight * 0.4), cur = null;
+      if (top(targets.app) <= line) cur = "app";
+      if (top(targets.pawai) <= line && targets.pawai.getBoundingClientRect().bottom > line) cur = "pawai";
+      if (targets.about && top(targets.about) <= line) cur = "about";
+      if (targets.questions && top(targets.questions) <= line) cur = "questions";
+      var closing = document.getElementById("get-app");
+      if (closing && top(closing) <= line) cur = null;
+      if (cur === now) return;
+      now = cur;
+      links.forEach(function (a) {
+        if (a.getAttribute("href") === "#" + cur) a.setAttribute("aria-current", "location"); else a.removeAttribute("aria-current");
+      });
+    }
+    function schedule() { if (!pending) { pending = true; requestAnimationFrame(measure); } }
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    measure();
+  })();
+
   // ---- the Back pill (batch WEB2): the previous page when the visitor came from this site, else the parent in its href; never a loop ----
   var pill = document.querySelector("[data-back]");
   function norm(path) { return path.replace(/^\/zh(?=\/|$)/, "").replace(/index\.html$/, "").replace(/\/+$/, "") || "/"; }
