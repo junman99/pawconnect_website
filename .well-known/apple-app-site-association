@@ -1,0 +1,55 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "9Z7GC3CMV8.com.pawconnect.PawConnect"
+        ],
+        "components": [
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "post"
+            },
+            "comment": "Universal Link for a shared post (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "zoomie"
+            },
+            "comment": "Universal Link for a shared zoomie (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "pet"
+            },
+            "comment": "Universal Link for a shared pet (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "profile"
+            },
+            "comment": "Universal Link for a shared profile (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "milestone"
+            },
+            "comment": "Universal Link for a shared milestone (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/share.html",
+            "?": {
+              "k": "join"
+            },
+            "comment": "Universal Link for a shared join (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          }
+        ]
+      }
+    ]
+  }
+}

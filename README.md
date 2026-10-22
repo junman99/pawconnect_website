@@ -1,36 +1,52 @@
 # PawConnect website
 
-A dependency-free static marketing site. This checkout is separate from the native app at `/Users/junman/PawConnect/PawConnect-Xcode`.
+A dependency-free static site, published by GitHub Pages at https://pawconnectsocial.com (the `CNAME` file). This checkout is separate from the native app at `/Users/junman/PawConnect/PawConnect-Xcode`.
 
 ## Preview
 
-From this folder:
-
 ```sh
-python3 -m http.server 8765 --bind 127.0.0.1
+python3 /Users/junman/PawConnect/scripts/website/serve.py . 8765     # from this folder; like http.server, plus byte ranges so video seeking works
 ```
 
-Open http://127.0.0.1:8765. No build step or package installation is needed. All visual assets are served locally; the only outbound action is following a link.
+Open http://127.0.0.1:8765 (English) and http://127.0.0.1:8765/zh/ (Chinese). The only outbound requests are the links people tap and, on `recovery.html` and `zh/recovery.html`, one call to the PawConnect Cloud Function that holds the tag's page. Asset paths in the new pages are root-absolute (`/assets/...`), so serve this folder as the site root (GitHub Pages with the `CNAME` does).
 
-## Design
+## How the site is made (second design, batch C5b)
 
-Cream `#FFF8F4`, peach `#FFF0EB`, coral `#D95A48`, charcoal `#29262D`, and PawAI lavender `#806FE8` follow the current native Theme.swift. Locally hosted Nunito typography with rounded terminals, large product views and continuous chapters replace the previous serif/sticker direction. Native scroll drives the desktop care product sequence; mobile exposes direct feature controls. No scroll interception. Reduced motion disables transitions and mascot motion; a pause control is also provided. The cat’s animation stops outside the viewport and in hidden tabs.
+The pages are generated from the app repo (`/Users/junman/PawConnect/scripts/website/`) and committed here; there is no build step on the host.
 
-## Assets and screenshots
+| Script | Makes |
+|---|---|
+| `build_assets.py` | `assets/app/stills` (AVIF and WebP, 360/540/720 px, from `LAUNCH_AUDIT/screenshots`), `assets/app/clips` (muted screen recordings from `Assets_web/demo/recordings`), the intro video and its poster |
+| `build_site.py` | `index.html`, `zh/index.html` (English and Chinese copy side by side), `site.css`, `site.js`, the caption tracks `pawconnect_intro.en.vtt` and `.zh-Hans.vtt` (from `src/cues.json`, re-timed from the audio) |
+| `build_pages.py` | the Chinese twins of support, report-a-problem, share and recovery; Chinese summaries of privacy and terms (`zh/privacy.html`, `zh/terms.html`); the language link, hreflang and first-visit script on every page |
+| `build_zh_font.py` | `assets/fonts/noto-sans-sc-display.woff2` (Chinese display weight, only the characters the headings use) |
+| `make_og.py` | `assets/og-image.jpg` (1200x630, from a still of the owner's video) and `LAUNCH_AUDIT/OG_CANDIDATES.png` |
 
-- `assets/fonts/nunito-latin-variable.woff2`: Nunito variable font, served locally with its SIL Open Font License. Marketing and supporting pages use Nunito; app design previews retain native system typography. Source: https://fonts.google.com/specimen/Nunito.
+## Pages and what must not change
 
-- `coco.jpg`, `mochi.jpg`, `buddy.jpg`: resized copies of native Welcome* photography, with the same pet identities. Original native assets untouched. Existing app assets are reused; their upstream photo licenses were not documented in the checkout and should be confirmed before publication.
-- `logo-primary.svg` and `logo-white.svg`: exact current SVG exports from the native `output/brand/PawConnect-Brand-Assets/SVG` folder. The coral P mark, pet silhouette and heart preserve the original geometry and color. `app-logo.png` and `app-icon.png` are the matching new native brand exports. Used throughout navigation, footer, download, support/legal/recovery pages and browser icons.
-- `cat-rig/` and `coral-cat.png`: copies of the existing coral mascot, preserving its likeness. Canvas layout is based on the app’s own mascot preview. No new AI images were generated.
-- `app-welcome.jpg` (original in `review/simulator-welcome.png`): genuine `simctl` screenshot captured on October 8, 2026, from the installed PawConnect 1.6 build on the booted iOS 26.5 simulator. The app is signed out. No authenticated feature screenshots could be obtained; the screenshot is not a capture of the latest uncommitted SwiftUI build. That older welcome capture is retained for evidence but is no longer displayed on the homepage. The new HTML app design previews use example content and are explicitly labeled; they are not screenshots of the latest app.
+| Page | Notes |
+|---|---|
+| `index.html`, `zh/index.html` (+ `site.css`, `site.js`) | The home pages: a pinned phone whose screen follows the story (care, moments, Zoomies, chat, PawAI, nearby, PawShop, Pet ID), the creator's video on a coral field with a drawn caption overlay (no box), FAQ. Real app screens and recordings (batch C7), no stock photos, no emoji. Motion is an enhancement and is off for visitors who ask for less motion; a "Pause motion" button stops everything that moves. |
+| `support.html`, `report-a-problem.html`, `privacy.html`, `terms.html` (+ `zh/` twins) | Linked from the app (`AppLinks`) and the App Store. Keep the addresses. Privacy and Terms stay English as the governing text; `zh/privacy.html` and `zh/terms.html` are plain-language Chinese summaries, **not a legal translation**. Wording is a draft for the owner, not legal advice. |
+| `recovery.html`, `zh/recovery.html` | The page a pet's QR tag opens. Keep the address and the `?t=<token>` format forever (printed tags). Both languages live in one script (`STR`), chosen by `<html lang>`. |
+| `share.html`, `zh/share.html` | The page every shared link opens (`?k=post|zoomie|pet|profile|milestone|join|walk|badge`). Fixed copy only, never text from the address. |
+| `.well-known/apple-app-site-association` | Universal Links for `/share.html` only (not `recovery.html`). `.nojekyll` makes GitHub Pages publish this folder. |
+| `commission-factory-*.html`, `CNAME` | Leave exactly as they are. |
 
-## Content verification
+Language handling: every page has hreflang tags and a visible language link; the choice is remembered in the browser (`localStorage` key `pc-lang`, nothing is sent anywhere); a visitor whose browser prefers Chinese is taken from an English page to its Chinese twin on the first visit only (the query string survives), and an explicit visit to a `/zh/` address stays there.
 
-Inspected current native owners: `Core/Theme/Theme.swift`, `Models/Pet.swift`, `Models/HealthRecord.swift`, `Models/ActivityRecord.swift`, `Features/Pets/PetIDCardView.swift`, `HealthTimelineView.swift`, `MedicalDocumentVaultView.swift`, `Features/AI/PawAIPanel.swift`, and feed/Zoomies navigation. PawAI is beta, does not replace a veterinarian, and suggested records require review. Oomi was not found; Zoomies is the confirmed video feature. Current development features may differ from the published version; the site carries that note.
+## Assets
 
-The App Store URL was verified against the public listing. The obsolete browser-only waitlist and unverified numbers, booking, price and advertising claims were removed. Privacy, terms, support, report and recovery pages received matching typography and branding and remain at their existing URLs. No backend, native app files, legal wording or live deployment were changed.
+- `assets/video/`: the creator's intro video (1080x1512, 5:7, H.264, faststart, **tone-mapped to ordinary BT.709**: the first version kept the HDR curve, which made it look pale), its poster (JPEG and WebP) and the English and Chinese caption files (timed to the whole file; the player starts at 1.5 s and stops at 48.3 s to skip the silence). Source: `Videos/` in the app repo (git-ignored, never modified).
+- `assets/app/`: stills and muted recordings of the app (fictional pets, people and records; the nearby screen is left out on purpose).
+- `assets/badges/`: Apple's official "Download on the App Store" badges, unmodified. `assets/brand/`: three cartoon avatars used on the share card.
+- `assets/og-image.jpg`: the share-preview image (1200x630). The owner chooses between three candidates (`LAUNCH_AUDIT/OG_CANDIDATES.png` in the app repo).
+- `assets/fonts/`: Bricolage Grotesque, Nunito and a Chinese display subset of Noto Sans SC (all SIL Open Font License), served locally.
 
-Inspiration: the visual pacing and focused product chapters of https://www.apple.com/iphone/, and the focused motion of https://www.apple.com/airpods-pro/. No layouts or assets copied from either.
+## Checks (run from the app repo; they read this folder)
 
-See `review/verification.md` for final browser checks.
+`scripts/check_website_home.py` (both home pages: structure, hreflang, no emoji, muted clips, weight, language handling, captions, reduced motion, contrast, touch targets, overflow at 320 to 1440 px), `check_website_links.py` (all 15 pages: links, anchors, alt text, tag balance, hreflang pairs), `check_website_recovery.py` and `check_website_share.py` (English special pages), `check_website_zh_pages.py` (their Chinese twins), `check_universal_links.py`. Lighthouse (mobile, simulated throttling, local server) at the time of writing: home en 95 / zh 95, desktop 100; accessibility, best practices and SEO 100; support, report and legal pages 100/100/100/100 on desktop.
+
+## Local-only folders
+
+`review/` (old screenshots and a verification note) is git-ignored so it can never be published by accident.

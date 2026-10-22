@@ -1,0 +1,275 @@
+<!doctype html>
+<html lang="zh-Hans" data-alt="/share.html">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#FFF8F4">
+  <meta name="robots" content="noindex,follow">
+  <title>加入我，一起用 PawConnect</title>
+  <meta name="description" content="来自 PawConnect 的一个瞬间：为宠物和爱它们的人而做的应用。在 App Store 获取。">
+  <meta property="og:site_name" content="PawConnect">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="加入我，一起用 PawConnect">
+  <meta property="og:description" content="宠物档案、日常护理，和一个懂你的社区。">
+  <meta property="og:image" content="https://pawconnectsocial.com/assets/app-icon.png">
+  <meta name="twitter:card" content="summary">
+  <link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+  <link rel="apple-touch-icon" href="/assets/app-icon.png">
+  <link rel="preload" href="/assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/typography.css?v=rounded-1">
+  <link rel="preload" href="/assets/fonts/bricolage-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+  <script>(function(){try{var t=localStorage.getItem("pc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+  <script>
+    // A share card is never meant to sit inside another page (GitHub Pages cannot send a frame-ancestors header): if it is framed, hide it.
+    if (window.top !== window.self) { document.documentElement.style.display = "none"; }
+  </script>
+  <!-- Safari's Smart App Banner. The tag is in the served HTML (Safari reads it before scripts run); the script below only adds the
+       argument that tells the app what to open, and only from values it has validated. -->
+  <meta name="apple-itunes-app" content="app-id=6760605721">
+  <script>
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var kind = p.get("k") || "";
+      var id = p.get("id") || "";
+      var code = p.get("code") || "";
+      var scheme = null;
+      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) scheme = "pawconnect://post?id=" + encodeURIComponent(id);
+      else if ((kind === "pet" || kind === "milestone") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) scheme = "pawconnect://" + kind + "?id=" + encodeURIComponent(id);
+      else if (kind === "profile" && /^[A-Za-z0-9._]{1,30}$/.test(id)) scheme = "pawconnect://profile?id=" + encodeURIComponent(id);
+      else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) scheme = "pawconnect://join?code=" + encodeURIComponent(code);
+      if (scheme) document.querySelector('meta[name="apple-itunes-app"]').setAttribute("content", "app-id=6760605721, app-argument=" + scheme);
+    })();
+  </script>
+  <style>
+    :root {
+      --bg: #fff8f4;
+      --peach: #fff0eb;
+      --card: #ffffff;
+      --ink: #29262d;
+      --muted: #6d6267;
+      --coral: #ff7f6e;
+      --coral-dark: #b9402f;
+      --line: #eadcd5;
+      --button: #29262d;
+      --on-button: #fff8f4;
+      --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
+      color-scheme: light dark;
+    }
+    @font-face { font-family: "Bricolage Grotesque"; font-style: normal; font-weight: 400 800; font-display: swap; src: url("/assets/fonts/bricolage-latin-variable.woff2") format("woff2"); }
+    :root[data-theme="light"] { color-scheme: light; }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      font-family: var(--rounded-sans);
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 12% -8%, rgba(255, 127, 110, 0.28), transparent 26rem),
+        radial-gradient(circle at 100% 8%, rgba(255, 209, 102, 0.22), transparent 22rem),
+        var(--bg);
+    }
+    .shell { width: min(560px, 100%); margin: 0 auto; padding: 22px 20px 40px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; font-family: var(--display); font-weight: 800; font-size: 21px; letter-spacing: -0.03em; color: var(--ink); text-decoration: none; }
+    .brand img { width: 34px; height: 34px; }
+    .card {
+      margin-top: 26px;
+      padding: 30px 24px 26px;
+      text-align: center;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 24px 60px rgba(98, 66, 43, 0.10);
+    }
+    .faces { display: flex; justify-content: center; margin-bottom: 22px; }
+    .faces img {
+      width: 84px; height: 84px; object-fit: cover; border-radius: 50%;
+      border: 4px solid var(--card); box-shadow: 0 8px 22px rgba(98, 66, 43, 0.18);
+    }
+    .faces img + img { margin-left: -20px; }
+    .faces img:nth-child(2) { width: 100px; height: 100px; margin-top: -8px; position: relative; z-index: 1; }
+    .chip {
+      display: inline-block; margin-bottom: 14px; padding: 6px 14px; border-radius: 999px;
+      background: var(--peach); color: var(--coral-dark); font-weight: 800; font-size: 13px; letter-spacing: 0.04em;
+    }
+    h1 { margin: 0 0 10px; font-family: var(--display); font-size: clamp(30px, 8vw, 40px); line-height: 1.04; letter-spacing: -0.035em; font-weight: 800; }
+    .lead { margin: 0 auto 24px; max-width: 30em; font-size: 17px; line-height: 1.5; color: var(--muted); }
+    .button {
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+      min-height: 54px; padding: 0 22px; border-radius: 999px;
+      font: inherit; font-weight: 800; font-size: 17px; text-decoration: none; cursor: pointer;
+    }
+    .storebadge { display: block; margin: 0 auto; width: fit-content; line-height: 0; border-radius: 9px; }
+    .storebadge img { height: 52px; width: auto; }
+    .soon { display: flex; align-items: center; justify-content: center; gap: 10px; width: fit-content; height: 52px; margin: 12px auto 0; padding: 0 20px; border-radius: 9px; background: rgba(41, 38, 45, 0.08); box-shadow: inset 0 0 0 1px rgba(41, 38, 45, 0.18); color: var(--muted); }
+    .soon span { display: grid; text-align: left; line-height: 1; }
+    .soon small { font: 600 11px/1 var(--display); letter-spacing: 0.02em; }
+    .soon b { margin-top: 3px; font: 800 22px/1 var(--display); letter-spacing: -0.02em; color: var(--ink); }
+    .soon sup { font-size: 0.5em; font-weight: 700; vertical-align: super; line-height: 0; }
+    .button.secondary { margin-top: 18px; background: var(--button); color: var(--on-button); }
+    .steps { margin: 26px 0 0; padding: 0; list-style: none; text-align: left; counter-reset: step; }
+    .steps li {
+      position: relative; margin-top: 10px; padding: 14px 16px 14px 56px; border-radius: 18px;
+      background: var(--bg); border: 1px solid var(--line); font-size: 16px; line-height: 1.4; counter-increment: step;
+    }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 14px; top: 50%; transform: translateY(-50%);
+      width: 30px; height: 30px; border-radius: 50%; background: var(--button); color: var(--on-button);
+      display: grid; place-items: center; font-weight: 800; font-size: 15px;
+    }
+    .code {
+      display: inline-block; margin: 2px 0 0; padding: 2px 10px; border-radius: 10px;
+      background: var(--peach); color: var(--coral-dark); font-weight: 800; letter-spacing: 0.08em;
+    }
+    .hint { margin: 18px 0 0; font-size: 14px; color: var(--muted); }
+    .desktop { display: none; }
+    @media (hover: hover) and (pointer: fine) { .desktop { display: block; } }
+    .features { display: grid; gap: 10px; margin: 22px 0 0; padding: 0; list-style: none; text-align: left; }
+    .features li { padding: 12px 16px; border-radius: 16px; background: var(--bg); border: 1px solid var(--line); font-size: 15px; line-height: 1.4; }
+    .features b { color: var(--ink); }
+    footer { margin-top: 26px; text-align: center; font-size: 13px; color: var(--muted); }
+    footer a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); margin: 0 8px; }
+    footer .credit { margin: 6px 0 0; font-size: 12px; line-height: 1.5; }
+    footer .credit a { display: inline; min-height: 0; margin: 0; }
+    .toolbar { position: absolute; top: 14px; right: 16px; display: flex; gap: 6px; }
+    .theme { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; padding: 0; border: 0; border-radius: 999px; background: var(--peach); color: var(--ink); cursor: pointer; }
+    .theme .sun { display: none; }
+    :root[data-theme="dark"] .theme .sun { display: block; }
+    :root[data-theme="dark"] .theme .moon { display: none; }
+    .hidden { display: none !important; }
+    .langlink { position: absolute; top: 20px; right: 20px; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--peach); color: var(--coral-dark); font-weight: 800; font-size: 14px; text-decoration: none; }
+    body { position: relative; }
+    .langlink { position: static; }
+    :root[data-theme="dark"] { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; color-scheme: dark; }
+    :root[data-theme="dark"] .soon { background: rgba(255, 248, 244, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 248, 244, 0.22); }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; }
+      :root:not([data-theme="light"]) .soon { background: rgba(255, 248, 244, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 248, 244, 0.22); }
+      :root:not([data-theme="light"]) .theme .sun { display: block; }
+      :root:not([data-theme="light"]) .theme .moon { display: none; }
+    }
+  </style>
+<link rel="alternate" hreflang="en" href="https://pawconnectsocial.com/share.html">
+<link rel="alternate" hreflang="zh-Hans" href="https://pawconnectsocial.com/zh/share.html">
+<link rel="alternate" hreflang="x-default" href="https://pawconnectsocial.com/share.html">
+<script>(function(){try{if(localStorage.getItem("pc-lang"))return;var l=(navigator.languages&&navigator.languages[0])||navigator.language||"";var want=/^zh/i.test(l)?"zh":"en";var here=document.documentElement.lang.indexOf("zh")===0?"zh":"en";if(want==="zh"&&here==="en")location.replace(document.documentElement.getAttribute("data-alt")+location.search+location.hash)}catch(e){}})()</script>
+<script>document.addEventListener("click",function(e){var a=e.target.closest&&e.target.closest("a[data-lang]");if(a){try{localStorage.setItem("pc-lang",a.getAttribute("data-lang"))}catch(x){}}})</script>
+</head>
+<body>
+  <main class="shell">
+    <div class="toolbar"><a class="langlink" href="/share.html" hreflang="en" lang="en" data-lang="en" id="langlink">EN</a><button type="button" class="theme" id="themebtn" aria-label="切换主题"><svg class="moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg></button></div>
+            <a class="brand" href="/zh/"><img src="/assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
+
+    <section class="card">
+      <div class="faces" aria-hidden="true">
+        <img src="/assets/brand/avatar-cat_peach.webp" alt="" width="84" height="84">
+        <img src="/assets/brand/avatar-dog_blue.webp" alt="" width="100" height="100">
+        <img src="/assets/brand/avatar-rabbit_lilac.webp" alt="" width="84" height="84">
+      </div>
+      <span class="chip" id="chip">PAWCONNECT</span>
+      <h1 id="headline">它们的世界，在你手中。</h1>
+      <p class="lead" id="lead">宠物档案、日常护理，和一个懂你的社区。</p>
+
+      <a class="storebadge" id="get" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721"><img src="/assets/badges/app-store-zh.svg" alt="在 App Store 下载" width="156" height="52"></a>
+      <span class="soon" id="soon"><span><small>即将登陆</small> <b>Google Play</b></span></span>
+      <a class="button secondary" id="open" href="pawconnect://">打开 PawConnect</a>
+
+      <ol class="steps hidden" id="steps">
+        <li>从 App Store 获取 PawConnect。</li>
+        <li>回到这条消息，点击<b>在 PawConnect 中打开</b>。</li>
+        <li id="codeStep" class="hidden">如果没有自动填入，请前往 个人 › 用邀请码加入，输入 <span class="code" id="codeText"></span></li>
+      </ol>
+
+      <ul class="features" id="features">
+        <li><b>宠物档案和数字身份卡</b>，献给你爱的每一位。</li>
+        <li><b>健康、提醒和散步</b>，尽在一处。</li>
+        <li><b>Zoomies 和精彩瞬间</b>，来自身边的宠物和人。</li>
+      </ul>
+      <p class="hint desktop">PawConnect 是一款 iPhone 应用。请在 iPhone 上打开此页面来安装。</p>
+    </section>
+
+    <footer>
+      <a href="/zh/privacy.html">隐私</a><a href="/zh/terms.html">条款</a><a href="/zh/support.html">支持</a>
+      <p class="credit">Google Play 是 Google LLC 的商标。</p>
+    </footer>
+  </main>
+
+  <script>
+    (function () {
+      var b = document.getElementById("themebtn"); if (!b) return;
+      var zh = document.documentElement.lang.indexOf("zh") === 0;
+      function dark() { var t = document.documentElement.getAttribute("data-theme"); return t ? t === "dark" : !!(window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches); }
+      function paint() { b.setAttribute("aria-label", dark() ? (zh ? "切换到浅色主题" : "Switch to the light theme") : (zh ? "切换到深色主题" : "Switch to the dark theme")); }
+      b.addEventListener("click", function () { var n = dark() ? "light" : "dark"; document.documentElement.setAttribute("data-theme", n); try { localStorage.setItem("pc-theme", n); } catch (e) {} paint(); });
+      paint();
+    })();
+  </script>
+  <script>
+    // Everything on this page that comes from the address is checked against a strict pattern before it is used. The only text taken from
+    // the address and shown is a join code that passed its pattern. No name or sentence from the address is ever displayed: otherwise anyone
+    // could put words on an official-looking page (audit S17-009). The sharer's name is therefore not shown.
+    (function () {
+      var p = new URLSearchParams(window.location.search);
+      var kind = p.get("k") || "";
+      var id = p.get("id") || "";
+      var code = p.get("code") || "";
+      function $(name) { return document.getElementById(name); }
+
+      // Fixed copy per kind. "opens" kinds have a place in the app; walks and badges do not, so the page does not promise to open them.
+      var copy = {
+        post:      { opens: true,  chip: "SHARED WITH YOU", head: "A friend shared a moment", lead: "Open it in PawConnect to see it, say hi, and meet the pets and people there." },
+        zoomie:    { opens: true,  chip: "ZOOMIE", head: "A friend shared a Zoomie", lead: "Open it in PawConnect, the home of pet videos and everyday moments." },
+        pet:       { opens: true,  chip: "MEET A NEW FRIEND", head: "A friend shared a pet with you", lead: "Open PawConnect to see their profile. If it is no longer shared, the app will say so." },
+        profile:   { opens: true,  chip: "ON PAWCONNECT", head: "A friend shared a profile with you", lead: "Open PawConnect to follow along. If the profile is no longer available, the app will say so." },
+        milestone: { opens: true,  chip: "A BIG DAY", head: "A friend shared a milestone", lead: "Open PawConnect to meet the pet behind it. Keep every special day in one place." },
+        walk:      { opens: false, chip: "TRACKED WALK", head: "A friend shared a walk", lead: "Walks stay inside PawConnect, so there is nothing to open here. Get the app to track your own walks, health and care." },
+        badge:     { opens: false, chip: "NEW BADGE", head: "A friend earned a badge", lead: "Earn badges for caring, sharing and showing up for your pets. Get PawConnect to start collecting." },
+        join:      { opens: true,  chip: "YOU'RE INVITED", head: "Care for a pet together", lead: "A friend invited you to share a pet on PawConnect." }
+      };
+      var copyZh = {
+        post:      { opens: true,  chip: "朋友的分享", head: "朋友分享了一个瞬间", lead: "在 PawConnect 中打开来查看、打个招呼，认识那里的宠物和朋友。" },
+        zoomie:    { opens: true,  chip: "ZOOMIE", head: "朋友分享了一个 Zoomie", lead: "在 PawConnect 中打开，这里是宠物视频和日常瞬间的家。" },
+        pet:       { opens: true,  chip: "认识新朋友", head: "朋友向你分享了一只宠物", lead: "打开 PawConnect 查看它的档案。如果已不再共享，应用会告诉你。" },
+        profile:   { opens: true,  chip: "在 PAWCONNECT", head: "朋友向你分享了一个主页", lead: "打开 PawConnect 来关注。如果该主页已不可用，应用会告诉你。" },
+        milestone: { opens: true,  chip: "重要的一天", head: "朋友分享了一个里程碑", lead: "打开 PawConnect，认识它背后的宠物。把每个特别的日子都留在一处。" },
+        walk:      { opens: false, chip: "散步记录", head: "朋友分享了一次散步", lead: "散步记录只保存在 PawConnect 里，所以这里没有可打开的内容。获取应用，记录你自己的散步、健康与护理。" },
+        badge:     { opens: false, chip: "新徽章", head: "朋友获得了一枚徽章", lead: "为照顾、分享和陪伴宠物而获得徽章。获取 PawConnect，开始收集。" },
+        join:      { opens: true,  chip: "你受到邀请", head: "一起照顾一只宠物", lead: "朋友邀请你在 PawConnect 上共同照顾一只宠物。" }
+      };
+      var UI = {
+        en: { incomplete: "This link looks incomplete, so it cannot open a specific item. You can still get PawConnect or open the app.", openIn: "Open in PawConnect", open: "Open PawConnect" },
+        zh: { incomplete: "此链接似乎不完整，无法打开具体内容。你仍可以获取 PawConnect 或直接打开应用。", openIn: "在 PawConnect 中打开", open: "打开 PawConnect" }
+      };
+      var L = document.documentElement.lang.indexOf("zh") === 0 ? "zh" : "en";
+      var c = Object.prototype.hasOwnProperty.call(L === "zh" ? copyZh : copy, kind) ? (L === "zh" ? copyZh : copy)[kind] : null;
+      if (c) {
+        $("chip").textContent = c.chip;
+        $("headline").textContent = c.head;
+        $("lead").textContent = c.lead;
+        document.title = c.head + " · PawConnect";
+      }
+
+      // Where the Open button goes: the item itself when the link carries a valid id or code, otherwise just the app.
+      var deep = "pawconnect://";
+      var valid = false;
+      if ((kind === "post" || kind === "zoomie") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        deep = "pawconnect://post?id=" + encodeURIComponent(id); valid = true;
+      } else if ((kind === "pet" || kind === "milestone") && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        deep = "pawconnect://" + kind + "?id=" + encodeURIComponent(id); valid = true;
+      } else if (kind === "profile" && /^[A-Za-z0-9._]{1,30}$/.test(id)) {
+        deep = "pawconnect://profile?id=" + encodeURIComponent(id); valid = true;
+      } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
+        deep = "pawconnect://join?code=" + encodeURIComponent(code); valid = true;
+        $("steps").classList.remove("hidden");
+        $("features").classList.add("hidden");
+        $("codeStep").classList.remove("hidden");
+        $("codeText").textContent = code;
+      }
+      // A known kind with a broken id is a plain card: install, or open the app as it is. An unknown kind keeps the generic card.
+      if (c && c.opens && !valid) $("lead").textContent = UI[L].incomplete;
+      $("open").textContent = (c && c.opens && valid) ? UI[L].openIn : UI[L].open;
+      $("open").setAttribute("href", deep);
+    })();
+  </script>
+</body>
+</html>
