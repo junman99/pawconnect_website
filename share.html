@@ -52,6 +52,8 @@
       --line: #eadcd5;
       --button: #29262d;
       --on-button: #fff8f4;
+      --cta: #b9402f;
+      --on-cta: #ffffff;
       --display: "Bricolage Grotesque", "Avenir Next", "Segoe UI", system-ui, sans-serif;
       color-scheme: light dark;
     }
@@ -137,13 +139,28 @@
     :root[data-theme="dark"] .theme .sun { display: block; }
     :root[data-theme="dark"] .theme .moon { display: none; }
     .hidden { display: none !important; }
+    /* CREATE2 step 4: a shared post shows the moment itself (its photo, whose it is, the pets and the place), read from the app's public data. */
+    .card { transition: opacity 0.2s ease; }
+    .card.pending { opacity: 0; }
+    .card.is-moment { text-align: left; padding: 20px 20px 24px; }
+    .card.is-moment .faces, .card.is-moment .chip, .card.is-moment .features, .card.is-moment .storebadge, .card.is-moment .soon { display: none; }
+    .byline { margin: 0 0 12px; font-size: 15px; color: var(--muted); overflow-wrap: anywhere; }
+    /* The buttons stay on the first screen of a phone: the photo is at most about half its height (a tall photo is cropped, not shrunk sideways). */
+    .photo { position: relative; margin: 0 0 22px; overflow: hidden; border-radius: 18px; background: var(--peach); aspect-ratio: 4 / 5; max-height: min(46vh, 420px); width: 100%; }
+    .photo img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .play { position: absolute; left: 50%; top: 50%; width: 64px; height: 64px; margin: -32px 0 0 -32px; border-radius: 50%; background: rgba(23, 18, 17, 0.5); display: grid; place-items: center; color: #fff; }
+    .card.is-moment h1 { font-size: clamp(28px, 7.4vw, 34px); line-height: 1.1; }
+    .card.is-moment .lead { margin: 0 0 22px; font-size: 16px; overflow-wrap: anywhere; }
+    .card.is-moment .button.secondary { margin-top: 0; background: var(--cta); color: var(--on-cta); }
+    .button.soft { margin-top: 10px; background: var(--peach); color: var(--ink); }
+    .note { margin: 16px 0 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
     .langlink { position: absolute; top: 20px; right: 20px; display: inline-flex; align-items: center; justify-content: center; min-width: 44px; min-height: 44px; padding: 0 14px; border-radius: 999px; background: var(--peach); color: var(--coral-dark); font-weight: 800; font-size: 14px; text-decoration: none; }
     body { position: relative; }
     .langlink { position: static; }
-    :root[data-theme="dark"] { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; color-scheme: dark; }
+    :root[data-theme="dark"] { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; --cta: #ff7f6e; --on-cta: #231716; color-scheme: dark; }
     :root[data-theme="dark"] .soon { background: rgba(255, 248, 244, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 248, 244, 0.22); }
     @media (prefers-color-scheme: dark) {
-      :root:not([data-theme="light"]) { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; }
+      :root:not([data-theme="light"]) { --bg: #171211; --peach: #2b2120; --card: #211a19; --ink: #f6ece7; --muted: #c8bab3; --line: #3a2f2c; --coral-dark: #ff9a8b; --button: #ff7f6e; --on-button: #231716; --cta: #ff7f6e; --on-cta: #231716; }
       :root:not([data-theme="light"]) .soon { background: rgba(255, 248, 244, 0.08); box-shadow: inset 0 0 0 1px rgba(255, 248, 244, 0.22); }
       :root:not([data-theme="light"]) .theme .sun { display: block; }
       :root:not([data-theme="light"]) .theme .moon { display: none; }
@@ -160,11 +177,15 @@
     <div class="toolbar"><a class="langlink" href="/zh/share.html" hreflang="zh-Hans" lang="zh-Hans" data-lang="zh" id="langlink">中文</a><button type="button" class="theme" id="themebtn" aria-label="Switch theme"><svg class="moon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg><svg class="sun" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2" fill="currentColor"/><g stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 2.6v2.4M12 19v2.4M2.6 12H5M19 12h2.4M5.3 5.3 7 7M17 17l1.7 1.7M5.3 18.7 7 17M17 7l1.7-1.7"/></g></svg></button></div>
             <a class="brand" href="index.html"><img src="assets/logo-primary.svg" alt="" width="40" height="40"><span>PawConnect</span></a>
 
-    <section class="card">
+    <section class="card" id="card">
       <div class="faces" aria-hidden="true">
         <img src="assets/brand/avatar-cat_peach.webp" alt="" width="84" height="84">
         <img src="assets/brand/avatar-dog_blue.webp" alt="" width="100" height="100">
         <img src="assets/brand/avatar-rabbit_lilac.webp" alt="" width="84" height="84">
+      </div>
+      <div class="hidden" id="moment">
+        <p class="byline" id="momentBy"></p>
+        <div class="photo"><img id="momentPhoto" alt=""><span class="play hidden" id="momentPlay" aria-hidden="true"><svg viewBox="0 0 24 24" width="28" height="28" focusable="false"><path d="M8 5.5v13l10.5-6.5z" fill="currentColor"/></svg></span></div>
       </div>
       <span class="chip" id="chip">PAWCONNECT</span>
       <h1 id="headline">Their world. In your hands.</h1>
@@ -173,6 +194,8 @@
       <a class="storebadge" id="get" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721"><img src="assets/badges/app-store-en.svg" alt="Download on the App Store" width="156" height="52"></a>
       <span class="soon" id="soon"><span><small>Coming soon to</small> <b>Google Play</b></span></span>
       <a class="button secondary" id="open" href="pawconnect://">Open PawConnect</a>
+      <a class="button soft hidden" id="getMoment" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721"></a>
+      <p class="note hidden" id="momentNote"></p>
 
       <ol class="steps hidden" id="steps">
         <li>Get PawConnect from the App Store.</li>
@@ -241,6 +264,11 @@
         zh: { incomplete: "此链接似乎不完整，无法打开具体内容。你仍可以获取 PawConnect 或直接打开应用。", openIn: "在 PawConnect 中打开", open: "打开 PawConnect" }
       };
       var L = document.documentElement.lang.indexOf("zh") === 0 ? "zh" : "en";
+      // CREATE2 step 4: "Invite a friend" in the app sends the inviter's profile with v=invite. Fixed words, chosen by a flag; nothing from the address is shown.
+      if (kind === "profile" && p.get("v") === "invite") {
+        copy.profile = { opens: true, chip: "YOU'RE INVITED", head: "Join me on PawConnect", lead: "Meet my pets, share your own pet moments, and find places to explore together." };
+        copyZh.profile = { opens: true, chip: "你受到邀请", head: "和我一起用 PawConnect", lead: "来认识我的宠物，分享你自己的宠物瞬间，一起发现好去处。" };
+      }
       var c = Object.prototype.hasOwnProperty.call(L === "zh" ? copyZh : copy, kind) ? (L === "zh" ? copyZh : copy)[kind] : null;
       if (c) {
         $("chip").textContent = c.chip;
@@ -269,6 +297,91 @@
       if (c && c.opens && !valid) $("lead").textContent = UI[L].incomplete;
       $("open").textContent = (c && c.opens && valid) ? UI[L].openIn : UI[L].open;
       $("open").setAttribute("href", deep);
+
+      // CREATE2 step 4: a shared post or Zoomie shows the moment itself. Posts are public in the app (a signed-out person reads one by id),
+      // so the page reads the same document the app's guest view reads. Names come from the app's data, not the address, and are set as text.
+      // Anything missing, deleted or off our media host: the plain card above stays.
+      if ((kind === "post" || kind === "zoomie") && valid) showMoment(id);
+
+      function showMoment(postId) {
+        var FS = "https://firestore.googleapis.com/v1/projects/pawconnect-72d74/databases/(default)/documents/";
+        var MEDIA = "pawconnect-upload.chinjunman99.workers.dev";
+        var M = {
+          en: { by: function (n) { return "A moment from " + n; }, byPlain: "A moment on PawConnect", head: "Small adventures. Excellent company.",
+                get: "Get PawConnect", note: "See the moment. Join to paw, comment and follow. Just installed? Come back to this page and tap Open in PawConnect.", alt: function (n) { return n ? "A moment with " + n : "A moment on PawConnect"; } },
+          zh: { by: function (n) { return "来自 " + n + " 的瞬间"; }, byPlain: "PawConnect 上的一个瞬间", head: "小小冒险，最好的陪伴。",
+                get: "获取 PawConnect", note: "先看看这个瞬间。加入后就能送爪、评论和关注。刚安装好？回到这个页面，点击“在 PawConnect 中打开”。", alt: function (n) { return n ? "和 " + n + " 的瞬间" : "PawConnect 上的一个瞬间"; } }
+        }[L];
+        var card = $("card");
+        card.classList.add("pending");
+        var shown = false;
+        function reveal(state) { if (!shown) { shown = true; card.classList.remove("pending"); } document.documentElement.setAttribute("data-moment", state); }
+        var timer = setTimeout(function () { reveal("waiting"); }, 2500);   // a slow answer never hides the card for long
+
+        function read(path) {
+          return fetch(FS + path, { credentials: "omit", cache: "no-store" }).then(function (r) { if (!r.ok) throw new Error("read"); return r.json(); });
+        }
+        function field(doc, name) { return (doc && doc.fields && doc.fields[name]) || null; }
+        function text(doc, name, max) {
+          var v = field(doc, name);
+          var s = v && typeof v.stringValue === "string" ? v.stringValue.replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, "").trim() : "";
+          return s.length > max ? s.slice(0, max - 1) + "…" : s;
+        }
+        function list(doc, name) {
+          var v = field(doc, name);
+          return v && v.arrayValue && v.arrayValue.values ? v.arrayValue.values.map(function (x) { return x.stringValue || ""; }) : [];
+        }
+        function ours(u) {
+          try { var x = new URL(u); return x.protocol === "https:" && x.hostname === MEDIA ? x.href : ""; } catch (e) { return ""; }
+        }
+        function safeId(x) { return /^[A-Za-z0-9_-]{1,128}$/.test(x) ? x : ""; }
+
+        read("posts/" + encodeURIComponent(postId)).then(function (post) {
+          var deleted = field(post, "isDeleted");
+          if (!deleted || deleted.booleanValue !== false) throw new Error("gone");
+          var zoomie = !!(field(post, "isZoomie") && field(post, "isZoomie").booleanValue);
+          var photo = ours(text(post, "thumbnailURL", 2048)) || ours(list(post, "imageURLs")[0] || "");
+          if (!photo) throw new Error("no photo");
+          var petIds = [text(post, "petId", 128)].concat(list(post, "taggedPetIds")).map(safeId)
+            .filter(function (x, i, all) { return x && all.indexOf(x) === i; }).slice(0, 3);
+          var owner = safeId(text(post, "ownerId", 128));
+          var place = "";
+          var loc = field(post, "location");
+          if (loc && loc.mapValue && loc.mapValue.fields && loc.mapValue.fields.name) {
+            place = text({ fields: loc.mapValue.fields }, "name", 60);
+          }
+          var r = field(post, "imageAspectRatios");
+          var first = r && r.arrayValue && r.arrayValue.values && r.arrayValue.values[0];
+          var aspect = first ? Number(first.doubleValue != null ? first.doubleValue : first.integerValue) : NaN;
+          return Promise.all([
+            Promise.all(petIds.map(function (pid) { return read("pets/" + pid).then(function (d) { return text(d, "name", 40); }, function () { return ""; }); })),
+            owner ? read("users/" + owner).then(function (d) { return text(d, "displayName", 50) || (text(d, "username", 30) ? "@" + text(d, "username", 30) : ""); }, function () { return ""; }) : Promise.resolve("")
+          ]).then(function (both) {
+            var names = both[0].filter(Boolean).join(" + ");
+            var who = both[1];
+            $("momentBy").textContent = who ? M.by(who) : M.byPlain;
+            var img = $("momentPhoto");
+            img.alt = M.alt(names);
+            img.src = photo;
+            if (!zoomie && aspect > 0) img.parentNode.style.aspectRatio = String(Math.min(1.91, Math.max(0.8, aspect)));
+            if (zoomie) $("momentPlay").classList.remove("hidden");
+            $("headline").textContent = M.head;
+            var line = [names, place].filter(Boolean).join(" · ");
+            $("lead").textContent = line;
+            if (!line) $("lead").classList.add("hidden");
+            $("getMoment").textContent = M.get;
+            $("momentNote").textContent = M.note;
+            $("moment").classList.remove("hidden");
+            $("getMoment").classList.remove("hidden");
+            $("momentNote").classList.remove("hidden");
+            $("steps").classList.add("hidden");
+            card.classList.add("is-moment");
+            document.title = (names || M.byPlain) + " · PawConnect";
+            var done = function () { clearTimeout(timer); reveal("shown"); };
+            img.onload = done; img.onerror = done;
+          });
+        }).catch(function () { clearTimeout(timer); reveal("plain"); });
+      }
     })();
   </script>
 </body>
