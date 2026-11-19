@@ -67,7 +67,34 @@ const ZHS = {
   "Switch theme": "切换主题", "Choose a business": "选择商家", "Signed out.": "已退出登录。", "minutes": "分钟", "%@ services": "%@ 项服务",
   "Sun": "周日", "Mon": "周一", "Tue": "周二", "Wed": "周三", "Thu": "周四", "Fri": "周五", "Sat": "周六",
   "Monday": "星期一", "Tuesday": "星期二", "Wednesday": "星期三", "Thursday": "星期四", "Friday": "星期五", "Saturday": "星期六", "Sunday": "星期日",
-  "to": "至", "Calls": "电话", "From %@": "%@ 起", "just now": "刚刚", "%@ min ago": "%@ 分钟前", "%@ h ago": "%@ 小时前", "%@ days ago": "%@ 天前", "Read the menu from this page": "从这个页面读取价目表",
+  "to": "至", "Offers and vouchers": "优惠和优惠券", "%1$@ collected · %2$@ used": "已领取 %1$@ · 已使用 %2$@", "%@ left": "剩 %@ 张",
+  "Mention PawConnect when you book": "预约时提到 PawConnect", "Offers show on your page and in Explore's Offers near you. A voucher is collected in the app and shown at your counter.": "优惠会显示在你的页面和探索的“附近优惠”里。优惠券在应用里领取、到你店里出示。",
+  "No offers yet. A first-visit voucher is the easiest way to see what PawConnect brings you.": "还没有优惠。首次光临优惠券是看到 PawConnect 带来多少顾客最简单的方法。",
+  "Check a voucher": "核对优惠券", "Type the code on the pet owner's phone.": "输入宠物主人手机上的代码。", "Check": "核对", "Marked as used": "已标记为使用", "Already used": "已经用过",
+  "For a first visit": "首次光临适用", "Used %@": "使用于 %@", "Edit offer": "编辑优惠", "Pet owners collect it in the app": "宠物主人在应用里领取", "Limit how many": "限制数量", "Up to": "最多",
+  "First visits only": "仅限首次光临", "They get a code to show at your counter. Type it under Check a voucher to mark it used, and see how many it brought in.": "他们会得到一个到店出示的代码。在“核对优惠券”里输入即可标记为已使用，并看到它带来了多少顾客。",
+  "Ends on a date": "设定结束日期", "Paused": "已暂停", "A paused offer stays here but pet owners don't see it.": "暂停的优惠会留在这里，但宠物主人看不到。", "Post": "发布", "End this offer?": "要结束这个优惠吗？", "Pet owners are looking for you.": "宠物主人正在找你。", "Be the one they message.": "让他们第一个联系你。",
+  "Your free page on PawConnect: your menu with prices by size, photos, offers and your numbers. Pet owners nearby find you in Explore and message you on WhatsApp, already knowing what they want.": "你在 PawConnect 上的免费页面：按体型定价的价目表、照片、优惠和数据。附近的宠物主人在“探索”里找到你，用 WhatsApp 联系你时已经知道要什么。",
+  "Claim your page free": "免费认领你的页面", "Sign in": "登录", "Free. No booking fees. No commission.": "免费。没有预约费，不抽佣金。", "Page views, 30 days": "30 天页面浏览",
+  "Built for groomers, pet hotels, vets, pet shops and pet cafés in Singapore and Malaysia.": "为新加坡和马来西亚的宠物美容店、宠物酒店、兽医诊所、宠物店和宠物咖啡馆而设计。",
+  "Groomers": "宠物美容", "Pet hotels": "宠物酒店", "Vets": "兽医诊所", "Pet shops": "宠物店", "Pet cafés": "宠物咖啡馆",
+  "Get found": "被找到", "On the map pet owners already use": "出现在宠物主人已经在用的地图上",
+  "Your page shows in Explore when someone nearby looks for a groomer, a vet or a place for their dog to stay. Add photos and your page earns the big card.": "附近有人找美容店、兽医或寄养时，你的页面会出现在“探索”里。加上照片，就能显示大卡片。",
+  "Get messages ready to book": "收到可以直接预约的消息", "Every service, every size, every price": "每项服务、每种体型、每个价格",
+  "Pet owners see your prices by size and photos of each service, then tap Ask on WhatsApp. The message already says the service, the pet and the size.": "宠物主人能看到按体型的价格和每项服务的照片，再点“用 WhatsApp 询问”。消息里已经写好了服务、宠物和体型。",
+  "Turn visits into regulars": "把一次来访变成常客", "Offers they collect, visits you can count": "顾客能领取的优惠，你能数得清的来访",
+  "Post an offer pet owners collect in the app and show at your counter. See how many collected and used it, what owners paid, and how many would come back.": "发布宠物主人能在应用里领取、到店出示的优惠。看到有多少人领取和使用、顾客花了多少，以及多少人会再来。",
+  "Claim your page in two minutes": "两分钟认领你的页面", "Find your business": "找到你的商家", "Open PawConnect, go to Explore and search your name. Your page is probably already there.": "打开 PawConnect，进入“探索”搜索你的店名。你的页面很可能已经在那里。",
+  "Prove it's yours": "证明是你的", "A code by SMS to your business number, a code on your website, or a photo of your business registration.": "发到商家号码的短信验证码、放在网站上的代码，或营业执照的照片。",
+  "Paste your website or snap your price list. We read the prices; you check them.": "贴上你的网站或拍下价目表。我们读取价格，你来核对。",
+  "Run it from anywhere": "随时随地管理", "From the app, or on this website on your computer. Invite your team as managers.": "用应用，或在电脑上用这个网站。邀请团队成员做管理员。",
+  "Get PawConnect on the App Store": "在 App Store 下载 PawConnect", "Questions": "常见问题", "Is it free?": "免费吗？",
+  "Yes. Your page, your menu, photos, offers and your numbers are free. We don't take a commission on what pet owners pay you.": "免费。页面、价目表、照片、优惠和数据都免费。宠物主人付给你的钱我们不抽佣金。",
+  "Do you take bookings or payments?": "你们处理预约或付款吗？", "No. Pet owners message or call you and you book them as you do today. PawConnect brings them to you with what they want already written.": "不处理。宠物主人发消息或打电话给你，你照常为他们预约。PawConnect 把写好需求的顾客带到你面前。",
+  "Can pet owners leave reviews?": "宠物主人能写评价吗？", "Not star reviews. They can say whether they would go back and what they paid, anonymously, and post photos of their visit. You see the same numbers.": "没有星级评价。他们可以匿名说是否会再来、花了多少钱，也可以发来访照片。你看到的是同样的数据。",
+  "Can my staff help run the page?": "员工能一起管理页面吗？", "Yes. Invite them as managers from the app. They can edit the page and see the numbers; only you manage the team.": "可以。在应用里邀请他们做管理员。他们能编辑页面、查看数据；只有你能管理团队。",
+  "Why sign in with my phone?": "为什么用手机登录？", "There is no password to forget or steal: only a phone signed in to PawConnect can let a computer in, and you can sign it out from the app.": "没有会忘记或被盗的密码：只有登录了 PawConnect 的手机才能让电脑登录，你也能在应用里让它退出。",
+  "Already on PawConnect?": "已经在 PawConnect 上？", "Calls": "电话", "From %@": "%@ 起", "just now": "刚刚", "%@ min ago": "%@ 分钟前", "%@ h ago": "%@ 小时前", "%@ days ago": "%@ 天前", "Read the menu from this page": "从这个页面读取价目表",
 };
 
 // ---- Server ----------------------------------------------------------------------------------------------------------------------------
@@ -98,9 +125,40 @@ function toast(text, bad = false) {
 
 // ---- Sign in ---------------------------------------------------------------------------------------------------------------------------
 let pollTimer; let tickTimer; let link;
+let linkStarted = false;
 function showSignin() {
-  $("#app").hidden = true; $("#signin").hidden = false; $("#me").hidden = true;
-  startLink();
+  $("#app").hidden = true; $("#signin").hidden = false; $("#me").hidden = true; $("#toplogin").hidden = false;
+  linkStarted = false;
+  landing();
+  // A sign-in code is made only when someone reaches the sign-in card (a visitor reading about PawConnect costs nothing).
+  const card = $("#signin-card");
+  const start = () => { if (!linkStarted) { linkStarted = true; startLink(); } };
+  if ("IntersectionObserver" in window) {
+    const io = new IntersectionObserver((entries) => { if (entries.some((e) => e.isIntersecting)) { io.disconnect(); start(); } }, { rootMargin: "0px 0px -20% 0px" });
+    io.observe(card);
+  } else start();
+  document.querySelectorAll('a[href="#signin-card"]').forEach((a) => a.addEventListener("click", start));
+  if (location.hash === "#signin-card") start();
+}
+
+/// The landing page's motion: sections rise in as they arrive, the views count up, the WhatsApp message types itself. All off with Reduce Motion.
+let landed = false;
+function landing() {
+  if (landed) return; landed = true;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const els = document.querySelectorAll(".reveal");
+  if (reduce || !("IntersectionObserver" in window)) els.forEach((e) => e.classList.add("in"));
+  else {
+    const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .15 });
+    els.forEach((e) => io.observe(e));
+  }
+  document.querySelectorAll(".lp-chip [data-count]").forEach(countUp);
+  const typed = $(".lp-typed");
+  if (typed) {
+    const text = ZH ? "你好 Paw & Glow，我在 PawConnect 上看到你们。我想给 Biscuit（中型）预约全套美容。请问什么时候有空？" : typed.dataset.text;
+    if (reduce) { typed.textContent = text; typed.classList.add("done"); }
+    else { let i = 0; setTimeout(function step() { typed.textContent = text.slice(0, ++i); if (i < text.length) setTimeout(step, 28); else typed.classList.add("done"); }, 1400); }
+  }
 }
 async function startLink() {
   clearInterval(pollTimer); clearInterval(tickTimer);
@@ -147,7 +205,7 @@ async function poll() {
 // ---- App -------------------------------------------------------------------------------------------------------------------------------
 const S = { businesses: [], id: null, data: null, view: "overview", draft: null, me: null };
 const NAV = [["overview", "Overview", "M3 12l9-8 9 8v8a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"], ["menu", "Menu", "M4 6h16M4 12h16M4 18h10"],
-  ["photos", "Photos", "M4 6h16v12H4zM8 13l3-3 5 5M15 10h.01"], ["offers", "Offers", "M4 10h16v10H4zM3 6h18v4H3zM12 6v14M12 6c-2-4-6-3-5 0M12 6c2-4 6-3 5 0"],
+  ["photos", "Photos", "M4 6h16v12H4zM8 13l3-3 5 5M15 10h.01"], ["offers", "Offers and vouchers", "M4 10h16v10H4zM3 6h18v4H3zM12 6v14M12 6c-2-4-6-3-5 0M12 6c2-4 6-3 5 0"],
   ["details", "Hours and details", "M12 7v5l3 2M12 3a9 9 0 1 0 0 18 9 9 0 0 0 0-18z"], ["contacts", "Contacts", "M4 5h16v11H8l-4 4z"]];
 
 async function boot() {
@@ -160,7 +218,7 @@ async function boot() {
     // "/business/#menu", "#photos", "#offers", "#details", "#contacts", or "#menu/<service id>" opens that service's editor.
     const [view, item] = location.hash.slice(1).split("/");
     if (NAV.some(([id]) => id === view)) { S.view = view; S.openItem = item || null; }
-    $("#signin").hidden = true; $("#app").hidden = false; $("#me").hidden = false;
+    $("#signin").hidden = true; $("#app").hidden = false; $("#me").hidden = false; $("#toplogin").hidden = true;
     $("#me").innerHTML = `<span class="avatar">${S.me.photoURL ? `<img src="${esc(S.me.photoURL)}" alt="">` : esc((S.me.name || "?").slice(0, 1))}</span><span>${esc(S.me.name || "")}</span>
       <button class="pill" id="signout">${T("Sign out")}</button>`;
     $("#signout").onclick = signOut;
@@ -180,7 +238,7 @@ function side() {
   const p = S.data.provider; const b = S.businesses.find((x) => x.id === S.id) || {};
   const photo = (p.profile.photos || [])[0] || p.postPhoto;
   const switcher = S.businesses.length > 1 ? `<label class="sr" for="bizpick">${T("Choose a business")}</label><select id="bizpick">${S.businesses.map((x) => `<option value="${esc(x.id)}" ${x.id === S.id ? "selected" : ""}>${esc(x.name)}</option>`).join("")}</select>` : "";
-  $("#side").innerHTML = `<div class="biz"><div class="thumb">${photo ? `<img src="${esc(photo)}" alt="">` : "🐾"}</div><div style="min-width:0;flex:1"><b>${esc(p.name)}</b>
+  $("#side").innerHTML = `<div class="biz"><div class="thumb">${photo ? `<img src="${esc(photo)}" alt="">` : `<img src="/assets/logo-primary.svg" alt="" style="width:60%;height:60%;object-fit:contain">`}</div><div style="min-width:0;flex:1"><b>${esc(p.name)}</b>
     <small>${esc([p.areaName, T(b.role === "manager" ? "Manager" : "Owner")].filter(Boolean).join(" · "))}</small>${switcher}</div></div>
     <nav class="nav" aria-label="${esc(p.name)}">${NAV.map(([id, label, d]) => `<button data-view="${id}" ${S.view === id ? 'aria-current="page"' : ""}>
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="${d}"/></svg>${T(label)}
@@ -419,26 +477,78 @@ function wirePhotos() {
   });
 }
 
-// ---- Offers ----------------------------------------------------------------------------------------------------------------------------
+const ICON = {
+  ticket: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v2a2 2 0 0 0 0 4v2a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-2a2 2 0 0 0 0-4z"/><path d="M13 6v2M13 11v2M13 16v2"/></svg>',
+  gift: '<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 10h16v10H4zM3 6h18v4H3zM12 6v14M12 6c-2-4-6-3-5 0M12 6c2-4 6-3 5 0"/></svg>',
+};
+
+// ---- Offers and vouchers ---------------------------------------------------------------------------------------------------------------
 function offers() {
   const list = S.data.provider.offers;
-  const end = new Date(Date.now() + 30 * 864e5).toISOString().slice(0, 10);
-  return head(T("Offers"), T("Offers show on your page and in Explore's Offers near you. One at a time works best.")) + `<div class="grid cols-2">
-    <div class="card"><h2>${T("New offer")}</h2><p class="sub"></p>
-      <label class="field"><span>${T("Name")}</span><input class="input" id="otitle" maxlength="60" placeholder="${T("For example: 15% off your first groom")}"></label>
-      <label class="field"><span>${T("Details (optional)")}</span><input class="input" id="odetail" maxlength="160"></label>
-      <label class="field"><span>${T("Ends on")}</span><input class="input" type="date" id="oend" value="${end}" min="${new Date().toISOString().slice(0, 10)}"></label>
-      <button class="btn" id="opost">${T("Post this offer")}</button></div>
-    <div class="card"><div class="rows">${list.length ? list.map((o) => `<div class="row"><div class="grow"><b>${esc(o.title)}</b><small>${esc([o.detail, o.endsAt ? F("Until %@", new Date(o.endsAt).toLocaleDateString(ZH ? "zh-CN" : "en-SG", { day: "numeric", month: "short" })) : T("No end date")].filter(Boolean).join(" · "))}</small></div>
-      <button class="btn small danger" data-end="${esc(o.id)}">${T("End this offer")}</button></div>`).join("") : `<p class="empty">—</p>`}</div></div></div>`;
+  const nums = (o) => [o.claimable ? F("%1$@ collected · %2$@ used", o.collected || 0, o.used || 0) : T("Mention PawConnect when you book"),
+    o.claimable && o.limit ? F("%@ left", Math.max(o.limit - (o.collected || 0), 0)) : null,
+    o.endsAt ? F("Until %@", new Date(o.endsAt).toLocaleDateString(ZH ? "zh-CN" : "en-SG", { day: "numeric", month: "short" })) : T("No end date")].filter(Boolean).join(" · ");
+  return head(T("Offers and vouchers"), T("Offers show on your page and in Explore's Offers near you. A voucher is collected in the app and shown at your counter."),
+    `<button class="btn small" id="newoffer">${T("New offer")}</button>`) + `<div class="grid cols-2">
+    <div class="card"><div class="rows">${list.length ? list.map((o) => `<div class="row click" tabindex="0" role="button" data-offer="${esc(o.id)}"><div class="thumb64" aria-hidden="true">${o.claimable ? ICON.ticket : ICON.gift}</div>
+      <div class="grow"><b>${esc(o.title)}${o.paused ? `<span class="tag grey">${T("Paused")}</span>` : ""}</b><small>${esc(nums(o))}</small></div></div>`).join("")
+      : `<p class="empty">${T("No offers yet. A first-visit voucher is the easiest way to see what PawConnect brings you.")}</p>`}</div></div>
+    <div class="card"><h2>${T("Check a voucher")}</h2><p class="sub">${T("Type the code on the pet owner's phone.")}</p>
+      <div style="display:flex;gap:10px"><input class="input" id="vcode" maxlength="7" autocomplete="off" spellcheck="false" placeholder="ABC 234" style="font:800 22px ui-monospace,Menlo,monospace;letter-spacing:.2em;text-transform:uppercase;text-align:center">
+      <button class="btn" id="vcheck">${T("Check")}</button></div><div id="vresult" aria-live="polite" style="margin-top:14px"></div></div></div>`;
 }
 function wireOffers() {
-  $("#opost").onclick = () => {
-    const title = $("#otitle").value.trim(); if (!title) { $("#otitle").focus(); return; }
-    const endsAt = $("#oend").value ? new Date($("#oend").value + "T23:59:00").getTime() : null;
-    save({ offers: [{ id: "off" + (Date.now() % 1e8), title, detail: $("#odetail").value.trim() || null, endsAt }, ...S.data.provider.offers] });
+  document.querySelectorAll("[data-offer]").forEach((el) => { const open = () => editOffer(S.data.provider.offers.find((o) => o.id === el.dataset.offer)); el.onclick = open; el.onkeydown = (e) => { if (e.key === "Enter") open(); }; });
+  $("#newoffer").onclick = () => editOffer(null);
+  const check = async () => {
+    const code = $("#vcode").value.toUpperCase().replace(/[^A-Z0-9]/g, ""); if (code.length !== 6) { $("#vcode").focus(); return; }
+    $("#vcheck").setAttribute("aria-busy", "true");
+    try {
+      const r = await call("redeem", { providerId: S.id, code });
+      const v = r.voucher || {}; const fresh = r.state === "used";
+      $("#vresult").innerHTML = `<div class="row" style="border:0"><span class="trend ${fresh ? "up" : "down"}" style="font-size:14px;padding:6px 12px">${T(fresh ? "Marked as used" : "Already used")}</span>
+        <div class="grow"><b>${esc(v.title || "")}</b><small>${esc([v.firstVisit ? T("For a first visit") : null, !fresh && v.usedAt ? F("Used %@", new Date(v.usedAt).toLocaleString(ZH ? "zh-CN" : "en-SG", { day: "numeric", month: "short", hour: "numeric", minute: "2-digit" })) : null].filter(Boolean).join(" · "))}</small></div></div>`;
+      $("#vcode").value = "";
+      const g = await call("get", { providerId: S.id }); S.data = g;
+    } catch (e) { $("#vresult").innerHTML = `<p style="color:var(--bad);font-weight:700;margin:0">${esc(e.message)}</p>`; }
+    finally { $("#vcheck").removeAttribute("aria-busy"); }
   };
-  document.querySelectorAll("[data-end]").forEach((b) => b.onclick = () => save({ offers: S.data.provider.offers.filter((o) => o.id !== b.dataset.end) }));
+  $("#vcheck").onclick = check; $("#vcode").onkeydown = (e) => { if (e.key === "Enter") check(); };
+}
+function editOffer(offer) {
+  const isNew = !offer;
+  const o = offer ? JSON.parse(JSON.stringify(offer)) : { id: "off" + (Date.now() % 1e8), title: "", detail: null, endsAt: Date.now() + 30 * 864e5, claimable: true, limit: null, firstVisit: false, paused: false };
+  const day = (ms) => new Date(ms).toISOString().slice(0, 10);
+  const dlg = $("#drawer");
+  dlg.innerHTML = `<form method="dialog"><header><h2>${T(isNew ? "New offer" : "Edit offer")}</h2><button class="iconbtn" value="cancel" aria-label="${T("Cancel")}">✕</button></header><div class="body">
+    <label class="field"><span>${T("Name")}</span><input class="input" name="title" maxlength="60" placeholder="${T("For example: 15% off your first groom")}" value="${esc(o.title)}"></label>
+    <label class="field"><span>${T("Details (optional)")}</span><input class="input" name="detail" maxlength="160" value="${esc(o.detail || "")}"></label>
+    <label class="check"><input type="checkbox" class="switch" name="claimable" ${o.claimable ? "checked" : ""}> ${T("Pet owners collect it in the app")}</label>
+    <div id="vopts" ${o.claimable ? "" : "hidden"}>
+      <label class="check"><input type="checkbox" class="switch" name="limited" ${o.limit ? "checked" : ""}> ${T("Limit how many")}</label>
+      <label class="field" id="limitbox" ${o.limit ? "" : "hidden"}><span>${T("Up to")}</span><input class="input" type="number" min="1" max="100000" name="limit" value="${o.limit || 50}"></label>
+      <label class="check"><input type="checkbox" class="switch" name="firstVisit" ${o.firstVisit ? "checked" : ""}> ${T("First visits only")}</label>
+      <p style="color:var(--muted);font-size:14px;margin:4px 0 14px">${T("They get a code to show at your counter. Type it under Check a voucher to mark it used, and see how many it brought in.")}</p>
+    </div>
+    <label class="check"><input type="checkbox" class="switch" name="hasEnd" ${o.endsAt ? "checked" : ""}> ${T("Ends on a date")}</label>
+    <label class="field" id="endbox" ${o.endsAt ? "" : "hidden"}><span>${T("Ends on")}</span><input class="input" type="date" name="ends" min="${day(Date.now())}" value="${day(o.endsAt || Date.now() + 30 * 864e5)}"></label>
+    ${isNew ? "" : `<label class="check"><input type="checkbox" class="switch" name="paused" ${o.paused ? "checked" : ""}> ${T("Paused")}</label><p style="color:var(--muted);font-size:14px;margin:0">${T("A paused offer stays here but pet owners don't see it.")}</p>`}
+  </div><footer>${isNew ? "<span></span>" : `<button type="button" class="btn small danger" id="endoffer">${T("End this offer")}</button>`}<button class="btn small ghost" value="cancel">${T("Cancel")}</button><button type="button" class="btn small" id="saveoffer">${T(isNew ? "Post" : "Save")}</button></footer></form>`;
+  const f = dlg.querySelector("form");
+  f.claimable.onchange = () => { $("#vopts").hidden = !f.claimable.checked; };
+  f.limited.onchange = () => { $("#limitbox").hidden = !f.limited.checked; };
+  f.hasEnd.onchange = () => { $("#endbox").hidden = !f.hasEnd.checked; };
+  $("#saveoffer").onclick = () => {
+    const title = f.title.value.trim(); if (!title) { f.title.focus(); return; }
+    const next = { id: o.id, title, detail: f.detail.value.trim() || null, claimable: f.claimable.checked,
+      limit: f.claimable.checked && f.limited.checked ? Math.max(1, Number(f.limit.value) || 50) : null, firstVisit: f.claimable.checked && f.firstVisit.checked,
+      endsAt: f.hasEnd.checked && f.ends.value ? new Date(f.ends.value + "T23:59:00").getTime() : null, paused: !isNew && f.paused.checked };
+    const list = S.data.provider.offers.map(({ collected, used, ...rest }) => rest); const at = list.findIndex((x) => x.id === o.id);
+    if (at >= 0) list[at] = next; else list.unshift(next);
+    dlg.close(); save({ offers: list });
+  };
+  const end = $("#endoffer"); if (end) end.onclick = () => { if (!window.confirm(T("End this offer?"))) return; dlg.close(); save({ offers: S.data.provider.offers.filter((x) => x.id !== o.id).map(({ collected, used, ...rest }) => rest) }); };
+  dlg.showModal();
 }
 
 // ---- Hours and details -----------------------------------------------------------------------------------------------------------------

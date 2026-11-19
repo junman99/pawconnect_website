@@ -20,15 +20,72 @@
 <header class="top">
   <a class="brand" href="/"><img src="/assets/logo-primary.svg" alt="" width="30" height="30">PawConnect<small data-t="For business">For business</small></a>
   <span class="spacer"></span>
+  <a class="pill" href="#signin-card" id="toplogin" data-t="Sign in">Sign in</a>
   <div class="me" id="me" hidden></div>
   <button type="button" class="iconbtn" id="theme" aria-label="Switch theme"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg></button>
 </header>
 
-<section class="signin" id="signin" hidden>
-  <div>
+<div id="signin" hidden>
+<section class="lp-hero">
+  <div class="lp-hero__text">
     <p class="eyebrow" data-t="For business">For business</p>
-    <h1 data-t="Run your PawConnect page from your computer">Run your PawConnect page from your computer</h1>
-    <p class="lead" data-t="Edit your menu and prices, add photos, post offers and see how pet owners find you. Everything you change shows in the app straight away.">Edit your menu and prices, add photos, post offers and see how pet owners find you. Everything you change shows in the app straight away.</p>
+    <h1><span data-t="Pet owners are looking for you.">Pet owners are looking for you.</span> <em data-t="Be the one they message.">Be the one they message.</em></h1>
+    <p class="lead" data-t="Your free page on PawConnect: your menu with prices by size, photos, offers and your numbers. Pet owners nearby find you in Explore and message you on WhatsApp, already knowing what they want.">Your free page on PawConnect: your menu with prices by size, photos, offers and your numbers. Pet owners nearby find you in Explore and message you on WhatsApp, already knowing what they want.</p>
+    <div class="lp-cta"><a class="btn" href="#how" data-t="Claim your page free">Claim your page free</a><a class="btn ghost" href="#signin-card" data-t="Sign in">Sign in</a></div>
+    <p class="lp-fine" data-t="Free. No booking fees. No commission.">Free. No booking fees. No commission.</p>
+  </div>
+  <div class="lp-hero__stage" aria-hidden="true">
+    <div class="lp-phone lp-float"><img src="/business/img/home.webp" alt="" width="600" height="1304"></div>
+    <div class="lp-chip lp-chip--views"><small data-t="Page views, 30 days">Page views, 30 days</small><b data-count="1350">0</b><span class="trend up">↑ 29%</span></div>
+    <div class="lp-bubble"><small>WhatsApp</small><p class="lp-typed" data-text="Hi Paw &amp; Glow, I found you on PawConnect. I'd like to book Full groom for Biscuit (Medium). When are you free?"></p></div>
+  </div>
+</section>
+
+<section class="lp-band reveal"><p data-t="Built for groomers, pet hotels, vets, pet shops and pet cafés in Singapore and Malaysia.">Built for groomers, pet hotels, vets, pet shops and pet cafés in Singapore and Malaysia.</p>
+  <ul class="lp-types"><li data-t="Groomers">Groomers</li><li data-t="Pet hotels">Pet hotels</li><li data-t="Vets">Vets</li><li data-t="Pet shops">Pet shops</li><li data-t="Pet cafés">Pet cafés</li></ul></section>
+
+<section class="lp-pillars">
+  <article class="lp-pillar reveal">
+    <div class="lp-pillar__art"><img src="/business/img/results.webp" alt="" loading="lazy" width="600" height="1304"></div>
+    <div><p class="eyebrow" data-t="Get found">Get found</p><h2 data-t="On the map pet owners already use">On the map pet owners already use</h2>
+      <p data-t="Your page shows in Explore when someone nearby looks for a groomer, a vet or a place for their dog to stay. Add photos and your page earns the big card.">Your page shows in Explore when someone nearby looks for a groomer, a vet or a place for their dog to stay. Add photos and your page earns the big card.</p></div>
+  </article>
+  <article class="lp-pillar reveal">
+    <div class="lp-pillar__art"><img src="/business/img/service.webp" alt="" loading="lazy" width="600" height="1304"></div>
+    <div><p class="eyebrow" data-t="Get messages ready to book">Get messages ready to book</p><h2 data-t="Every service, every size, every price">Every service, every size, every price</h2>
+      <p data-t="Pet owners see your prices by size and photos of each service, then tap Ask on WhatsApp. The message already says the service, the pet and the size.">Pet owners see your prices by size and photos of each service, then tap Ask on WhatsApp. The message already says the service, the pet and the size.</p></div>
+  </article>
+  <article class="lp-pillar reveal">
+    <div class="lp-pillar__art"><img src="/business/img/owners.webp" alt="" loading="lazy" width="600" height="1304"></div>
+    <div><p class="eyebrow" data-t="Turn visits into regulars">Turn visits into regulars</p><h2 data-t="Offers they collect, visits you can count">Offers they collect, visits you can count</h2>
+      <p data-t="Post an offer pet owners collect in the app and show at your counter. See how many collected and used it, what owners paid, and how many would come back.">Post an offer pet owners collect in the app and show at your counter. See how many collected and used it, what owners paid, and how many would come back.</p></div>
+  </article>
+</section>
+
+<section class="lp-how" id="how">
+  <h2 class="reveal" data-t="Claim your page in two minutes">Claim your page in two minutes</h2>
+  <ol class="lp-steps">
+    <li class="reveal"><b data-t="Find your business">Find your business</b><span data-t="Open PawConnect, go to Explore and search your name. Your page is probably already there.">Open PawConnect, go to Explore and search your name. Your page is probably already there.</span></li>
+    <li class="reveal"><b data-t="Prove it's yours">Prove it's yours</b><span data-t="A code by SMS to your business number, a code on your website, or a photo of your business registration.">A code by SMS to your business number, a code on your website, or a photo of your business registration.</span></li>
+    <li class="reveal"><b data-t="Bring in your menu">Bring in your menu</b><span data-t="Paste your website or snap your price list. We read the prices; you check them.">Paste your website or snap your price list. We read the prices; you check them.</span></li>
+    <li class="reveal"><b data-t="Run it from anywhere">Run it from anywhere</b><span data-t="From the app, or on this website on your computer. Invite your team as managers.">From the app, or on this website on your computer. Invite your team as managers.</span></li>
+  </ol>
+  <p class="lp-cta center"><a class="btn" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721" data-t="Get PawConnect on the App Store">Get PawConnect on the App Store</a></p>
+</section>
+
+<section class="lp-faq">
+  <h2 class="reveal" data-t="Questions">Questions</h2>
+  <details class="reveal"><summary data-t="Is it free?">Is it free?</summary><p data-t="Yes. Your page, your menu, photos, offers and your numbers are free. We don't take a commission on what pet owners pay you.">Yes. Your page, your menu, photos, offers and your numbers are free. We don't take a commission on what pet owners pay you.</p></details>
+  <details class="reveal"><summary data-t="Do you take bookings or payments?">Do you take bookings or payments?</summary><p data-t="No. Pet owners message or call you and you book them as you do today. PawConnect brings them to you with what they want already written.">No. Pet owners message or call you and you book them as you do today. PawConnect brings them to you with what they want already written.</p></details>
+  <details class="reveal"><summary data-t="Can pet owners leave reviews?">Can pet owners leave reviews?</summary><p data-t="Not star reviews. They can say whether they would go back and what they paid, anonymously, and post photos of their visit. You see the same numbers.">Not star reviews. They can say whether they would go back and what they paid, anonymously, and post photos of their visit. You see the same numbers.</p></details>
+  <details class="reveal"><summary data-t="Can my staff help run the page?">Can my staff help run the page?</summary><p data-t="Yes. Invite them as managers from the app. They can edit the page and see the numbers; only you manage the team.">Yes. Invite them as managers from the app. They can edit the page and see the numbers; only you manage the team.</p></details>
+  <details class="reveal"><summary data-t="Why sign in with my phone?">Why sign in with my phone?</summary><p data-t="There is no password to forget or steal: only a phone signed in to PawConnect can let a computer in, and you can sign it out from the app.">There is no password to forget or steal: only a phone signed in to PawConnect can let a computer in, and you can sign it out from the app.</p></details>
+</section>
+
+<section class="signin" id="signin-card">
+  <div>
+    <p class="eyebrow" data-t="Already on PawConnect?">Already on PawConnect?</p>
+    <h2 class="lp-h2" data-t="Run your PawConnect page from your computer">Run your PawConnect page from your computer</h2>
     <ul class="perks">
       <li data-t="Prices by size, with photos for every service">Prices by size, with photos for every service</li>
       <li data-t="Your numbers for the last 30 days">Your numbers for the last 30 days</li>
@@ -52,6 +109,7 @@
     <p class="trust" data-t="Don't run a business on PawConnect yet? Find it in Explore and tap Is this your business?">Don't run a business on PawConnect yet? Find it in Explore and tap Is this your business?</p>
   </div>
 </section>
+</div>
 
 <div class="app" id="app" hidden>
   <aside class="side" id="side"></aside>
