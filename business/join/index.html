@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>(function(){try{var t=localStorage.getItem("pc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Join a business on PawConnect</title>
+<link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+<link rel="stylesheet" href="/typography.css?v=rounded-1">
+<link rel="stylesheet" href="/business/business.css?v=1">
+</head>
+<body>
+<header class="top"><a class="brand" href="/"><img src="/assets/logo-primary.svg" alt="" width="30" height="30">PawConnect<small id="sub">For business</small></a></header>
+<section class="signin" style="grid-template-columns:1fr;max-width:620px;min-height:auto;text-align:center">
+  <div class="codecard">
+    <h2 id="title">You're invited to help run a business page</h2>
+    <p id="lead">Open PawConnect on your iPhone, go to Explore, Your business, Join a business with a code, and type:</p>
+    <div class="code" id="code" aria-live="polite"></div>
+    <p><a class="btn" id="open" href="pawconnect://explore/team">Open PawConnect</a></p>
+    <p class="trust" id="note">The code works once, for 7 days.</p>
+    <p class="trust"><a href="https://apps.apple.com/us/app/pawconnect-social/id6760605721" id="store">Get PawConnect on the App Store</a></p>
+  </div>
+</section>
+<script>
+(function () {
+  var zh = (function(){ try { var l = localStorage.getItem("pc-lang"); if (l) return l === "zh"; } catch (e) {} return /^zh/i.test(navigator.language || ""); })();
+  var c = (new URLSearchParams(location.search).get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 8);
+  if (zh) {
+    document.documentElement.lang = "zh-Hans";
+    document.getElementById("sub").textContent = "商家版";
+    document.getElementById("title").textContent = "你被邀请一起管理商家页面";
+    document.getElementById("lead").textContent = "在 iPhone 上打开 PawConnect，进入“探索”、“你的商家”、“用代码加入商家”，然后输入：";
+    document.getElementById("open").textContent = "打开 PawConnect";
+    document.getElementById("note").textContent = "代码只能用一次，7 天内有效。";
+    document.getElementById("store").textContent = "在 App Store 下载 PawConnect";
+  }
+  var box = document.getElementById("code");
+  c.split("").forEach(function (ch, i) { var s = document.createElement("span"); s.textContent = ch; s.style.marginLeft = i === 4 ? "10px" : "0"; box.appendChild(s); });
+  if (c.length === 8) document.getElementById("open").href = "pawconnect://explore/team?c=" + c;
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<script>(function(){try{var t=localStorage.getItem("pc-theme");if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}})()</script>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: blob:; font-src 'self'; connect-src https://asia-southeast1-pawconnect-72d74.cloudfunctions.net https://pawconnect-upload.chinjunman99.workers.dev; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<script>if (window.top !== window.self) { document.documentElement.style.display = "none"; }</script>
+<title>PawConnect for business</title>
+<meta name="description" content="Run your PawConnect page from your computer: menu and prices, photos, offers, hours and your numbers.">
+<link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+<link rel="preload" href="/assets/fonts/nunito-latin-variable.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/typography.css?v=rounded-1">
+<link rel="stylesheet" href="/business/business.css?v=1">
+</head>
+<body>
+<header class="top">
+  <a class="brand" href="/"><img src="/assets/logo-primary.svg" alt="" width="30" height="30">PawConnect<small data-t="For business">For business</small></a>
+  <span class="spacer"></span>
+  <div class="me" id="me" hidden></div>
+  <button type="button" class="iconbtn" id="theme" aria-label="Switch theme"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z" fill="currentColor"/></svg></button>
+</header>
+
+<section class="signin" id="signin" hidden>
+  <div>
+    <p class="eyebrow" data-t="For business">For business</p>
+    <h1 data-t="Run your PawConnect page from your computer">Run your PawConnect page from your computer</h1>
+    <p class="lead" data-t="Edit your menu and prices, add photos, post offers and see how pet owners find you. Everything you change shows in the app straight away.">Edit your menu and prices, add photos, post offers and see how pet owners find you. Everything you change shows in the app straight away.</p>
+    <ul class="perks">
+      <li data-t="Prices by size, with photos for every service">Prices by size, with photos for every service</li>
+      <li data-t="Your numbers for the last 30 days">Your numbers for the last 30 days</li>
+      <li data-t="No password: your phone lets this computer in">No password: your phone lets this computer in</li>
+    </ul>
+  </div>
+  <div class="codecard">
+    <div class="faces" aria-hidden="true" style="display:flex;margin-bottom:18px">
+      <img src="/assets/brand/mascot-ragdoll.webp" alt="" width="52" height="52" style="border-radius:50%;border:3px solid var(--card)">
+      <img src="/assets/brand/mascot-shiba.webp" alt="" width="52" height="52" style="border-radius:50%;border:3px solid var(--card);margin-left:-12px">
+      <img src="/assets/brand/mascot-lionhead.webp" alt="" width="52" height="52" style="border-radius:50%;border:3px solid var(--card);margin-left:-12px">
+    </div>
+    <h2 data-t="Sign in with your phone">Sign in with your phone</h2>
+    <ol class="steps" style="margin-top:16px">
+      <li data-t="Open PawConnect on your phone">Open PawConnect on your phone</li>
+      <li data-t="Go to Explore, Your business, Open on a computer">Go to Explore, Your business, Open on a computer</li>
+      <li data-t="Type this code">Type this code</li>
+    </ol>
+    <div id="codebox" aria-live="polite"></div>
+    <p class="trust" data-t="Only a phone signed in to PawConnect can approve this code. This computer stays signed in for 30 days, or until you sign it out in the app.">Only a phone signed in to PawConnect can approve this code. This computer stays signed in for 30 days, or until you sign it out in the app.</p>
+    <p class="trust" data-t="Don't run a business on PawConnect yet? Find it in Explore and tap Is this your business?">Don't run a business on PawConnect yet? Find it in Explore and tap Is this your business?</p>
+  </div>
+</section>
+
+<div class="app" id="app" hidden>
+  <aside class="side" id="side"></aside>
+  <main class="main" id="main"></main>
+</div>
+
+<dialog class="drawer" id="drawer"></dialog>
+<div class="savebar" id="savebar" role="region" aria-live="polite"><span id="savetext">You have changes</span><button class="link" id="discard" type="button">Discard</button><button class="btn" id="savebtn" type="button">Save</button></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/business/business.js?v=1"></script>
+</body>
+</html>

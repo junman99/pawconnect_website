@@ -145,7 +145,16 @@ h3 { font-size: clamp(30px, 5.2vw, 54px); line-height: 1.02; }
 .hero { position: relative; padding: clamp(28px, 6vw, 72px) 0 clamp(56px, 8vw, 110px); overflow: clip; }
 .hero .wrap { display: grid; gap: 44px; align-items: center; position: relative; }
 .hero__stage { position: relative; display: grid; place-items: center; min-height: 420px; }
-.hero__mark { position: absolute; width: min(125%, 640px); aspect-ratio: 1; background: url("/assets/logo-primary.svg") center / contain no-repeat; opacity: .96; transform: translate(22%, -4%) rotate(-10deg); }
+/* EXPLORE6 (owner, 19 Nov: "the mascot head is a cheap one, use the good mascot from the app, only the head"): the app's Ragdoll peeks over
+   the top of the phone, its chin behind the phone's edge, on a small coral disc (it was the logo's outline, 640 px, behind the phone). */
+.hero__stage { padding-top: clamp(96px, 11vw, 150px); }
+.hero .phonebox { position: relative; }
+.hero__mark { position: absolute; left: 50%; top: 0; width: 66%; aspect-ratio: 1; transform: translate(-28%, -58%) rotate(6deg); z-index: 0; pointer-events: none; }
+.hero__mark::before { content: ""; position: absolute; inset: 8% 4% 0 4%; border-radius: 50%; background: radial-gradient(circle at 40% 35%, #ffc2b8, var(--coral) 72%); }
+.hero__mark::after { content: ""; position: absolute; inset: 0; background: url("/assets/brand/mascot-ragdoll-head.webp") center 20% / 92% auto no-repeat;
+  animation: hero-peek .9s .3s cubic-bezier(.2, .7, .1, 1) both; }
+@keyframes hero-peek { from { transform: translateY(26%); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .hero__mark::after { animation: none; } }
 .hero .phone { --w: min(300px, 68vw); z-index: 1; transform: rotate(-2.5deg); }
 .ln { display: block; overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
 .ln > span { display: inline-block; }
@@ -272,7 +281,14 @@ main > .backbar ~ .doc__grid { padding-top: 58px; }
 
 /* ---- closing, questions, footer ---- */
 .closing { position: relative; overflow: clip; padding: clamp(80px, 12vw, 170px) 0; background: var(--deep); color: var(--on-deep); }
-.closing::after { content: ""; position: absolute; right: -8%; bottom: -26%; width: min(70vw, 640px); aspect-ratio: 1; background: var(--coral); opacity: .2; -webkit-mask: url("/assets/logo-primary.svg") center / contain no-repeat; mask: url("/assets/logo-primary.svg") center / contain no-repeat; transform: rotate(-12deg); pointer-events: none; }
+/* EXPLORE6 (owner, 19 Nov: "the mascot head is a cheap one, use the good mascot from the app, only the head"): the app's Ragdoll, head only,
+   peeking up from the bottom edge of the closing field (it was the logo's outline, tinted coral). */
+.closing::after { content: ""; position: absolute; right: clamp(12px, 6vw, 96px); bottom: 0; width: clamp(150px, 34vw, 430px); aspect-ratio: 640 / 580;
+  background: url("/assets/brand/mascot-ragdoll-head.webp") center bottom / contain no-repeat; filter: drop-shadow(0 -10px 40px rgba(255, 127, 110, .18)); pointer-events: none;
+  animation: closing-peek 1.2s cubic-bezier(.2, .7, .1, 1) both; animation-timeline: view(); animation-range: entry 10% cover 40%; }
+@keyframes closing-peek { from { transform: translateY(38%); opacity: 0; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .closing::after { animation: none; } }
+@media (max-width: 700px) { .closing { padding-bottom: clamp(150px, 40vw, 220px); } }
 .closing .wrap { position: relative; z-index: 1; }
 .closing h2 { max-width: 11em; font-size: clamp(44px, 9vw, 120px); }
 .closing p { max-width: 34em; margin: 22px 0 0; color: var(--on-deep-muted); }
@@ -325,7 +341,7 @@ main > .backbar ~ .doc__grid { padding-top: 58px; }
 @keyframes fadeUp { to { transform: none; } }
 @keyframes fadeDown { from { opacity: 0; transform: translateY(-14px); } to { opacity: 1; transform: none; } }
 @keyframes phoneIn { from { transform: translateY(60px) rotate(2deg); } to { transform: rotate(-2.5deg); } }
-@keyframes markIn { from { opacity: 0; transform: translate(22%, 8%) rotate(-26deg) scale(.86); } to { opacity: .96; transform: translate(22%, -4%) rotate(-10deg); } }
+@keyframes markIn { from { opacity: 0; transform: translate(-28%, -30%) rotate(-6deg) scale(.9); } to { opacity: 1; transform: translate(-28%, -58%) rotate(6deg); } }
 @keyframes revealUp { from { opacity: 0; transform: translateY(34px); } to { opacity: 1; transform: none; } }
 html[data-paused] *, html[data-paused] *::before, html[data-paused] *::after { animation-play-state: paused !important; transition: none !important; }
 @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { animation: none !important; transition: none !important; } .reveal { opacity: 1 !important; transform: none !important; } }
