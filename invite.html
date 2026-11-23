@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="dark">
+<meta name="theme-color" content="#120a0d">
+<meta name="robots" content="noindex">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' https: data: http://127.0.0.1:8787; font-src 'self'; connect-src https://asia-southeast1-pawconnect-72d74.cloudfunctions.net http://127.0.0.1:5001; base-uri 'none'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<title>Your private invitation · PawConnect</title>
+<link rel="icon" type="image/svg+xml" href="/assets/logo-primary.svg">
+<link rel="stylesheet" href="/typography.css?v=rounded-1">
+<!-- INVITE1 (Figma "INVITE" C): the owner's private invitation on the web. iOS opens the app straight from this address when it is installed
+     (apple-app-site-association: /invite.html); otherwise, and inside Instagram's own browser, this page shows the place, the code and the two ways on. -->
+<style>
+  :root { --gold: #e3bf8c; --base: #120a0d; --card: #1a1316; --coral: #e96553; --plum: #73244f; }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { background: var(--base); color: #fff; font-family: 'Nunito', ui-rounded, -apple-system, system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  body { min-height: 100vh; min-height: 100dvh; display: flex; justify-content: center; overflow-x: hidden; }
+  .glow { position: fixed; inset: 0; pointer-events: none; z-index: 0;
+    background: radial-gradient(60% 34% at 58% 6%, rgba(233,101,83,.62), transparent 70%),
+                radial-gradient(46% 30% at 4% 30%, rgba(115,36,79,.7), transparent 72%),
+                radial-gradient(34% 22% at 96% 18%, rgba(255,180,160,.22), transparent 70%); }
+  main { position: relative; z-index: 1; width: 100%; max-width: 440px; padding: max(16px, env(safe-area-inset-top)) 20px max(20px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 20px; }
+  .brand { display: flex; align-items: center; gap: 8px; color: #fff; text-decoration: none; font-weight: 800; font-size: 17px; }
+  .brand img { width: 26px; height: 26px; }
+  .head { text-align: center; display: grid; gap: 8px; margin-top: 4px; }
+  .eyebrow { color: var(--gold); font-size: 12px; font-weight: 700; letter-spacing: .2em; text-transform: uppercase; }
+  h1 { font-size: 30px; line-height: 1.13; font-weight: 800; letter-spacing: -.01em; }
+  .card { position: relative; border-radius: 24px; overflow: hidden; background: var(--card); box-shadow: 0 18px 50px rgba(0,0,0,.5); }
+  .card::after { content: ""; position: absolute; inset: 0; border-radius: 24px; padding: 1px; pointer-events: none;
+    background: linear-gradient(135deg, rgba(227,191,140,.9), rgba(227,191,140,.15) 50%, rgba(227,191,140,.7));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; }
+  .pic { position: relative; height: 172px; background: linear-gradient(160deg, #3b1a2c, #1a1316); }
+  .pic img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .pic::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 50%; background: linear-gradient(transparent, var(--card)); }
+  .seal { position: absolute; top: 12px; left: 12px; z-index: 1; display: inline-flex; align-items: center; gap: 6px; padding: 6px 10px; border-radius: 999px;
+    color: var(--gold); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+    background: rgba(26,19,22,.55); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); border: .5px solid rgba(227,191,140,.35); }
+  .body { padding: 20px; display: grid; gap: 16px; }
+  .name { font-size: 24px; font-weight: 800; line-height: 1.15; }
+  .line { color: rgba(255,255,255,.62); font-size: 15px; margin-top: 4px; }
+  .rule { height: .5px; background: rgba(227,191,140,.22); }
+  .facts { display: flex; justify-content: space-between; gap: 16px; }
+  .k { color: rgba(255,255,255,.45); font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 4px; }
+  .code { color: var(--gold); font: 600 22px/1.2 ui-monospace, 'SF Mono', Menlo, monospace; letter-spacing: .12em; user-select: all; -webkit-user-select: all; }
+  .v { font-size: 17px; font-weight: 600; text-align: right; }
+  .pitch { color: rgba(255,255,255,.66); font-size: 15px; line-height: 1.45; text-align: center; }
+  .steps { display: grid; gap: 8px; counter-reset: s; padding: 0 4px; }
+  .steps li { list-style: none; display: flex; gap: 12px; align-items: flex-start; color: rgba(255,255,255,.8); font-size: 15px; line-height: 1.4; }
+  .steps li::before { counter-increment: s; content: counter(s); flex: 0 0 24px; height: 24px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 12px; font-weight: 800; color: var(--gold); border: .5px solid rgba(227,191,140,.5); }
+  .actions { display: grid; gap: 10px; margin-top: auto; }
+  .btn { display: flex; align-items: center; justify-content: center; gap: 8px; height: 50px; border-radius: 999px; font-size: 17px; font-weight: 700; text-decoration: none; }
+  .primary { background: #fff; color: #120a0d; }
+  .secondary { background: rgba(255,255,255,.08); color: #fff; border: .5px solid rgba(255,255,255,.14); }
+  .fine { color: rgba(255,255,255,.5); font-size: 13px; text-align: center; line-height: 1.4; }
+  .problem { text-align: center; color: rgba(255,255,255,.8); font-size: 16px; line-height: 1.45; padding: 40px 8px; }
+  [hidden] { display: none !important; }
+  @media (prefers-reduced-motion: no-preference) { .card { animation: rise .6s cubic-bezier(.2,.8,.2,1) both .05s; } @keyframes rise { from { opacity: 0; transform: translateY(10px) scale(.985); } } }
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<main>
+  <a class="brand" href="/"><img src="/assets/logo-primary.svg" alt="" width="26" height="26">PawConnect</a>
+  <div class="head">
+    <div class="eyebrow" id="eyebrow">Private invitation</div>
+    <h1 id="title">Your page on PawConnect is ready</h1>
+  </div>
+  <div class="card" id="card" hidden>
+    <div class="pic"><img id="photo" alt="" hidden><span class="seal" id="seal">&#10003; Owner invite</span></div>
+    <div class="body">
+      <div><div class="name" id="name"></div><div class="line" id="line"></div></div>
+      <div class="rule"></div>
+      <div class="facts">
+        <div><div class="k" id="kcode">Invitation code</div><div class="code" id="code"></div></div>
+        <div id="untilbox"><div class="k" id="kuntil" style="text-align:right">Valid until</div><div class="v" id="until"></div></div>
+      </div>
+    </div>
+  </div>
+  <p class="problem" id="problem" hidden></p>
+  <p class="pitch" id="pitch" hidden></p>
+  <ol class="steps" id="steps">
+    <li id="s1">Get PawConnect from the App Store.</li>
+    <li id="s2">Then tap Open in PawConnect, or type the code in the app.</li>
+  </ol>
+  <div class="actions">
+    <a class="btn primary" id="get" href="https://apps.apple.com/us/app/pawconnect-social/id6760605721">Get PawConnect</a>
+    <a class="btn secondary" id="open" href="pawconnect://invite">Open in PawConnect</a>
+    <p class="fine" id="fine">Only for the owner of this place. It works once.</p>
+  </div>
+</main>
+<script>
+(function () {
+  var zh = (function () { try { var l = localStorage.getItem("pc-lang"); if (l) return l === "zh"; } catch (e) {} return /^zh/i.test(navigator.language || ""); })();
+  var T = zh ? {
+    eyebrow: "专属邀请", title: "您在 PawConnect 的页面已准备好", seal: "✓ 店主邀请", kcode: "邀请码", kuntil: "有效期至",
+    s1: "从 App Store 下载 PawConnect。", s2: "然后点“在 PawConnect 中打开”，或在 App 里输入邀请码。",
+    get: "下载 PawConnect", open: "在 PawConnect 中打开", fine: function (n) { return "仅限 " + n + " 的店主，只能使用一次。"; },
+    pitchArea: function (a, n) { return a + " 附近的宠物主人已经在这里找到 " + n + "。接管页面，展示您的价目表、照片和优惠。"; },
+    pitch: function (n) { return "宠物主人已经在这里找到 " + n + "。接管页面，展示您的价目表、照片和优惠。"; },
+    missing: "找不到此邀请。请检查链接，或回复我们的消息索取新的邀请。", ended: "此邀请已过期。回复我们的消息，我们会发送新的邀请。",
+    taken: "此页面已有店主。如果它应该属于您，请回复我们的消息。", failed: "暂时无法打开邀请。请稍后再试，或直接在 App 里输入邀请码。",
+    kinds: { vets: "兽医", emergency: "急诊", grooming: "美容", boarding: "寄养", petFriendly: "宠物友好", parks: "公园", cafes: "咖啡馆", petShops: "宠物店" },
+    markets: { sg: "新加坡", "my-jb": "新山", "my-kk": "亚庇", "my-kv": "巴生谷" }, locale: "zh-CN"
+  } : {
+    fine: function (n) { return "Only for the owner of " + n + ". It works once."; },
+    pitchArea: function (a, n) { return "Pet owners near " + a + " already find " + n + " here. Take it over to show your menu, photos and offers."; },
+    pitch: function (n) { return "Pet owners already find " + n + " here. Take it over to show your menu, photos and offers."; },
+    missing: "This invitation was not found. Check the link, or reply to our message for a new one.", ended: "This invitation has ended. Reply to our message and we will send a new one.",
+    taken: "This page already has an owner. If it should be yours, reply to our message.", failed: "Couldn't open the invitation just now. Try again later, or type the code in the app.",
+    kinds: { vets: "Vets", emergency: "Emergency", grooming: "Grooming", boarding: "Boarding", petFriendly: "Pet friendly", parks: "Parks", cafes: "Cafés", petShops: "Pet shops" },
+    markets: { sg: "Singapore", "my-jb": "Johor Bahru", "my-kk": "Kota Kinabalu", "my-kv": "Klang Valley" }, locale: "en-GB"
+  };
+  var $ = function (id) { return document.getElementById(id); };
+  if (zh) {
+    document.documentElement.lang = "zh-Hans";
+    ["eyebrow", "title", "seal", "kcode", "kuntil", "s1", "s2", "get", "open"].forEach(function (k) { $(k).textContent = T[k]; });
+    document.title = T.eyebrow + " · PawConnect";
+  }
+  // The server's letters: no 0/O, 1/I/L (functions/lib/explore/owner.js).
+  var raw = (new URLSearchParams(location.search).get("c") || "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+  var code = /^[ABCDEFGHJKMNPQRSTUVWXYZ2-9]{6}$/.test(raw) ? raw : "";
+  function problem(text) { $("problem").textContent = text; $("problem").hidden = false; $("card").hidden = true; $("pitch").hidden = true; $("steps").hidden = true; $("open").hidden = true; $("fine").hidden = true; }
+  if (!code) { problem(T.missing); return; }
+  $("open").href = "pawconnect://invite?c=" + code;
+  $("code").textContent = code.slice(0, 4) + " " + code.slice(4);
+  // A local preview of the website (127.0.0.1) reads the demo stub instead of the live server.
+  var local = location.hostname === "127.0.0.1" || location.hostname === "localhost";
+  var api = local ? "http://127.0.0.1:5001/pawconnect-72d74/asia-southeast1/exploreInvitePreview" : "https://asia-southeast1-pawconnect-72d74.cloudfunctions.net/exploreInvitePreview";
+  fetch(api + "?c=" + code, { headers: { Accept: "application/json" } })
+    .then(function (r) { return r.json().then(function (j) { return { ok: r.ok, status: r.status, j: j }; }); })
+    .then(function (res) {
+      if (!res.ok || !res.j.invite) { problem(res.status === 404 ? T.missing : T.failed); return; }
+      var v = res.j.invite;
+      $("name").textContent = v.name;
+      var place = [v.area, T.markets[v.marketId]].filter(function (x, i, a) { return x && a.indexOf(x) === i; }).join(", ");
+      $("line").textContent = [T.kinds[v.category], place].filter(Boolean).join(" · ");
+      if (v.photo && (/^https:\/\//.test(v.photo) || local)) { var img = $("photo"); img.onload = function () { img.hidden = false; }; img.src = v.photo; }
+      if (v.expiresAt) $("until").textContent = new Date(v.expiresAt).toLocaleDateString(T.locale, { day: "numeric", month: "short", year: "numeric" }); else $("untilbox").hidden = true;
+      $("fine").textContent = T.fine(v.name);
+      $("pitch").textContent = v.area ? T.pitchArea(v.area, v.name) : T.pitch(v.name);
+      $("card").hidden = false; $("pitch").hidden = false;
+      if (v.taken || v.state === "used") { $("pitch").textContent = T.taken; $("steps").hidden = true; $("get").hidden = true; $("open").hidden = true; $("fine").hidden = true; }
+      else if (v.expiresAt && v.expiresAt < Date.now()) { $("pitch").textContent = T.ended; $("steps").hidden = true; $("get").hidden = true; $("open").hidden = true; $("fine").hidden = true; }
+    })
+    .catch(function () {   // no signal: the code still works in the app
+      document.querySelector(".pic").hidden = true; $("name").textContent = zh ? "您的邀请码" : "Your invitation"; $("untilbox").hidden = true;
+      $("card").hidden = false; $("pitch").textContent = T.failed; $("pitch").hidden = false;
+    });
+})();
+</script>
+</body>
+</html>

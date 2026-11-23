@@ -47,6 +47,13 @@
               "k": "join"
             },
             "comment": "Universal Link for a shared join (walk and badge links stay on the web page; recovery.html is deliberately not here)"
+          },
+          {
+            "/": "/invite.html",
+            "?": {
+              "c": "?*"
+            },
+            "comment": "INVITE1: a business owner's private invitation (opens the invitation in the app; without the app the page shows it)"
           }
         ]
       }
