@@ -49,6 +49,13 @@
             "comment": "Universal Link for a shared join (walk and badge links stay on the web page; recovery.html is deliberately not here)"
           },
           {
+            "/": "/share.html",
+            "?": {
+              "k": "place"
+            },
+            "comment": "Universal Link for a shared place (EXPLORE10: Explore's place page)"
+          },
+          {
             "/": "/invite.html",
             "?": {
               "c": "?*"

@@ -247,7 +247,8 @@
         milestone: { opens: true,  chip: "A BIG DAY", head: "A friend shared a milestone", lead: "Open PawConnect to meet the pet behind it. Keep every special day in one place." },
         walk:      { opens: false, chip: "TRACKED WALK", head: "A friend shared a walk", lead: "Walks stay inside PawConnect, so there is nothing to open here. Get the app to track your own walks, health and care." },
         badge:     { opens: false, chip: "NEW BADGE", head: "A friend earned a badge", lead: "Earn badges for caring, sharing and showing up for your pets. Get PawConnect to start collecting." },
-        join:      { opens: true,  chip: "YOU'RE INVITED", head: "Care for a pet together", lead: "A friend invited you to share a pet on PawConnect." }
+        join:      { opens: true,  chip: "YOU'RE INVITED", head: "Care for a pet together", lead: "A friend invited you to share a pet on PawConnect." },
+        place:     { opens: true,  chip: "A PLACE FOR PETS", head: "A friend shared a place", lead: "Open it in PawConnect to see its menu, prices, hours and the pets who've been there." }
       };
       var copyZh = {
         post:      { opens: true,  chip: "朋友的分享", head: "朋友分享了一个瞬间", lead: "在 PawConnect 中打开来查看、打个招呼，认识那里的宠物和朋友。" },
@@ -257,7 +258,8 @@
         milestone: { opens: true,  chip: "重要的一天", head: "朋友分享了一个里程碑", lead: "打开 PawConnect，认识它背后的宠物。把每个特别的日子都留在一处。" },
         walk:      { opens: false, chip: "散步记录", head: "朋友分享了一次散步", lead: "散步记录只保存在 PawConnect 里，所以这里没有可打开的内容。获取应用，记录你自己的散步、健康与护理。" },
         badge:     { opens: false, chip: "新徽章", head: "朋友获得了一枚徽章", lead: "为照顾、分享和陪伴宠物而获得徽章。获取 PawConnect，开始收集。" },
-        join:      { opens: true,  chip: "你受到邀请", head: "一起照顾一只宠物", lead: "朋友邀请你在 PawConnect 上共同照顾一只宠物。" }
+        join:      { opens: true,  chip: "你受到邀请", head: "一起照顾一只宠物", lead: "朋友邀请你在 PawConnect 上共同照顾一只宠物。" },
+        place:     { opens: true,  chip: "宠物好去处", head: "朋友分享了一个地点", lead: "在 PawConnect 中打开，查看价目、营业时间和去过那里的宠物。" }
       };
       var UI = {
         en: { incomplete: "This link looks incomplete, so it cannot open a specific item. You can still get PawConnect or open the app.", openIn: "Open in PawConnect", open: "Open PawConnect" },
@@ -286,6 +288,9 @@
         deep = "pawconnect://" + kind + "?id=" + encodeURIComponent(id); valid = true;
       } else if (kind === "profile" && /^[A-Za-z0-9._]{1,30}$/.test(id)) {
         deep = "pawconnect://profile?id=" + encodeURIComponent(id); valid = true;
+      } else if (kind === "place" && /^[A-Za-z0-9_-]{6,128}$/.test(id)) {
+        // EXPLORE10: one of our places (its public page is readable by id).
+        deep = "pawconnect://place?id=" + encodeURIComponent(id); valid = true;
       } else if (kind === "join" && /^[A-Za-z0-9-]{4,32}$/.test(code)) {
         deep = "pawconnect://join?code=" + encodeURIComponent(code); valid = true;
         $("steps").classList.remove("hidden");
@@ -302,6 +307,28 @@
       // so the page reads the same document the app's guest view reads. Names come from the app's data, not the address, and are set as text.
       // Anything missing, deleted or off our media host: the plain card above stays.
       if ((kind === "post" || kind === "zoomie") && valid) showMoment(id);
+      if (kind === "place" && valid) showPlace(id);
+
+      // EXPLORE10: a shared place shows its name, kind and area from its public page (explorePages/{id}); anything missing keeps the plain card.
+      function showPlace(placeId) {
+        var FS = "https://firestore.googleapis.com/v1/projects/pawconnect-72d74/databases/(default)/documents/";
+        var kinds = { en: { vets: "Vet care", emergency: "Emergency vets", grooming: "Grooming", boarding: "Boarding", petFriendly: "Pet-friendly", parks: "Parks & runs", cafes: "Cafés & places", petShops: "Pet shops" },
+                      zh: { vets: "兽医", emergency: "急诊兽医", grooming: "美容", boarding: "寄养", petFriendly: "宠物友好", parks: "公园与跑道", cafes: "咖啡馆与好去处", petShops: "宠物店" } }[L];
+        fetch(FS + "explorePages/" + encodeURIComponent(placeId), { credentials: "omit", cache: "no-store" })
+          .then(function (r) { if (!r.ok) throw new Error("read"); return r.json(); })
+          .then(function (doc) {
+            var f = doc.fields || {};
+            var clean = function (v, max) { var s = v && typeof v.stringValue === "string" ? v.stringValue.replace(/[\u0000-\u001f\u007f\u202a-\u202e\u2066-\u2069]/g, "").trim() : ""; return s.length > max ? s.slice(0, max - 1) + "…" : s; };
+            var name = clean(f.name, 80);
+            if (!name) return;
+            var cats = f.categories && f.categories.arrayValue && f.categories.arrayValue.values ? f.categories.arrayValue.values.map(function (x) { return x.stringValue; }) : [];
+            var line = [kinds[cats[0]] || "", clean(f.areaName, 40) || clean(f.address, 80)].filter(Boolean).join(" · ");
+            $("headline").textContent = name;
+            if (line) $("lead").textContent = line;
+            document.title = name + " · PawConnect";
+          })
+          .catch(function () {});
+      }
 
       function showMoment(postId) {
         var FS = "https://firestore.googleapis.com/v1/projects/pawconnect-72d74/databases/(default)/documents/";
